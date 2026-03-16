@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "path": "linux-01-navigation", "title": "Урок 1: Навигация в Linux" },
+    { "path": "linux-02-files", "title": "Урок 2: Работа с файлами" },
+    { "path": "linux-03-permissions", "title": "Урок 3: Права доступа" },
+    { "path": "linux-04-users", "title": "Урок 4: Пользователи и группы" },
+    { "path": "linux-05-processes", "title": "Урок 5: Процессы" },
+    { "path": "linux-06-network", "title": "Урок 6: Сеть в Linux" },
+    { "path": "linux-07-apt", "title": "Урок 7: Управление пакетами (apt)" },
+    { "path": "linux-08-bash1", "title": "Урок 8: Bash-скриптинг (Часть 1)" },
+    { "path": "linux-09-bash2", "title": "Урок 9: Bash-скриптинг (Часть 2)" },
+    { "path": "linux-10-systemd", "title": "Урок 10: systemd и управление сервисами" }
+  ]
+}
