@@ -1,2 +1,2 @@
 #!/bin/bash
-grep -q "CMD" /root/myapp/Dockerfile && exit 0 || exit 1
+docker images | grep -q "cmd-demo" && docker images | grep -q "entrypoint-demo"

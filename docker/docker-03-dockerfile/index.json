@@ -1,18 +1,52 @@
 {
-  "title": "Урок 3: Написание Dockerfile",
-  "description": "FROM, RUN, COPY, ADD, ENV, EXPOSE, CMD, ENTRYPOINT — разбираем каждую инструкцию",
-  "difficulty": "Intermediate",
-  "time": "30",
+  "title": "Docker: Написание Dockerfile",
+  "description": "Создание собственных образов: инструкции FROM, RUN, COPY, CMD, WORKDIR, ENV и лучшие практики написания Dockerfile",
   "details": {
-    "intro": { "text": "intro.md" },
+    "intro": {
+      "text": "intro.md"
+    },
     "steps": [
-      { "title": "Шаг 1: FROM и RUN — база и зависимости", "text": "step1.md", "verify": "step1/verify.sh" },
-      { "title": "Шаг 2: COPY и ADD — файлы в образ",      "text": "step2.md", "verify": "step2/verify.sh" },
-      { "title": "Шаг 3: ENV и EXPOSE",                    "text": "step3.md", "verify": "step3/verify.sh" },
-      { "title": "Шаг 4: CMD vs ENTRYPOINT",               "text": "step4.md", "verify": "step4/verify.sh" },
-      { "title": "Шаг 5: Лучшие практики — меньше слоёв", "text": "step5.md", "verify": "step5/verify.sh" }
+      {
+        "title": "Что такое Dockerfile",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "Инструкции FROM и RUN",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Инструкции COPY и ADD",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Инструкции CMD и ENTRYPOINT",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Инструкции WORKDIR и ENV",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "EXPOSE, ARG и лучшие практики",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "Итоговое задание",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      }
     ],
-    "finish": { "text": "finish.md" }
+    "finish": {
+      "text": "finish.md"
+    }
   },
-  "backend": { "imageid": "ubuntu" }
+  "backend": {
+    "imageid": "ubuntu"
+  }
 }

@@ -1,36 +1,59 @@
-## CMD vs ENTRYPOINT
+# Шаг 4: Инструкции CMD и ENTRYPOINT
 
-Это самая часто путаемая пара инструкций. Разница принципиальная:
+## CMD — команда по умолчанию
 
-**CMD** — команда по умолчанию. Легко переопределить при `docker run`.
-`docker run myapp echo "hello"` — заменит CMD на `echo "hello"`
+`CMD` задаёт команду, которая выполняется при запуске контейнера. Её **можно переопределить** при `docker run`:
 
-**ENTRYPOINT** — точка входа. Аргументы `docker run` добавляются К ней.
-`docker run myapp echo "hello"` — выполнит `entrypoint echo "hello"`
-
----
-
-1. Добавьте CMD в Dockerfile:
-`nano /root/myapp/Dockerfile`
-
-2. Финальный вид файла:
 ```
-FROM ubuntu:22.04
-
-ENV APP_VERSION=1.0.0 \
-    APP_ENV=production
-
-RUN apt-get update && \
-    apt-get install -y curl wget && \
-    rm -rf /var/lib/apt/lists/*
-
-WORKDIR /app
-COPY app.sh /app/app.sh
-RUN chmod +x /app/app.sh
-
-EXPOSE 8080
-
-CMD ["/app/app.sh"]
+CMD ["executable", "arg1", "arg2"]   # exec-форма (рекомендуется)
+CMD command arg1 arg2                 # shell-форма
 ```
 
-Сохраните файл.
+## Задание 1: Демонстрация CMD
+
+```bash
+cd /opt/myapp
+cat > Dockerfile << 'DOCKERFILE'
+FROM alpine:3.18
+CMD ["echo", "Это команда по умолчанию"]
+DOCKERFILE
+```{{execute}}
+
+```bash
+docker build -t cmd-demo .
+```{{execute}}
+
+Запуск с командой по умолчанию:
+```bash
+docker run --rm cmd-demo
+```{{execute}}
+
+Переопределение CMD:
+```bash
+docker run --rm cmd-demo echo "Это другая команда"
+```{{execute}}
+
+## ENTRYPOINT — фиксированная точка входа
+
+`ENTRYPOINT` задаёт команду, которую **нельзя переопределить** обычным способом. Аргументы `docker run` добавляются к ней:
+
+```bash
+cat > Dockerfile << 'DOCKERFILE'
+FROM alpine:3.18
+ENTRYPOINT ["echo", "Привет,"]
+CMD ["мир"]
+DOCKERFILE
+```{{execute}}
+
+```bash
+docker build -t entrypoint-demo .
+docker run --rm entrypoint-demo
+```{{execute}}
+
+```bash
+docker run --rm entrypoint-demo Docker!
+```{{execute}}
+
+## CMD + ENTRYPOINT вместе
+
+`ENTRYPOINT` — фиксированная программа, `CMD` — аргументы по умолчанию к ней. Это классический паттерн для утилит.

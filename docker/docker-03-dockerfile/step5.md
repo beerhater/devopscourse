@@ -1,41 +1,61 @@
-## Лучшие практики — меньше слоёв, меньше размер
+# Шаг 5: Инструкции WORKDIR и ENV
 
-Каждый `RUN` = новый слой. Чем меньше слоёв — тем легче образ и быстрее сборка.
+## WORKDIR — рабочая директория
 
-Сравнение:
+`WORKDIR` задаёт директорию, в которой будут выполняться последующие инструкции `RUN`, `CMD`, `ENTRYPOINT`, `COPY`, `ADD`:
+
 ```
-# Плохо: 3 слоя
-RUN apt-get update
-RUN apt-get install -y curl
-RUN apt-get install -y wget
-
-# Хорошо: 1 слой
-RUN apt-get update && \
-    apt-get install -y curl wget && \
-    rm -rf /var/lib/apt/lists/*
+WORKDIR /path/to/dir
 ```
 
----
+Если директория не существует — Docker создаёт её автоматически. Лучше использовать `WORKDIR` вместо `RUN cd /some/path`.
 
-1. Создайте оптимизированный Dockerfile:
-`nano /root/myapp/Dockerfile.optimized`
+## ENV — переменные окружения
 
-2. Введите:
+`ENV` устанавливает переменные окружения, доступные **во время сборки и во время работы** контейнера:
+
 ```
+ENV KEY=VALUE
+```
+
+## Задание: соберите приложение с WORKDIR и ENV
+
+```bash
+cd /opt/myapp
+cat > Dockerfile << 'DOCKERFILE'
 FROM alpine:3.18
 
-ENV APP_VERSION=1.0.0
+# Переменные окружения
+ENV APP_HOME=/app \
+    APP_VERSION=2.0 \
+    APP_ENV=production
 
-RUN apk add --no-cache bash curl
+# Устанавливаем рабочую директорию
+WORKDIR $APP_HOME
 
-WORKDIR /app
-COPY app.sh /app/app.sh
-RUN chmod +x /app/app.sh
+# Копируем файл (путь относительно WORKDIR)
+COPY hello.sh .
 
-CMD ["/app/app.sh"]
-```
+RUN chmod +x hello.sh
 
-Alpine Linux вместо Ubuntu сразу уменьшает базовый размер с ~80MB до ~5MB!
+# CMD тоже выполняется относительно WORKDIR
+CMD ["./hello.sh"]
+DOCKERFILE
+```{{execute}}
 
-3. Посмотрите итоговый Dockerfile:
-`cat /root/myapp/Dockerfile`
+```bash
+docker build -t workdir-demo .
+docker run --rm workdir-demo
+```{{execute}}
+
+Проверьте переменные окружения внутри контейнера:
+
+```bash
+docker run --rm workdir-demo env
+```{{execute}}
+
+Переопределите переменную при запуске:
+
+```bash
+docker run --rm -e APP_ENV=staging workdir-demo env | grep APP_ENV
+```{{execute}}

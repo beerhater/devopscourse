@@ -1,27 +1,48 @@
-## FROM и RUN — база и зависимости
+# Шаг 1: Что такое Dockerfile
 
-`FROM` — первая инструкция любого Dockerfile.
-`RUN` — выполняет shell-команду при **сборке** образа.
+**Dockerfile** — это рецепт создания образа. Docker читает его сверху вниз и выполняет каждую инструкцию последовательно, создавая слой за слоем.
 
----
+## Создайте рабочую директорию
 
-1. Создайте рабочую папку:
-`mkdir -p /root/myapp && cd /root/myapp`
+```bash
+mkdir -p /opt/myapp && cd /opt/myapp
+```{{execute}}
 
-2. Создайте Dockerfile:
-`nano Dockerfile`
+## Напишите первый Dockerfile
 
-3. Введите:
-```
+```bash
+cat > Dockerfile << 'DOCKERFILE'
+# Базовый образ
 FROM ubuntu:22.04
 
-RUN apt-get update && \
-    apt-get install -y curl wget && \
-    rm -rf /var/lib/apt/lists/*
-```
+# Метаданные
+LABEL maintainer="student@example.com"
+LABEL version="1.0"
 
-Обратите внимание:
-- Несколько команд объединены через `&&` в одном `RUN` — это один слой вместо трёх
-- `rm -rf /var/lib/apt/lists/*` — очищаем кэш apt чтобы образ был меньше
+# Обновляем пакеты и ставим curl
+RUN apt-get update && apt-get install -y curl
 
-Сохраните файл.
+# Команда по умолчанию
+CMD ["echo", "Hello from my first Docker image!"]
+DOCKERFILE
+```{{execute}}
+
+## Изучите структуру
+
+```bash
+cat Dockerfile
+```{{execute}}
+
+Каждая строка — это **инструкция**: `ИНСТРУКЦИЯ аргументы`. Комментарии начинаются с `#`.
+
+## Соберите образ
+
+```bash
+docker build -t my-first-image .
+```{{execute}}
+
+Флаг `-t` задаёт имя образа, `.` указывает на директорию с Dockerfile.
+
+```bash
+docker images my-first-image
+```{{execute}}

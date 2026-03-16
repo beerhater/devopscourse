@@ -1,38 +1,56 @@
-## COPY и ADD — файлы в образ
+# Шаг 2: Инструкции FROM и RUN
 
-`COPY` — копирует файлы с хоста в образ. Использовать по умолчанию.
-`ADD` — как COPY, но умеет распаковывать `.tar.gz` и скачивать по URL.
-Рекомендация: используйте COPY — она предсказуема и явна.
+## FROM — базовый образ
 
-`WORKDIR` — задаёт рабочую директорию. Если не существует — создаётся автоматически.
+`FROM` — первая инструкция в любом Dockerfile. Она задаёт базовый образ, на основе которого строится ваш:
 
----
-
-1. Создайте файл приложения:
-`nano /root/myapp/app.sh`
-
-2. Вставьте:
 ```
-#!/bin/bash
-echo "Hello from container!"
-echo "Hostname: $(hostname)"
-date
+FROM <image>[:<tag>]
 ```
 
-3. Обновите Dockerfile:
-`nano /root/myapp/Dockerfile`
+Выбор базового образа важен: `ubuntu` (~30 МБ), `debian:slim` (~25 МБ), `alpine` (~5 МБ).
 
-4. Добавьте строки:
+## RUN — выполнение команд при сборке
+
+`RUN` выполняет команду **во время сборки** образа и сохраняет результат как новый слой:
+
 ```
-FROM ubuntu:22.04
-
-RUN apt-get update && \
-    apt-get install -y curl wget && \
-    rm -rf /var/lib/apt/lists/*
-
-WORKDIR /app
-COPY app.sh /app/app.sh
-RUN chmod +x /app/app.sh
+RUN <команда>
 ```
 
-Сохраните файл.
+## Задание: объединяйте RUN-команды
+
+Плохая практика — несколько отдельных `RUN`:
+```dockerfile
+RUN apt-get update
+RUN apt-get install -y curl
+RUN apt-get install -y wget
+```
+Это создаёт 3 лишних слоя!
+
+Хорошая практика — объединять через `&&` и `\`:
+
+```bash
+cd /opt/myapp
+cat > Dockerfile << 'DOCKERFILE'
+FROM alpine:3.18
+
+RUN apk update && \
+    apk add --no-cache \
+      curl \
+      wget \
+      bash
+
+CMD ["bash"]
+DOCKERFILE
+```{{execute}}
+
+```bash
+docker build -t my-alpine-app .
+```{{execute}}
+
+```bash
+docker run --rm my-alpine-app curl --version
+```{{execute}}
+
+Флаг `--no-cache` в `apk` (и `--no-install-recommends` в `apt`) уменьшает размер образа.
