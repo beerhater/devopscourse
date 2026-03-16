@@ -1,1 +1,85 @@
-# \u0428\u0430\u0433 2: Healthcheck \u2014 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u0433\u043e\u0442\u043e\u0432\u043d\u043e\u0441\u0442\u0438\n\n**Healthcheck** \u2014 \u043f\u0435\u0440\u0438\u043e\u0434\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u0440\u0430\u0431\u043e\u0442\u043e\u0441\u043f\u043e\u0441\u043e\u0431\u043d\u043e\u0441\u0442\u0438 \u0441\u0435\u0440\u0432\u0438\u0441\u0430. Docker \u043f\u043e\u043c\u0435\u0447\u0430\u0435\u0442 \u043a\u043e\u043d\u0442\u0435\u0439\u043d\u0435\u0440 \u043a\u0430\u043a  \u0438\u043b\u0438 .\n\n## \u041f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u044b healthcheck\n\n\n\n## \u0417\u0430\u0434\u0430\u043d\u0438\u0435: \u0441\u0442\u0435\u043a \u0441 healthcheck\n\n{{execute}}\n\n{{execute}}\n\n{{execute}}\n\n\u0421\u043b\u0435\u0434\u0438\u0442\u0435 \u0437\u0430 \u0441\u0442\u0430\u0442\u0443\u0441\u043e\u043c \u2014  \u2192 :\n{{execute}}\n\n\u041d\u0430\u0436\u043c\u0438\u0442\u0435  \u0447\u0435\u0440\u0435\u0437 30 \u0441\u0435\u043a\u0443\u043d\u0434.\n\n{{execute}}\n\n{{execute}}\n
+# Шаг 2: Healthcheck — проверка готовности
+
+**Healthcheck** — периодическая проверка работоспособности сервиса. Docker помечает контейнер как `healthy` или `unhealthy`.
+
+## Параметры healthcheck
+
+```yaml
+healthcheck:
+  test: ["CMD", "curl", "-f", "http://localhost"]
+  interval: 30s
+  timeout: 10s
+  retries: 3
+  start_period: 40s
+```
+
+## Задание: стек с healthcheck для всех сервисов
+
+```bash
+cd /opt/compose2
+```{{execute}}
+
+```bash
+cat > docker-compose.yml << 'COMPOSEFILE'
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  redis:
+    image: redis:alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_PASSWORD: secret
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  app:
+    image: alpine
+    command: sh -c "echo 'All healthy!' && sleep infinity"
+    depends_on:
+      nginx:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+COMPOSEFILE
+```{{execute}}
+
+```bash
+docker-compose up -d
+```{{execute}}
+
+Следим за статусом — `starting` -> `healthy`:
+```bash
+watch -n 2 docker-compose ps
+```{{execute}}
+
+Нажмите Ctrl+C через 30 секунд.
+
+```bash
+docker-compose ps
+```{{execute}}
+
+```bash
+docker-compose down
+```{{execute}}

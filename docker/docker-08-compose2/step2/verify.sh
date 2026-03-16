@@ -1,1 +1,2 @@
-#!/bin/bash\ncd /opt/compose2 && grep -q "healthcheck" docker-compose.yml\n
+#!/bin/bash
+cd /opt/compose2 && grep -q "healthcheck" docker-compose.yml

@@ -1,1 +1,2 @@
-#!/bin/bash\ntest -f /opt/prod-stack/docker-compose.yml && grep -q "healthcheck" /opt/prod-stack/docker-compose.yml\n
+#!/bin/bash
+test -f /opt/prod-stack/docker-compose.yml && grep -q "healthcheck" /opt/prod-stack/docker-compose.yml

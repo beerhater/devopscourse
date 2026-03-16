@@ -1,1 +1,83 @@
-# \u0428\u0430\u0433 3: build \u0432 Compose\n\n\u0412\u043c\u0435\u0441\u0442\u043e \u0433\u043e\u0442\u043e\u0432\u043e\u0433\u043e \u043e\u0431\u0440\u0430\u0437\u0430 Compose \u043c\u043e\u0436\u0435\u0442 **\u0441\u043e\u0431\u0440\u0430\u0442\u044c \u043e\u0431\u0440\u0430\u0437** \u0438\u0437 Dockerfile.\n\n## \u0421\u0438\u043d\u0442\u0430\u043a\u0441\u0438\u0441 build\n\n\n\n## \u0417\u0430\u0434\u0430\u043d\u0438\u0435: \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u0441 build\n\n{{execute}}\n\n{{execute}}\n\n{{execute}}\n\n{{execute}}\n\n{{execute}}\n\n \u043f\u0440\u0438\u043d\u0443\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e \u043f\u0435\u0440\u0435\u0441\u043e\u0431\u0438\u0440\u0430\u0435\u0442 \u043e\u0431\u0440\u0430\u0437\u044b \u043f\u0440\u0438 \u043a\u0430\u0436\u0434\u043e\u043c .\n\n{{execute}}\n
+# Шаг 3: build в Compose
+
+Вместо готового образа Compose может **собрать образ** из Dockerfile прямо при запуске.
+
+## Синтаксис build
+
+```yaml
+# Краткая форма
+build: ./app
+
+# Расширенная форма
+build:
+  context: ./app
+  dockerfile: Dockerfile.prod
+  args:
+    VERSION: 1.0.0
+  target: production
+```
+
+## Задание: приложение с build
+
+```bash
+cd /opt/compose2 && mkdir -p app
+```{{execute}}
+
+```bash
+cat > app/server.py << 'PYFILE'
+import http.server, socketserver, os, json, datetime
+
+class Handler(http.server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header("Content-type", "application/json")
+        self.end_headers()
+        self.wfile.write(json.dumps({
+            "version": os.environ.get("APP_VERSION", "dev"),
+            "time": datetime.datetime.now().isoformat(),
+        }, indent=2).encode())
+    def log_message(self, *args): pass
+
+with socketserver.TCPServer(("", 5000), Handler) as s:
+    print("Server on :5000"); s.serve_forever()
+PYFILE
+```{{execute}}
+
+```bash
+cat > app/Dockerfile << 'DFILE'
+FROM python:3.11-alpine
+ARG APP_VERSION=dev
+ENV APP_VERSION=$APP_VERSION
+WORKDIR /app
+COPY server.py .
+EXPOSE 5000
+CMD ["python", "server.py"]
+DFILE
+```{{execute}}
+
+```bash
+cat > docker-compose.yml << 'COMPOSEFILE'
+services:
+  app:
+    build:
+      context: ./app
+      args:
+        APP_VERSION: "2.0.0"
+    ports:
+      - "5000:5000"
+
+  redis:
+    image: redis:alpine
+COMPOSEFILE
+```{{execute}}
+
+```bash
+docker-compose up -d --build
+curl http://localhost:5000
+```{{execute}}
+
+`--build` принудительно пересобирает образы при каждом `up`.
+
+```bash
+docker-compose down
+```{{execute}}

@@ -1,1 +1,2 @@
-#!/bin/bash\ntest -f /opt/compose2/app/Dockerfile\n
+#!/bin/bash
+test -f /opt/compose2/app/Dockerfile

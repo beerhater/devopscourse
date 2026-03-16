@@ -1,1 +1,56 @@
-# \u0428\u0430\u0433 4: \u041c\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u2014 --scale\n\nCompose \u043f\u043e\u0437\u0432\u043e\u043b\u044f\u0435\u0442 \u0437\u0430\u043f\u0443\u0441\u043a\u0430\u0442\u044c **\u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u0440\u0435\u043f\u043b\u0438\u043a** \u043e\u0434\u043d\u043e\u0433\u043e \u0441\u0435\u0440\u0432\u0438\u0441\u0430.\n\n## \u0412\u0430\u0436\u043d\u043e\u0435 \u0443\u0441\u043b\u043e\u0432\u0438\u0435\n\n\u041c\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u0443\u0435\u043c\u044b\u0439 \u0441\u0435\u0440\u0432\u0438\u0441 \u043d\u0435 \u0434\u043e\u043b\u0436\u0435\u043d \u0438\u043c\u0435\u0442\u044c  \u0438 \u0434\u043e\u043b\u0436\u0435\u043d \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c  \u0432\u043c\u0435\u0441\u0442\u043e  \u2014 \u0438\u043d\u0430\u0447\u0435 \u0432\u0442\u043e\u0440\u043e\u0439 \u043a\u043e\u043d\u0442\u0435\u0439\u043d\u0435\u0440 \u043d\u0435 \u0441\u043c\u043e\u0436\u0435\u0442 \u0437\u0430\u043d\u044f\u0442\u044c \u0442\u043e\u0442 \u0436\u0435 \u043f\u043e\u0440\u0442 \u0445\u043e\u0441\u0442\u0430.\n\n## \u0417\u0430\u0434\u0430\u043d\u0438\u0435\n\n{{execute}}\n\n{{execute}}\n\n{{execute}}\n\n\u0417\u0430\u043f\u0443\u0441\u0442\u0438\u0442\u0435 3 \u0440\u0435\u043f\u043b\u0438\u043a\u0438:\n{{execute}}\n\n{{execute}}\n\n\u0422\u0440\u0438 \u043a\u043e\u043d\u0442\u0435\u0439\u043d\u0435\u0440\u0430: , , .\n\n\u0423\u043c\u0435\u043d\u044c\u0448\u0438\u0442\u0435 \u0434\u043e 1:\n{{execute}}\n\n## \u0421\u0435\u043a\u0446\u0438\u044f deploy (\u0434\u043b\u044f Docker Swarm)\n\n\n\n{{execute}}\n
+# Шаг 4: Масштабирование — --scale
+
+Compose позволяет запускать **несколько реплик** одного сервиса.
+
+## Важное условие
+
+Масштабируемый сервис не должен иметь `container_name` и должен использовать `expose` вместо `ports` — иначе второй контейнер не сможет занять тот же порт хоста.
+
+## Задание
+
+```bash
+cd /opt/compose2
+```{{execute}}
+
+```bash
+cat > docker-compose.yml << 'COMPOSEFILE'
+services:
+  app:
+    build: ./app
+    expose:
+      - "5000"
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+
+  redis:
+    image: redis:alpine
+COMPOSEFILE
+```{{execute}}
+
+```bash
+docker-compose up -d --build
+```{{execute}}
+
+Запустите 3 реплики:
+```bash
+docker-compose up -d --scale app=3
+```{{execute}}
+
+```bash
+docker-compose ps
+```{{execute}}
+
+Три контейнера: `compose2_app_1`, `compose2_app_2`, `compose2_app_3`.
+
+Уменьшите до 1:
+```bash
+docker-compose up -d --scale app=1
+docker-compose ps
+```{{execute}}
+
+```bash
+docker-compose down
+```{{execute}}

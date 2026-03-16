@@ -1,1 +1,2 @@
-#!/bin/bash\ndocker images | grep -q "compose2"\n
+#!/bin/bash
+docker images | grep -q "compose2"

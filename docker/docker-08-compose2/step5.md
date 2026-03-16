@@ -1,1 +1,68 @@
-# \u0428\u0430\u0433 5: \u041f\u0440\u043e\u0444\u0438\u043b\u0438 \u2014 \u0437\u0430\u043f\u0443\u0441\u043a \u043d\u0443\u0436\u043d\u044b\u0445 \u0441\u0435\u0440\u0432\u0438\u0441\u043e\u0432\n\n**Profiles** \u043f\u043e\u0437\u0432\u043e\u043b\u044f\u044e\u0442 \u043f\u043e\u043c\u0435\u0447\u0430\u0442\u044c \u0441\u0435\u0440\u0432\u0438\u0441\u044b \u0442\u0435\u0433\u0430\u043c\u0438. \u0421\u0435\u0440\u0432\u0438\u0441 \u0431\u0435\u0437 \u043f\u0440\u043e\u0444\u0438\u043b\u044f \u0437\u0430\u043f\u0443\u0441\u043a\u0430\u0435\u0442\u0441\u044f \u0432\u0441\u0435\u0433\u0434\u0430, \u0441 \u043f\u0440\u043e\u0444\u0438\u043b\u0435\u043c \u2014 \u0442\u043e\u043b\u044c\u043a\u043e \u043f\u0440\u0438 \u044f\u0432\u043d\u043e\u043c \u0443\u043a\u0430\u0437\u0430\u043d\u0438\u0438 . \u0418\u0434\u0435\u0430\u043b\u044c\u043d\u043e \u0434\u043b\u044f dev-\u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u043e\u0432 \u0438 \u0443\u0442\u0438\u043b\u0438\u0442 \u043c\u0438\u0433\u0440\u0430\u0446\u0438\u0439.\n\n## \u0417\u0430\u0434\u0430\u043d\u0438\u0435\n\n{{execute}}\n\n{{execute}}\n\n\u0422\u043e\u043b\u044c\u043a\u043e \u043e\u0441\u043d\u043e\u0432\u043d\u044b\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u044b (\u0431\u0435\u0437 \u043f\u0440\u043e\u0444\u0438\u043b\u0435\u0439):\n{{execute}}\n\n\u0421 dev-\u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u0430\u043c\u0438:\n{{execute}}\n\n{{execute}}\n
+# Шаг 5: Профили — запуск нужных сервисов
+
+**Profiles** позволяют помечать сервисы тегами. Сервисы без профиля запускаются всегда, с профилем — только при явном `--profile`. Идеально для dev-инструментов и миграций.
+
+## Задание
+
+```bash
+cd /opt/compose2
+```{{execute}}
+
+```bash
+cat > docker-compose.yml << 'COMPOSEFILE'
+services:
+  app:
+    build: ./app
+    ports:
+      - "5000:5000"
+
+  redis:
+    image: redis:alpine
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_PASSWORD: secret
+
+  adminer:
+    image: adminer
+    ports:
+      - "8081:8080"
+    profiles: ["dev"]
+    depends_on:
+      - db
+
+  redis-commander:
+    image: rediscommander/redis-commander
+    environment:
+      REDIS_HOSTS: local:redis:6379
+    ports:
+      - "8082:8081"
+    profiles: ["dev"]
+
+  db-init:
+    image: postgres:15-alpine
+    environment:
+      PGPASSWORD: secret
+    command: sh -c "psql -h db -U postgres -c 'SELECT 1' && echo 'DB OK'"
+    profiles: ["tools"]
+    depends_on:
+      - db
+COMPOSEFILE
+```{{execute}}
+
+Только основные сервисы:
+```bash
+docker-compose up -d --build
+docker-compose ps
+```{{execute}}
+
+С dev-инструментами:
+```bash
+docker-compose --profile dev up -d
+docker-compose ps
+```{{execute}}
+
+```bash
+docker-compose --profile dev down
+```{{execute}}

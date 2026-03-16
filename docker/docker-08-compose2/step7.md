@@ -1,1 +1,172 @@
-# \u0428\u0430\u0433 7: \u0418\u0442\u043e\u0433\u043e\u0432\u043e\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435\n\nProduction-ready \u0441\u0442\u0435\u043a \u0441\u043e \u0432\u0441\u0435\u043c\u0438 \u0438\u0437\u0443\u0447\u0435\u043d\u043d\u044b\u043c\u0438 \u0432\u043e\u0437\u043c\u043e\u0436\u043d\u043e\u0441\u0442\u044f\u043c\u0438.\n\n**1. \u0421\u043e\u0437\u0434\u0430\u0439\u0442\u0435 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u044e:**\n\n{{execute}}\n\n**2. \u041f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435:**\n\n{{execute}}\n\n{{execute}}\n\n**3. .env \u0444\u0430\u0439\u043b:**\n\n{{execute}}\n\n**4. docker-compose.yml:**\n\n{{execute}}\n\n**5. \u0417\u0430\u043f\u0443\u0441\u0442\u0438\u0442\u0435 \u0441\u0442\u0435\u043a:**\n\n{{execute}}\n\n**6. \u0421\u043b\u0435\u0434\u0438\u0442\u0435 \u0437\u0430 healthcheck:**\n\n{{execute}}\n\n\u0414\u043e\u0436\u0434\u0438\u0442\u0435\u0441\u044c  \u0443 \u0432\u0441\u0435\u0445 \u0441\u0435\u0440\u0432\u0438\u0441\u043e\u0432, \u0437\u0430\u0442\u0435\u043c .\n\n**7. \u0417\u0430\u043f\u0443\u0441\u0442\u0438\u0442\u0435 3 \u0440\u0435\u043f\u043b\u0438\u043a\u0438 app:**\n\n{{execute}}\n\n**8. \u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 nginx:**\n\n{{execute}}\n\n**9. Dev-\u043f\u0440\u043e\u0444\u0438\u043b\u044c:**\n\n{{execute}}\n\n**10. \u041e\u0447\u0438\u0441\u0442\u0438\u0442\u0435:**\n\n{{execute}}\n
+# Шаг 7: Итоговое задание
+
+Соберите production-ready стек со всеми изученными возможностями.
+
+**1. Подготовьте директорию:**
+
+```bash
+mkdir -p /opt/prod-stack/app && cd /opt/prod-stack
+```{{execute}}
+
+**2. Создайте приложение:**
+
+```bash
+cat > app/server.py << 'PYFILE'
+import http.server, socketserver, os, json
+
+COUNTER = 0
+
+class Handler(http.server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        global COUNTER
+        COUNTER += 1
+        self.send_response(200)
+        self.send_header("Content-type", "application/json")
+        self.end_headers()
+        self.wfile.write(json.dumps({
+            "env": os.environ.get("APP_ENV", "unknown"),
+            "version": os.environ.get("APP_VERSION", "dev"),
+            "requests": COUNTER,
+            "instance": os.uname().nodename,
+        }, indent=2).encode())
+    def log_message(self, *args): pass
+
+with socketserver.TCPServer(("", 5000), Handler) as s:
+    print("Ready"); s.serve_forever()
+PYFILE
+```{{execute}}
+
+```bash
+cat > app/Dockerfile << 'DFILE'
+FROM python:3.11-alpine
+ARG APP_VERSION=dev
+ENV APP_VERSION=$APP_VERSION
+WORKDIR /app
+COPY server.py .
+HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD wget -qO- http://localhost:5000 || exit 1
+EXPOSE 5000
+CMD ["python", "server.py"]
+DFILE
+```{{execute}}
+
+**3. .env файл:**
+
+```bash
+cat > .env << 'ENVFILE'
+APP_ENV=production
+APP_VERSION=1.0.0
+DB_PASSWORD=strongpassword
+ENVFILE
+```{{execute}}
+
+**4. docker-compose.yml:**
+
+```bash
+cat > docker-compose.yml << 'COMPOSEFILE'
+services:
+  app:
+    build:
+      context: ./app
+      args:
+        APP_VERSION: ${APP_VERSION}
+    environment:
+      APP_ENV: ${APP_ENV}
+    expose:
+      - "5000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:5000"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+
+  adminer:
+    image: adminer
+    ports:
+      - "8081:8080"
+    profiles: ["dev"]
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+COMPOSEFILE
+```{{execute}}
+
+**5. Запустите:**
+
+```bash
+docker-compose up -d --build
+```{{execute}}
+
+**6. Следите за healthcheck:**
+
+```bash
+watch -n 3 docker-compose ps
+```{{execute}}
+
+Дождитесь `healthy` у всех сервисов, затем Ctrl+C.
+
+**7. Запустите 3 реплики app:**
+
+```bash
+docker-compose up -d --scale app=3
+docker-compose ps
+```{{execute}}
+
+**8. Проверьте nginx:**
+
+```bash
+curl http://localhost:8080
+```{{execute}}
+
+**9. Dev-профиль:**
+
+```bash
+docker-compose --profile dev up -d
+docker-compose ps
+```{{execute}}
+
+**10. Очистите:**
+
+```bash
+docker-compose --profile dev down -v
+```{{execute}}

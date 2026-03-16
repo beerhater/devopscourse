@@ -1,1 +1,76 @@
-# \u0428\u0430\u0433 1: depends_on \u0438 \u043f\u043e\u0440\u044f\u0434\u043e\u043a \u0437\u0430\u043f\u0443\u0441\u043a\u0430\n\n## \u041f\u0440\u043e\u0431\u043b\u0435\u043c\u0430 \u043f\u0440\u043e\u0441\u0442\u043e\u0433\u043e depends_on\n\n\n\n\u042d\u0442\u043e \u0433\u0430\u0440\u0430\u043d\u0442\u0438\u0440\u0443\u0435\u0442 \u0447\u0442\u043e **\u043a\u043e\u043d\u0442\u0435\u0439\u043d\u0435\u0440**  \u0437\u0430\u043f\u0443\u0449\u0435\u043d, \u043d\u043e **\u043d\u0435** \u0447\u0442\u043e PostgreSQL \u0432\u043d\u0443\u0442\u0440\u0438 \u0433\u043e\u0442\u043e\u0432 \u043f\u0440\u0438\u043d\u0438\u043c\u0430\u0442\u044c \u0441\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u044f. \u041f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u0441\u0442\u0430\u0440\u0442\u0443\u0435\u0442 \u0440\u0430\u043d\u044c\u0448\u0435 \u0438 \u043f\u0430\u0434\u0430\u0435\u0442 \u0441 \u043e\u0448\u0438\u0431\u043a\u043e\u0439 \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f.\n\n## \u0414\u0435\u043c\u043e\u043d\u0441\u0442\u0440\u0430\u0446\u0438\u044f \u043f\u0440\u043e\u0431\u043b\u0435\u043c\u044b\n\n{{execute}}\n\n{{execute}}\n\n{{execute}}\n\n \u0441\u0442\u0430\u0440\u0442\u0443\u0435\u0442 \u043f\u043e\u0447\u0442\u0438 \u043e\u0434\u043d\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u043e \u0441  \u2014  \u043b\u0438\u0448\u044c \u0437\u0430\u0434\u0430\u0451\u0442 \u043f\u043e\u0440\u044f\u0434\u043e\u043a, \u043d\u0435 \u0436\u0434\u0451\u0442 \u0433\u043e\u0442\u043e\u0432\u043d\u043e\u0441\u0442\u0438.\n\n## \u0420\u0435\u0448\u0435\u043d\u0438\u0435: condition: service_healthy\n\n{{execute}}\n\n{{execute}}\n\n{{execute}}\n\n\u0422\u0435\u043f\u0435\u0440\u044c  \u0441\u0442\u0430\u0440\u0442\u0443\u0435\u0442 \u0442\u043e\u043b\u044c\u043a\u043e \u043a\u043e\u0433\u0434\u0430 PostgreSQL \u0440\u0435\u0430\u043b\u044c\u043d\u043e \u0433\u043e\u0442\u043e\u0432!\n\n{{execute}}\n
+# Шаг 1: depends_on и порядок запуска
+
+## Проблема простого depends_on
+
+```yaml
+depends_on:
+  - db
+```
+
+Это гарантирует что **контейнер** `db` запущен, но **не** что PostgreSQL внутри готов принимать соединения. Приложение стартует раньше и падает с ошибкой подключения.
+
+## Демонстрация проблемы
+
+```bash
+mkdir -p /opt/compose2 && cd /opt/compose2
+```{{execute}}
+
+```bash
+cat > docker-compose.yml << 'COMPOSEFILE'
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_PASSWORD: secret
+
+  app:
+    image: alpine
+    command: sh -c "echo 'Connecting to DB...' && sleep 2 && echo 'Done'"
+    depends_on:
+      - db
+COMPOSEFILE
+```{{execute}}
+
+```bash
+docker-compose up
+```{{execute}}
+
+`app` стартует почти одновременно с `db` — `depends_on` лишь задаёт порядок, не ждёт готовности.
+
+## Решение: condition: service_healthy
+
+```bash
+docker-compose down
+```{{execute}}
+
+```bash
+cat > docker-compose.yml << 'COMPOSEFILE'
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_PASSWORD: secret
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: alpine
+    command: sh -c "echo 'DB is ready!' && echo 'Connected OK'"
+    depends_on:
+      db:
+        condition: service_healthy
+COMPOSEFILE
+```{{execute}}
+
+```bash
+docker-compose up
+```{{execute}}
+
+Теперь `app` стартует только когда PostgreSQL реально готов!
+
+```bash
+docker-compose down
+```{{execute}}
