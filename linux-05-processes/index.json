@@ -1,0 +1,49 @@
+{
+  "title": "Урок 5: Процессы",
+  "description": "Учимся смотреть, управлять и убивать процессы в Linux",
+  "difficulty": "Beginner",
+  "time": "20",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "Шаг 1: Смотрим процессы через ps",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "Шаг 2: Мониторинг в реальном времени через top",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Шаг 3: Запускаем процесс в фоне",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Шаг 4: jobs, fg и bg",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Шаг 5: Убиваем процесс через kill",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "Шаг 6: Поиск процесса через pgrep и pkill",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
