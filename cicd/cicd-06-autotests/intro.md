@@ -1,18 +1,18 @@
-# Autotests in Pipeline
+# Автотесты в пайплайне
 
-In previous modules we ran tests with `python3 tests.py`. Real projects use **test frameworks**: they collect reports, measure coverage, run tests in parallel, and integrate with CI.
+В предыдущих модулях мы запускали тесты через `python3 tests.py` — простой скрипт. В реальных проектах используют **тест-фреймворки**: они собирают отчёты, измеряют покрытие, запускают тесты параллельно и интегрируются с CI.
 
-## What we will study
+## Что изучим
 
-- **pytest** — Python standard: fixtures, parametrize, coverage
-- **go test** — Go built-in runner: benchmarks, race detector, coverage
-- **JUnit XML** — universal report format understood by GitHub Actions and GitLab CI
-- **HTML Coverage Report** — visual report with uncovered lines highlighted
-- **Parallel execution** — tests in multiple threads or jobs
-- **Fail-fast** — stop on first failure or run everything
+- **pytest** — стандарт для Python: fixtures, parametrize, coverage
+- **go test** — встроенный раннер Go: benchmarks, race detector, coverage
+- **JUnit XML** — универсальный формат отчётов, понимается и GitHub Actions и GitLab CI
+- **HTML Coverage Report** — визуальный отчёт с подсветкой непокрытых строк
+- **Параллельный запуск** — тесты в нескольких потоках или джобах
+- **Fail-fast** — останавливаться на первой ошибке или гонять все тесты
 
-> Check tools: `python3 --version && pip3 --version`{{execute}}
+> Проверить инструменты: `python3 --version && pip3 --version`{{execute}}
 
-> Install pytest: `pip3 install pytest pytest-cov pytest-xdist pytest-html 2>/dev/null | tail -3`{{execute}}
+> Установить pytest: `pip3 install pytest pytest-cov pytest-xdist pytest-html 2>/dev/null | tail -3`{{execute}}
 
-> Working directory: `mkdir -p /opt/autotests-demo && cd /opt/autotests-demo`{{execute}}
+> Рабочая директория: `mkdir -p /opt/autotests-demo && cd /opt/autotests-demo`{{execute}}

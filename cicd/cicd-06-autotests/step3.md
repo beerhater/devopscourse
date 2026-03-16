@@ -1,26 +1,35 @@
-# Step 3: Coverage
+# Шаг 3: Coverage — измеряем покрытие кода тестами
 
 ```bash
 cd /opt/autotests-demo
 ```{{execute}}
 
 ```bash
+# Базовый запуск с покрытием
 python3 -m pytest test_bank.py --cov=bank --cov-report=term-missing
 ```{{execute}}
 
 ```bash
-python3 -m pytest test_bank.py   --cov=bank   --cov-report=term-missing   --cov-report=html:coverage-html   --cov-report=xml:coverage.xml
+# Генерируем все форматы отчётов
+python3 -m pytest test_bank.py \
+  --cov=bank \
+  --cov-report=term-missing \
+  --cov-report=html:coverage-html \
+  --cov-report=xml:coverage.xml
 ```{{execute}}
 
 ```bash
+# Минимальный порог покрытия: деплой упадёт если < 80%
 python3 -m pytest test_bank.py --cov=bank --cov-fail-under=80 -q
 ```{{execute}}
 
 ```bash
-python3 -m pytest test_bank.py --cov=bank --cov-fail-under=100 -q || echo "Coverage below 100%"
+# Попробуем поставить порог 100% — намеренно упадёт
+python3 -m pytest test_bank.py --cov=bank --cov-fail-under=100 -q || echo "Покрытие ниже 100%"
 ```{{execute}}
 
 ```bash
+# Сохраняем настройки в pytest.ini
 cat > pytest.ini << 'EOF'
 [pytest]
 addopts =
@@ -34,9 +43,9 @@ addopts =
     --cov-fail-under=75
 
 markers =
-    slow: slow integration tests
-    unit: fast unit tests
-    integration: integration tests
+    slow: медленные интеграционные тесты
+    unit: быстрые unit тесты
+    integration: интеграционные тесты
 EOF
 ```{{execute}}
 
@@ -45,6 +54,7 @@ python3 -m pytest test_bank.py
 ```{{execute}}
 
 ```bash
+# GitLab CI с coverage badge
 cat > .gitlab-ci.yml << 'GLCI'
 stages: [test]
 pytest-with-coverage:
@@ -67,8 +77,5 @@ pytest-with-coverage:
         path: coverage.xml
     expire_in: 1 week
 GLCI
-```{{execute}}
-
-```bash
 python3 -c "import yaml; yaml.safe_load(open('.gitlab-ci.yml')); print('YAML OK')"
 ```{{execute}}

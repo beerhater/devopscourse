@@ -1,4 +1,4 @@
-# Step 2: pytest — basic run in pipeline
+# Шаг 2: pytest — базовый запуск в пайплайне
 
 ```bash
 cd /opt/autotests-demo
@@ -104,15 +104,15 @@ class TestTransfer:
         assert receiver.balance == 100
 
 
-@pytest.mark.parametrize("deposit_amount,expected_balance", [
+@pytest.mark.parametrize("amount,expected", [
     (100, 100),
     (0.01, 0.01),
     (1_000_000, 1_000_000),
     (99.99, 99.99),
 ])
-def test_deposit_parametrized(empty_account, deposit_amount, expected_balance):
-    empty_account.deposit(deposit_amount)
-    assert empty_account.balance == pytest.approx(expected_balance)
+def test_deposit_parametrized(empty_account, amount, expected):
+    empty_account.deposit(amount)
+    assert empty_account.balance == pytest.approx(expected)
 
 
 class TestStatement:
@@ -139,14 +139,17 @@ python3 -m pytest test_bank.py -v --tb=short
 ```{{execute}}
 
 ```bash
+# Запуск конкретного класса
 python3 -m pytest test_bank.py::TestDeposit -v
 ```{{execute}}
 
 ```bash
+# Фильтр по имени теста
 python3 -m pytest test_bank.py -k "withdraw" -v
 ```{{execute}}
 
 ```bash
+# GitHub Actions workflow
 mkdir -p .github/workflows
 cat > .github/workflows/pytest.yml << 'WORKFLOW'
 name: Python Tests
@@ -160,7 +163,7 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install pytest pytest-cov pytest-xdist pytest-html
-      - name: Run tests
+      - name: Запуск тестов
         run: |
           python3 -m pytest test_bank.py -v --tb=short --junitxml=test-results.xml
       - uses: actions/upload-artifact@v4
@@ -172,6 +175,7 @@ WORKFLOW
 ```{{execute}}
 
 ```bash
+# GitLab CI
 cat > .gitlab-ci.yml << 'GLCI'
 stages: [test]
 pytest:
@@ -187,8 +191,5 @@ pytest:
       junit: report.xml
     expire_in: 1 week
 GLCI
-```{{execute}}
-
-```bash
 python3 -c "import yaml; yaml.safe_load(open('.gitlab-ci.yml')); print('YAML OK')"
 ```{{execute}}

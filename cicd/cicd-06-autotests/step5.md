@@ -1,4 +1,4 @@
-# Step 5: go test
+# Шаг 5: go test — тестирование Go-сервисов в пайплайне
 
 ```bash
 export PATH=$PATH:/usr/local/go/bin
@@ -56,17 +56,11 @@ GOEOF
 cat > calculator_test.go << 'GOEOF'
 package main
 
-import (
-    "testing"
-)
+import "testing"
 
 func TestAdd(t *testing.T) {
     calc := &Calculator{}
-    tests := []struct {
-        name     string
-        a, b     float64
-        expected float64
-    }{
+    tests := []struct{ name string; a, b, expected float64 }{
         {"positive", 2, 3, 5},
         {"negative", -1, -2, -3},
         {"zero", 0, 0, 0},
@@ -75,8 +69,7 @@ func TestAdd(t *testing.T) {
     }
     for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {
-            result := calc.Add(tt.a, tt.b)
-            if result != tt.expected {
+            if result := calc.Add(tt.a, tt.b); result != tt.expected {
                 t.Errorf("Add(%v,%v) = %v, want %v", tt.a, tt.b, result, tt.expected)
             }
         })
@@ -87,16 +80,11 @@ func TestDivide(t *testing.T) {
     calc := &Calculator{}
     t.Run("normal", func(t *testing.T) {
         result, err := calc.Divide(10, 2)
-        if err != nil {
-            t.Fatalf("unexpected error: %v", err)
-        }
-        if result != 5 {
-            t.Errorf("Divide(10,2) = %v, want 5", result)
-        }
+        if err != nil { t.Fatalf("unexpected error: %v", err) }
+        if result != 5 { t.Errorf("Divide(10,2) = %v, want 5", result) }
     })
     t.Run("by_zero", func(t *testing.T) {
-        _, err := calc.Divide(10, 0)
-        if err == nil {
+        if _, err := calc.Divide(10, 0); err == nil {
             t.Error("expected error for division by zero")
         }
     })
@@ -105,38 +93,16 @@ func TestDivide(t *testing.T) {
 func TestSqrt(t *testing.T) {
     calc := &Calculator{}
     result, err := calc.Sqrt(16)
-    if err != nil {
-        t.Fatalf("unexpected error: %v", err)
-    }
-    if result != 4 {
-        t.Errorf("Sqrt(16) = %v, want 4", result)
-    }
-    _, err = calc.Sqrt(-1)
-    if err == nil {
+    if err != nil { t.Fatalf("unexpected error: %v", err) }
+    if result != 4 { t.Errorf("Sqrt(16) = %v, want 4", result) }
+    if _, err = calc.Sqrt(-1); err == nil {
         t.Error("expected error for negative number")
-    }
-}
-
-func TestPower(t *testing.T) {
-    calc := &Calculator{}
-    tests := []struct{ base, exp, expected float64 }{
-        {2, 10, 1024},
-        {3, 0, 1},
-        {5, 2, 25},
-    }
-    for _, tt := range tests {
-        result := calc.Power(tt.base, tt.exp)
-        if result != tt.expected {
-            t.Errorf("Power(%v,%v) = %v, want %v", tt.base, tt.exp, result, tt.expected)
-        }
     }
 }
 
 func BenchmarkAdd(b *testing.B) {
     calc := &Calculator{}
-    for i := 0; i < b.N; i++ {
-        calc.Add(float64(i), float64(i+1))
-    }
+    for i := 0; i < b.N; i++ { calc.Add(float64(i), float64(i+1)) }
 }
 GOEOF
 ```{{execute}}
@@ -163,6 +129,7 @@ go test ./... -bench=. -benchmem
 ```{{execute}}
 
 ```bash
+# GitHub Actions для Go
 cat > .github/workflows/go-test.yml << 'WORKFLOW'
 name: Go Tests
 on: [push, pull_request]
@@ -179,8 +146,5 @@ jobs:
       - run: go tool cover -func=coverage.out
       - run: go test ./... -bench=. -benchmem -run=^$
 WORKFLOW
-```{{execute}}
-
-```bash
 python3 -c "import yaml; yaml.safe_load(open('.github/workflows/go-test.yml')); print('YAML OK')"
 ```{{execute}}

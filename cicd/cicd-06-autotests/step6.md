@@ -1,20 +1,21 @@
-# Step 6: Parallel runs and fail-fast
+# Шаг 6: Параллельный запуск и fail-fast стратегии
 
 ```bash
 cd /opt/autotests-demo
 ```{{execute}}
 
 ```bash
-echo "=== Sequential ==="
+echo "=== Последовательный запуск ==="
 time python3 -m pytest test_bank.py -q --no-cov 2>/dev/null
 ```{{execute}}
 
 ```bash
-echo "=== Parallel (2 workers) ==="
+echo "=== Параллельный запуск (2 воркера) ==="
 time python3 -m pytest test_bank.py -q -n 2 --no-cov 2>/dev/null
 ```{{execute}}
 
 ```bash
+# Разделяем тесты по маркерам: быстрые unit и медленные интеграционные
 cat > test_strategies.py << 'PYEOF'
 import pytest
 from bank import BankAccount, InsufficientFundsError
@@ -52,10 +53,12 @@ PYEOF
 ```{{execute}}
 
 ```bash
+# Только быстрые тесты (каждый push)
 python3 -m pytest test_strategies.py -m "unit" -v --no-cov 2>/dev/null
 ```{{execute}}
 
 ```bash
+# Fail-fast демонстрация
 cat > test_failfast.py << 'PYEOF'
 from bank import BankAccount
 
@@ -64,7 +67,7 @@ def test_1_passes():
 
 def test_2_FAILS():
     acc = BankAccount("B", 100)
-    assert acc.balance == 999, "Intentionally broken"
+    assert acc.balance == 999, "Намеренно сломан"
 
 def test_3_would_pass():
     assert 1 + 1 == 2
@@ -72,21 +75,22 @@ PYEOF
 ```{{execute}}
 
 ```bash
-echo "=== Without -x: all tests run ==="
+echo "=== Без -x: все тесты прогоняются ==="
 python3 -m pytest test_failfast.py -v --no-cov 2>/dev/null || true
 echo ""
-echo "=== With -x: stop on first failure ==="
+echo "=== С -x: остановка на первой ошибке ==="
 python3 -m pytest test_failfast.py -v -x --no-cov 2>/dev/null || true
 ```{{execute}}
 
 ```bash
+# Умная стратегия в GitHub Actions
 mkdir -p .github/workflows
 cat > .github/workflows/smart-tests.yml << 'WORKFLOW'
 name: Smart Test Strategy
 on: [push, pull_request]
 jobs:
   unit-tests:
-    name: "Unit Tests (fast)"
+    name: "Unit тесты (быстрые)"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -94,7 +98,8 @@ jobs:
         with: { python-version: "3.11" }
       - run: pip install pytest pytest-cov pytest-xdist
       - run: |
-          python3 -m pytest test_bank.py -m "unit or not slow"             -n auto -x --tb=short --junitxml=unit-results.xml
+          python3 -m pytest test_bank.py -m "unit or not slow" \
+            -n auto -x --tb=short --junitxml=unit-results.xml
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -102,7 +107,7 @@ jobs:
           path: unit-results.xml
 
   full-tests:
-    name: "Full Tests + Coverage"
+    name: "Полный прогон + Coverage"
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
@@ -111,7 +116,10 @@ jobs:
         with: { python-version: "3.11" }
       - run: pip install pytest pytest-cov pytest-xdist
       - run: |
-          python3 -m pytest test_bank.py -n auto             --cov=bank --cov-report=term-missing             --cov-report=html:coverage-html             --cov-fail-under=75 --junitxml=full-results.xml
+          python3 -m pytest test_bank.py -n auto \
+            --cov=bank --cov-report=term-missing \
+            --cov-report=html:coverage-html \
+            --cov-fail-under=75 --junitxml=full-results.xml
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -136,8 +144,5 @@ jobs:
       - run: pip install pytest
       - run: python3 -m pytest test_bank.py -q
 WORKFLOW
-```{{execute}}
-
-```bash
 python3 -c "import yaml; yaml.safe_load(open('.github/workflows/smart-tests.yml')); print('YAML OK')"
 ```{{execute}}

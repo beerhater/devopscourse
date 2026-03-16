@@ -1,27 +1,30 @@
-# Step 1: Why tests in CI
+# Шаг 1: Зачем тесты в CI и какие они бывают
 
-## Test pyramid
+## Пирамида тестирования
 
 ```bash
 mkdir -p /opt/autotests-demo
 cat > /opt/autotests-demo/pyramid.txt << 'EOF'
-         /        /  \          E2E tests (Selenium, Playwright)
-       / E2E\         Slow, expensive, fragile
-      /------\        Few: 5-10 tests
-     /            /Integration\     Integration tests (API, DB)
-   /------------\     Medium speed, medium count: 50-100
-  /               /   Unit Tests   \   Unit tests (functions, classes)
-/------------------\  Fast, isolated, many: 500+
+         /\
+        /  \          E2E тесты (Selenium, Playwright)
+       / E2E\         Медленные, дорогие, хрупкие
+      /------\        Мало: 5-10 тестов
+     /        \
+    /Integration\     Интеграционные (API, DB)
+   /------------\     Средние: 50-100 тестов
+  /              \
+ /   Unit Tests   \   Unit тесты (функции, классы)
+/------------------\  Быстрые, изолированные: 500+
 
-CI STRATEGY:
-  Every push    -> Unit + Integration (< 2 min)
-  Every MR      -> Unit + Integration + some E2E
-  Nightly       -> Full run including slow E2E
+СТРАТЕГИЯ В CI:
+  Каждый push    -> Unit + Integration (< 2 мин)
+  Каждый MR      -> Unit + Integration + часть E2E
+  Ночной запуск  -> Полный прогон включая медленные E2E
 EOF
 cat /opt/autotests-demo/pyramid.txt
 ```{{execute}}
 
-## Create the demo project
+## Создаём демо-проект
 
 ```bash
 cd /opt/autotests-demo
@@ -83,8 +86,8 @@ from bank import BankAccount
 acc = BankAccount('Alice', 1000)
 acc.deposit(500)
 acc.withdraw(200)
-print(f'Balance: {acc.balance}')
-print(f'Transactions: {acc.get_statement()}')
-print('bank.py OK!')
+print(f'Баланс: {acc.balance}')
+print(f'Транзакции: {acc.get_statement()}')
+print('bank.py работает!')
 "
 ```{{execute}}
