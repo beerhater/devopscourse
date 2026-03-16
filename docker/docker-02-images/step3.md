@@ -1,20 +1,46 @@
-## Список образов (images)
+# Шаг 3: Просмотр образов — docker images
 
-`docker images` показывает все локальные образы с метаданными.
+`docker images` показывает все локальные образы.
 
----
+## Основные варианты команды
 
-1. Посмотрите все образы:
-`docker images`
+Полный список с деталями:
 
-2. Отфильтруйте только nginx:
-`docker images nginx`
+```bash
+docker images
+```{{execute}}
 
-3. Посмотрите ID образов в коротком формате:
-`docker images -q`
+Столбцы таблицы:
+| Столбец | Описание |
+|---------|----------|
+| REPOSITORY | Имя образа |
+| TAG | Версия/тег |
+| IMAGE ID | Уникальный ID (сокращённый) |
+| CREATED | Когда создан |
+| SIZE | Размер на диске |
 
-4. Сохраните список в файл:
-`docker images > /root/images_list.txt`
+## Только имена и теги
 
-5. Проверьте что alpine занимает меньше всего места:
-`docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}"`
+```bash
+docker images --format "{{.Repository}}:{{.Tag}}"
+```{{execute}}
+
+## Только ID образов
+
+```bash
+docker images -q
+```{{execute}}
+
+## Фильтрация по имени
+
+```bash
+docker images nginx
+```{{execute}}
+
+## Размер всех образов суммарно
+
+```bash
+docker system df
+```{{execute}}
+
+Команда `docker system df` показывает сводку по использованию диска: образы, контейнеры, volumes.

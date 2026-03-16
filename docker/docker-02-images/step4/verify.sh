@@ -1,2 +1,2 @@
 #!/bin/bash
-docker inspect nginx &>/dev/null && exit 0 || exit 1
+docker images ubuntu | grep -q "22.04"

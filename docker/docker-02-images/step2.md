@@ -1,18 +1,39 @@
-## Скачиваем образы (pull)
+# Шаг 2: Скачивание образов — docker pull
 
-Команда `docker pull` скачивает образ в локальный кэш.
-Без указания тега скачивается `latest`.
+`docker pull` скачивает образ из реестра в локальное хранилище, **не запуская** контейнер.
 
----
+## Синтаксис
 
-1. Скачайте последнюю версию Alpine Linux (самый маленький базовый образ, ~5MB):
-`docker pull alpine`
+```
+docker pull [OPTIONS] NAME[:TAG]
+```
 
-2. Скачайте конкретную версию nginx:
-`docker pull nginx:1.25-alpine`
+## Задание 1: Скачайте образ ubuntu
 
-3. Скачайте образ PostgreSQL:
-`docker pull postgres:15`
+```bash
+docker pull ubuntu
+```{{execute}}
 
-4. Посмотрите что скачалось и обратите внимание на слои:
-`docker images`
+Вы увидите, как Docker скачивает слои образа по одному. Каждая строка `Pull complete` — это один слой.
+
+## Задание 2: Скачайте образ alpine
+
+`alpine` — минималистичный Linux (~5 МБ), часто используется как базовый образ:
+
+```bash
+docker pull alpine
+```{{execute}}
+
+## Задание 3: Скачайте образ nginx
+
+```bash
+docker pull nginx
+```{{execute}}
+
+## Проверьте, что образы скачались
+
+```bash
+docker images
+```{{execute}}
+
+Обратите внимание на столбец **SIZE** — alpine значительно меньше ubuntu!

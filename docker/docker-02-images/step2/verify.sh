@@ -1,2 +1,2 @@
 #!/bin/bash
-docker images | grep -qi "alpine" && exit 0 || exit 1
+docker images | grep -q "alpine" && docker images | grep -q "nginx"

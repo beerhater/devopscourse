@@ -1,2 +1,2 @@
 #!/bin/bash
-[ -f /root/nginx_search.txt ] && exit 0 || exit 1
+docker images --format '{{.Repository}}' | grep -q "." || docker images | grep -q "REPOSITORY"

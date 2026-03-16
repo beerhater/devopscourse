@@ -1,20 +1,47 @@
-## Удаление образов (rmi)
+# Шаг 5: Поиск образов — Docker Hub
 
-Образы занимают место на диске. Неиспользуемые нужно чистить.
+**Docker Hub** (hub.docker.com) — главный публичный реестр образов. Там миллионы образов от сообщества и официальных издателей.
 
----
+## Поиск через командную строку
 
-1. Удалите образ postgres:
-`docker rmi postgres:15`
+```bash
+docker search nginx
+```{{execute}}
 
-2. Удалите nginx:1.25-alpine:
-`docker rmi nginx:1.25-alpine`
+Столбцы результата:
+| Столбец | Описание |
+|---------|----------|
+| NAME | Имя образа |
+| DESCRIPTION | Описание |
+| STARS | Рейтинг (как звёзды на GitHub) |
+| OFFICIAL | `[OK]` = официальный образ от Docker |
+| AUTOMATED | Автоматическая сборка |
 
-3. Проверьте что удалилось:
-`docker images`
+## Фильтрация: только официальные образы
 
-4. Покажите образы которые не используются ни одним контейнером:
-`docker image prune -a --dry-run`
+```bash
+docker search --filter is-official=true python
+```{{execute}}
 
-Флаг `--dry-run` показывает что **было бы** удалено, не удаляя реально.
-Очень полезно перед реальной очисткой!
+## Фильтрация по рейтингу
+
+```bash
+docker search --filter stars=100 redis
+```{{execute}}
+
+## Ограничение количества результатов
+
+```bash
+docker search --limit 5 postgres
+```{{execute}}
+
+## Задание
+
+Найдите официальный образ `redis` и скачайте его:
+
+```bash
+docker search --filter is-official=true redis
+docker pull redis:alpine
+```{{execute}}
+
+> **Совет:** На hub.docker.com можно смотреть все доступные теги образа, читать документацию и примеры использования — интерфейс удобнее, чем `docker search`.
