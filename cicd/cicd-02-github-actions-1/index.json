@@ -1,0 +1,18 @@
+{
+  "title": "GitHub Actions: Часть 1",
+  "description": "Структура .github/workflows/, триггеры on:push/pull_request, jobs, steps, runners. Пишем и запускаем настоящие workflow локально через act.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Что такое GitHub Actions и как это работает", "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Структура workflow-файла",                    "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Триггеры: когда запускать пайплайн",         "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Jobs и Steps: единицы работы",               "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Переменные окружения и контекст",            "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Запускаем workflow локально через act",       "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Итоговое задание",                           "text": "step7.md", "verify": "step7/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu" }
+}

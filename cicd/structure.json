@@ -1,7 +1,8 @@
 {
   "title": "CI/CD для DevOps",
-  "description": "Автоматизация сборки и деплоя: пайплайны, GitHub Actions, GitLab CI, тесты, стратегии деплоя",
+  "description": "Автоматизация сборки и деплоя",
   "items": [
-    { "path": "cicd-01-intro" }
+    { "path": "cicd-01-intro" },
+    { "path": "cicd-02-github-actions-1" }
   ]
 }
