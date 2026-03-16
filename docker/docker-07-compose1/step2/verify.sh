@@ -1,2 +1,1 @@
-#!/bin/bash
-[ -f /root/mystack/docker-compose.yml ] && exit 0 || exit 1
+#!/bin/bash\ntest -f /opt/compose-intro/docker-compose.yml\n

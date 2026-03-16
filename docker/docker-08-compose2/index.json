@@ -1,18 +1,1 @@
-{
-  "title": "Урок 8: Docker Compose (Часть 2)",
-  "description": "depends_on, переменные окружения, .env файл, масштабирование и healthcheck",
-  "difficulty": "Intermediate",
-  "time": "35",
-  "details": {
-    "intro": { "text": "intro.md" },
-    "steps": [
-      { "title": "Шаг 1: depends_on — порядок запуска",    "text": "step1.md", "verify": "step1/verify.sh" },
-      { "title": "Шаг 2: Переменные окружения и .env",     "text": "step2.md", "verify": "step2/verify.sh" },
-      { "title": "Шаг 3: healthcheck — ждём готовности",   "text": "step3.md", "verify": "step3/verify.sh" },
-      { "title": "Шаг 4: Масштабирование (scale)",         "text": "step4.md", "verify": "step4/verify.sh" },
-      { "title": "Шаг 5: Практика — полный стек",          "text": "step5.md", "verify": "step5/verify.sh" }
-    ],
-    "finish": { "text": "finish.md" }
-  },
-  "backend": { "imageid": "ubuntu" }
-}
+{\n  "title": "Docker Compose: \u0427\u0430\u0441\u0442\u044c 2",\n  "description": "\u041f\u0440\u043e\u0434\u0432\u0438\u043d\u0443\u0442\u044b\u0439 Docker Compose: depends_on \u0441 healthcheck, build, \u043c\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435, profiles \u0438 override-\u0444\u0430\u0439\u043b\u044b",\n  "details": {\n    "intro": { "text": "intro.md" },\n    "steps": [\n      { "title": "depends_on \u0438 \u043f\u043e\u0440\u044f\u0434\u043e\u043a \u0437\u0430\u043f\u0443\u0441\u043a\u0430",     "text": "step1.md", "verify": "step1/verify.sh" },\n      { "title": "Healthcheck: \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u0433\u043e\u0442\u043e\u0432\u043d\u043e\u0441\u0442\u0438", "text": "step2.md", "verify": "step2/verify.sh" },\n      { "title": "build \u0432 Compose",                  "text": "step3.md", "verify": "step3/verify.sh" },\n      { "title": "\u041c\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435: --scale",         "text": "step4.md", "verify": "step4/verify.sh" },\n      { "title": "\u041f\u0440\u043e\u0444\u0438\u043b\u0438: \u0437\u0430\u043f\u0443\u0441\u043a \u043d\u0443\u0436\u043d\u044b\u0445 \u0441\u0435\u0440\u0432\u0438\u0441\u043e\u0432",  "text": "step5.md", "verify": "step5/verify.sh" },\n      { "title": "Override-\u0444\u0430\u0439\u043b\u044b \u0438 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f",       "text": "step6.md", "verify": "step6/verify.sh" },\n      { "title": "\u0418\u0442\u043e\u0433\u043e\u0432\u043e\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435",                 "text": "step7.md", "verify": "step7/verify.sh" }\n    ],\n    "finish": { "text": "finish.md" }\n  },\n  "backend": { "imageid": "ubuntu" }\n}\n

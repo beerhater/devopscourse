@@ -1,2 +1,1 @@
-#!/bin/bash
-cd /root/mystack && docker compose ps | grep -qi "running\|up" && exit 0 || exit 1
+#!/bin/bash\ncd /opt/compose-intro && docker-compose ps | grep -qi "up"\n

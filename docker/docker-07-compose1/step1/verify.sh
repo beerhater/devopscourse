@@ -1,2 +1,1 @@
-#!/bin/bash
-[ -f /root/compose_version.txt ] && exit 0 || exit 1
+#!/bin/bash\ndocker-compose version > /dev/null 2>&1 || docker compose version > /dev/null 2>&1\n

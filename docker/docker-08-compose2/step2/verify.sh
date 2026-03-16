@@ -1,2 +1,1 @@
-#!/bin/bash
-[ -f /root/prodstack/.env ] && grep -q "POSTGRES_PASSWORD" /root/prodstack/.env && exit 0 || exit 1
+#!/bin/bash\ncd /opt/compose2 && grep -q "healthcheck" docker-compose.yml\n
