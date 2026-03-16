@@ -1,20 +1,58 @@
-## Тегирование: docker tag
+# Шаг 3: Тегирование — docker tag
 
-У одного образа может быть несколько тегов.
-Это не копия — это просто дополнительное имя, указывающее на тот же ID образа.
+Тег — это указатель на конкретный образ (по IMAGE ID). Один образ может иметь **сколько угодно тегов**.
 
-Соглашение: `имя:latest` = последняя стабильная версия.
+## Синтаксис
 
----
+```
+docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+```
 
-1. Создайте тег `latest` для v2:
-`docker tag webserver:v2 webserver:latest`
+`docker tag` не копирует образ — оба тега указывают на один и тот же IMAGE ID.
 
-2. Проверьте — v2 и latest имеют одинаковый IMAGE ID:
-`docker images webserver`
+## Задание 1: Добавьте теги к существующему образу
 
-3. Создайте тег с именем пользователя (как для Docker Hub):
-`docker tag webserver:latest devopsstudent/webserver:v2`
+Посмотрите текущие образы:
+```bash
+docker images buildapp
+```{{execute}}
 
-4. Посмотрите все теги:
-`docker images | grep webserver`
+Добавьте тег `latest`:
+```bash
+docker tag buildapp:1.0 buildapp:latest
+```{{execute}}
+
+Добавьте тег с датой:
+```bash
+docker tag buildapp:1.0 buildapp:$(date +%Y%m%d)
+```{{execute}}
+
+```bash
+docker images buildapp
+```{{execute}}
+
+Все теги указывают на один IMAGE ID — убедитесь сами.
+
+## Задание 2: Тег для публикации на Docker Hub
+
+Для публикации на Docker Hub образ должен иметь тег вида `username/imagename:tag`:
+
+```bash
+docker tag buildapp:1.0 testuser/buildapp:1.0
+docker tag buildapp:1.0 testuser/buildapp:latest
+```{{execute}}
+
+```bash
+docker images testuser/buildapp
+```{{execute}}
+
+## Задание 3: Удалите тег
+
+```bash
+docker rmi buildapp:$(date +%Y%m%d)
+```{{execute}}
+
+Образ не удалился — удалился только тег. Убедитесь:
+```bash
+docker images buildapp
+```{{execute}}

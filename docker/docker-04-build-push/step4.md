@@ -1,19 +1,59 @@
-## Запуск собственного образа
+# Шаг 4: Многоэтапная сборка (multi-stage build)
 
-Теперь запустим то, что собрали, и убедимся что всё работает.
+**Проблема:** образы для сборки содержат компиляторы, инструменты сборки — всё это не нужно в продакшен-образе и раздувает его размер.
 
----
+**Решение:** multi-stage build — несколько `FROM` в одном Dockerfile. Финальный образ копирует только нужные артефакты из предыдущих этапов.
 
-1. Запустите контейнер из своего образа:
-`docker run -d --name mywebserver -p 8080:80 webserver:latest`
+## Задание: собери Go-приложение
 
-2. Убедитесь что контейнер запущен:
-`docker ps`
+```bash
+mkdir -p /opt/multistage && cd /opt/multistage
+```{{execute}}
 
-3. Проверьте что отдаёт наш nginx:
-`curl http://localhost:8080`
+```bash
+cat > main.go << 'GO'
+package main
 
-Вы должны увидеть ваш HTML!
+import "fmt"
 
-4. Остановите и удалите контейнер:
-`docker stop mywebserver && docker rm mywebserver`
+func main() {
+    fmt.Println("Hello from a tiny Docker image!")
+}
+GO
+```{{execute}}
+
+```bash
+cat > Dockerfile << 'DOCKERFILE'
+# Этап 1: сборка (большой образ с Go-компилятором)
+FROM golang:1.21-alpine AS builder
+
+WORKDIR /build
+COPY main.go .
+RUN go build -o app main.go
+
+# Этап 2: финальный образ (минимальный)
+FROM alpine:3.18
+
+WORKDIR /app
+# Копируем только скомпилированный бинарник из этапа builder
+COPY --from=builder /build/app .
+
+CMD ["./app"]
+DOCKERFILE
+```{{execute}}
+
+```bash
+docker build -t multistage-demo .
+```{{execute}}
+
+```bash
+docker run --rm multistage-demo
+```{{execute}}
+
+Сравните размеры:
+```bash
+docker images golang:1.21-alpine
+docker images multistage-demo
+```{{execute}}
+
+Разница колоссальная: ~300 МБ vs ~10 МБ!

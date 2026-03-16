@@ -1,18 +1,52 @@
 {
-  "title": "Урок 4: Сборка и тегирование",
-  "description": "docker build, docker tag, кэш слоёв, docker push на Docker Hub",
-  "difficulty": "Intermediate",
-  "time": "30",
+  "title": "Docker: Сборка и публикация образов",
+  "description": "Сборка образов с docker build, тегирование через docker tag и публикация на Docker Hub через docker push",
   "details": {
-    "intro": { "text": "intro.md" },
+    "intro": {
+      "text": "intro.md"
+    },
     "steps": [
-      { "title": "Шаг 1: Сборка docker build",        "text": "step1.md", "verify": "step1/verify.sh" },
-      { "title": "Шаг 2: Кэш слоёв при сборке",       "text": "step2.md", "verify": "step2/verify.sh" },
-      { "title": "Шаг 3: Тегирование docker tag",      "text": "step3.md", "verify": "step3/verify.sh" },
-      { "title": "Шаг 4: Запуск собственного образа",  "text": "step4.md", "verify": "step4/verify.sh" },
-      { "title": "Шаг 5: docker push и реестры",       "text": "step5.md", "verify": "step5/verify.sh" }
+      {
+        "title": "docker build: флаги и контекст сборки",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "Кеш слоёв и оптимизация сборки",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Тегирование: docker tag",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Многоэтапная сборка (multi-stage)",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Авторизация: docker login",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "Публикация: docker push",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "Итоговое задание",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      }
     ],
-    "finish": { "text": "finish.md" }
+    "finish": {
+      "text": "finish.md"
+    }
   },
-  "backend": { "imageid": "ubuntu" }
+  "backend": {
+    "imageid": "ubuntu"
+  }
 }

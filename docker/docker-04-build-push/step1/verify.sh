@@ -1,2 +1,2 @@
 #!/bin/bash
-docker images | grep -q "webserver" && exit 0 || exit 1
+docker images | grep -q "buildapp"

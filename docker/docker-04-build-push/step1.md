@@ -1,35 +1,63 @@
-## Сборка образа: docker build
+# Шаг 1: docker build — флаги и контекст сборки
 
-Синтаксис: `docker build -t имя:тег путь_к_контексту`
+## Контекст сборки
 
-Точка `.` в конце означает "текущая папка — контекст сборки".
-Docker упаковывает все файлы из этой папки и передаёт демону.
+Когда вы запускаете `docker build .`, точка `.` — это **контекст сборки**: директория, содержимое которой Docker отправляет в build-daemon. Чем меньше файлов — тем быстрее сборка. Именно поэтому важен `.dockerignore`.
 
----
-
-1. Создайте папку проекта:
-`mkdir -p /root/webserver && cd /root/webserver`
-
-2. Создайте Dockerfile:
-`nano Dockerfile`
-
-3. Вставьте:
-```
-FROM nginx:alpine
-COPY index.html /usr/share/nginx/html/index.html
-```
-
-4. Создайте html-страницу:
-`nano index.html`
+## Основные флаги docker build
 
 ```
-<html>
-<h1>Hello from my custom image!</h1>
-<p>Built with Docker.</p>
-</html>
+docker build [OPTIONS] PATH
 ```
 
-5. Соберите образ:
-`docker build -t webserver:v1 .`
+| Флаг | Описание |
+|------|----------|
+| `-t name:tag` | Имя и тег образа |
+| `-f Dockerfile.prod` | Путь к Dockerfile (если не дефолтный) |
+| `--no-cache` | Сборка без кеша |
+| `--build-arg KEY=VAL` | Передать ARG-переменную |
+| `--target stage` | Собрать до конкретного этапа (multi-stage) |
+| `--platform` | Целевая платформа (linux/amd64, linux/arm64) |
 
-Наблюдайте за выводом — вы видите каждый шаг сборки.
+## Задание: подготовьте приложение
+
+```bash
+mkdir -p /opt/buildapp && cd /opt/buildapp
+```{{execute}}
+
+```bash
+cat > app.sh << 'SCRIPT'
+#!/bin/sh
+echo "App version: ${APP_VERSION:-unknown}"
+echo "Built at: ${BUILD_DATE:-unknown}"
+echo "Running on: $(uname -m)"
+SCRIPT
+```{{execute}}
+
+```bash
+cat > Dockerfile << 'DOCKERFILE'
+FROM alpine:3.18
+ARG APP_VERSION=dev
+ARG BUILD_DATE=unknown
+ENV APP_VERSION=$APP_VERSION
+ENV BUILD_DATE=$BUILD_DATE
+WORKDIR /app
+COPY app.sh .
+RUN chmod +x app.sh
+CMD ["./app.sh"]
+DOCKERFILE
+```{{execute}}
+
+Сборка с тегом и build-args:
+
+```bash
+docker build \
+  -t buildapp:1.0 \
+  --build-arg APP_VERSION=1.0.0 \
+  --build-arg BUILD_DATE=$(date +%Y-%m-%d) \
+  .
+```{{execute}}
+
+```bash
+docker run --rm buildapp:1.0
+```{{execute}}

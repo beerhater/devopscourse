@@ -1,31 +1,49 @@
-## Docker Push и публичные реестры
+# Шаг 5: Авторизация — docker login
 
-`docker push` отправляет образ в реестр чтобы другие могли его скачать.
+Для публикации образов в реестр нужно авторизоваться.
 
-Кроме Docker Hub существуют:
-- **GitHub Container Registry** (ghcr.io)
-- **AWS ECR** (Elastic Container Registry)
-- **Google Artifact Registry**
-- **GitLab Registry**
-- **Harbor** — self-hosted опция
+## Docker Hub
 
----
+```
+docker login
+```
 
-Полная цепочка публикации (без реального выполнения):
+Или сразу с параметрами (для скриптов):
+```
+docker login -u USERNAME -p PASSWORD
+```
 
-1. Войдите в Docker Hub:
-`docker login`
+## Другие реестры
 
-2. Переименуйте образ с вашим username:
-`docker tag webserver:latest ВАШ_USERNAME/webserver:latest`
+Docker поддерживает любые реестры — достаточно указать адрес:
 
-3. Опубликуйте:
-`docker push ВАШ_USERNAME/webserver:latest`
+```bash
+# GitHub Container Registry
+docker login ghcr.io
 
-4. Чтобы скачать на любом другом сервере:
-`docker pull ВАШ_USERNAME/webserver:latest`
+# GitLab Registry
+docker login registry.gitlab.com
 
----
+# Приватный реестр
+docker login my-registry.company.com:5000
+```
 
-Сохраните понимание этого флоу в файл:
-`echo "build -> tag -> push -> pull" > /root/docker_flow.txt`
+## Где хранятся credentials
+
+```bash
+cat ~/.docker/config.json
+```{{execute}}
+
+Токены хранятся в `~/.docker/config.json`. В реальных проектах используйте `docker-credential-helpers` или переменные окружения CI/CD вместо хранения паролей в открытом виде.
+
+## Задание: посмотрите конфигурацию Docker
+
+```bash
+docker info | grep -A5 "Registry"
+```{{execute}}
+
+```bash
+docker info | grep "Username" || echo "Не авторизован — это нормально для данного упражнения"
+```{{execute}}
+
+> **Примечание:** В этой среде реальная авторизация на Docker Hub недоступна. На следующем шаге мы разберём `docker push` на практическом примере с локальным реестром.
