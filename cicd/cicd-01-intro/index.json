@@ -1,0 +1,18 @@
+{
+  "title": "Введение в CI/CD",
+  "description": "Что такое CI/CD, зачем это нужно, основные термины: pipeline, build, test, deploy. Строим первый пайплайн вручную на bash.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Жизнь без CI/CD",                    "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Термины: pipeline, build, test, deploy", "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Первый пайплайн на bash",             "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Добавляем тесты в пайплайн",          "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Артефакты и версионирование",         "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Пайплайн с Docker",                   "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Итоговое задание",                    "text": "step7.md", "verify": "step7/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu-docker" }
+}
