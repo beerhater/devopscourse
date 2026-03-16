@@ -1,0 +1,18 @@
+{
+  "title": "GitLab CI: Часть 2",
+  "description": "Docker build и push в GitLab Container Registry, include: разбивка конфига, extends: переиспользование, Environments, MR pipelines.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "GitLab Container Registry: Docker в GitLab",         "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Docker build и push в пайплайне",                    "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "include: разбивка конфига на файлы",                 "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "extends: и YAML anchors — переиспользование",        "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Environments: трекинг деплоев",                      "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "rules: сложная логика — MR, ветки, теги",            "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Итоговое задание: полный GitLab CI/CD",              "text": "step7.md", "verify": "step7/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu" }
+}

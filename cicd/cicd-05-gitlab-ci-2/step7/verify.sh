@@ -1,0 +1,2 @@
+#!/bin/bash
+test -f /opt/final-gitlab-ci-2/.gitlab-ci.yml && test -f /opt/final-gitlab-ci-2/ci/lint.yml && test -f /opt/final-gitlab-ci-2/ci/test.yml && test -f /opt/final-gitlab-ci-2/ci/docker.yml && test -f /opt/final-gitlab-ci-2/ci/deploy.yml && python3 -c "import yaml; yaml.safe_load(open('/opt/final-gitlab-ci-2/.gitlab-ci.yml'))" 2>/dev/null && grep -q "extends:" /opt/final-gitlab-ci-2/ci/test.yml
