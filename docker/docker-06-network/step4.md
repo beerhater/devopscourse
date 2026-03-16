@@ -1,21 +1,50 @@
-## Связь контейнеров по имени
+# Шаг 4: Связь контейнеров по имени (DNS)
 
----
+В пользовательской bridge-сети Docker автоматически настраивает **встроенный DNS-сервер**. Каждый контейнер получает DNS-запись по своему имени и всем псевдонимам.
 
-1. Из контейнера app2 пинганите app1 по имени:
-`docker exec app2 ping -c 3 app1`
+## Задание 1: Проверьте DNS по имени
 
-Это работает! Docker DNS резолвит `app1` в правильный IP.
+Запустите тестовый контейнер в той же сети:
 
-2. Из app1 пинганите app2:
-`docker exec app1 ping -c 3 app2`
+```bash
+docker run --rm --network app-network alpine nslookup web
+```{{execute}}
 
-3. Посмотрите какие контейнеры в сети mynet:
-`docker network inspect mynet --format='{{range .Containers}}{{.Name}} {{.IPv4Address}}{{"\n"}}{{end}}'`
+Docker резолвит имя `web` в IP-адрес контейнера!
 
-4. Подключите существующий контейнер к сети (один контейнер может быть в нескольких сетях):
-`docker run -d --name solo alpine sleep 300`
-`docker network connect mynet solo`
-`docker exec solo ping -c 2 app1`
+## Задание 2: Пинг по имени
 
-5. Остановите все: `docker rm -f app1 app2 solo`
+```bash
+docker run --rm --network app-network alpine ping -c 3 web
+```{{execute}}
+
+```bash
+docker run --rm --network app-network alpine ping -c 3 cache
+```{{execute}}
+
+## Задание 3: Реальный запрос к nginx по имени
+
+```bash
+docker run --rm --network app-network alpine wget -qO- http://web
+```{{execute}}
+
+## Псевдонимы (network aliases)
+
+Один контейнер может иметь несколько DNS-имён:
+
+```bash
+docker run -d \
+  --name db-primary \
+  --network app-network \
+  --network-alias database \
+  --network-alias db \
+  postgres:15-alpine \
+  -c "postgres_password=secret"
+```{{execute}}
+
+```bash
+docker run --rm --network app-network alpine nslookup database
+docker run --rm --network app-network alpine nslookup db
+```{{execute}}
+
+Оба имени резолвятся в один контейнер!

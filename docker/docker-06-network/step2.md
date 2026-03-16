@@ -1,22 +1,48 @@
-## Bridge-сеть по умолчанию
+# Шаг 2: Сеть bridge — сеть по умолчанию
 
-Когда вы запускаете контейнер без указания сети — он попадает в `bridge`.
-Контейнеры в bridge-сети по умолчанию **не находят друг друга по имени**,
-только по IP-адресу. Это ограничение дефолтной bridge-сети.
+Если при запуске контейнера не указать сеть, он попадает в сеть `bridge` по умолчанию.
 
----
+## Задание 1: Запустите два контейнера
 
-1. Запустите два контейнера в сети по умолчанию:
-`docker run -d --name c1 alpine sleep 300`
-`docker run -d --name c2 alpine sleep 300`
+```bash
+docker run -d --name container-a alpine sleep 300
+docker run -d --name container-b alpine sleep 300
+```{{execute}}
 
-2. Узнайте IP-адрес c1:
-`docker inspect c1 --format='{{.NetworkSettings.IPAddress}}'`
+## Задание 2: Узнайте их IP-адреса
 
-3. Попробуйте достучаться из c2 до c1 по IP (подставьте реальный IP):
-`docker exec c2 ping -c 2 $(docker inspect c1 --format='{{.NetworkSettings.IPAddress}}')`
+```bash
+docker inspect container-a | grep '"IPAddress"'
+docker inspect container-b | grep '"IPAddress"'
+```{{execute}}
 
-4. Теперь попробуйте по имени — это НЕ работает в дефолтной сети:
-`docker exec c2 ping -c 2 c1`
+## Задание 3: Проверьте связь по IP
 
-5. Остановите контейнеры: `docker rm -f c1 c2`
+Получите IP контейнера B:
+
+```bash
+IP_B=$(docker inspect -f '{{.NetworkSettings.IPAddress}}' container-b)
+echo "IP контейнера B: $IP_B"
+```{{execute}}
+
+Пингуйте из контейнера A:
+
+```bash
+docker exec container-a ping -c 3 $IP_B
+```{{execute}}
+
+Контейнеры видят друг друга по IP!
+
+## Ограничение дефолтной bridge-сети
+
+Попробуйте обратиться **по имени**:
+
+```bash
+docker exec container-a ping -c 2 container-b
+```{{execute}}
+
+**Ошибка!** В дефолтной bridge-сети нет DNS — контейнеры не знают имён друг друга, только IP. Это ограничение устраняется в пользовательских сетях.
+
+```bash
+docker stop container-a container-b && docker rm container-a container-b
+```{{execute}}

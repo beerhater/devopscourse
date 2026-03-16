@@ -1,2 +1,2 @@
 #!/bin/bash
-docker network ls | grep -q "mynet" && exit 1 || exit 0
+docker network ls | grep -q "frontend-net" && docker network ls | grep -q "backend-net"

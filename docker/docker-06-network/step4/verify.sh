@@ -1,2 +1,2 @@
 #!/bin/bash
-docker network inspect mynet 2>/dev/null | grep -q "app" && exit 0 || exit 1
+docker run --rm --network app-network alpine ping -c 1 web > /dev/null 2>&1

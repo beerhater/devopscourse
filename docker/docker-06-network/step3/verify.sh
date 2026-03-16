@@ -1,2 +1,2 @@
 #!/bin/bash
-docker network ls | grep -q "mynet" && exit 0 || exit 1
+docker network ls | grep -q "app-network"

@@ -1,2 +1,2 @@
 #!/bin/bash
-[ -f /root/networks.txt ] && exit 0 || exit 1
+docker network ls | grep -q "bridge"

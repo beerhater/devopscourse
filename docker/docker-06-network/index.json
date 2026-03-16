@@ -1,18 +1,52 @@
 {
-  "title": "Урок 6: Сеть в Docker",
-  "description": "bridge, host, none, docker network create и связь контейнеров",
-  "difficulty": "Intermediate",
-  "time": "30",
+  "title": "Docker: Сеть",
+  "description": "Сетевые драйверы Docker: bridge, host, none. Создание сетей, связь контейнеров по имени, docker network команды",
   "details": {
-    "intro": { "text": "intro.md" },
+    "intro": {
+      "text": "intro.md"
+    },
     "steps": [
-      { "title": "Шаг 1: Сетевые драйверы Docker",     "text": "step1.md", "verify": "step1/verify.sh" },
-      { "title": "Шаг 2: Bridge-сеть по умолчанию",    "text": "step2.md", "verify": "step2/verify.sh" },
-      { "title": "Шаг 3: Создаём свою сеть",           "text": "step3.md", "verify": "step3/verify.sh" },
-      { "title": "Шаг 4: Связь контейнеров по имени",  "text": "step4.md", "verify": "step4/verify.sh" },
-      { "title": "Шаг 5: Host и None сети",            "text": "step5.md", "verify": "step5/verify.sh" }
+      {
+        "title": "Сетевые драйверы Docker",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "Сеть bridge: сеть по умолчанию",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Создание пользовательских сетей",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Связь контейнеров по имени (DNS)",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Сеть host и none",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "Проброс портов и управление сетями",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "Итоговое задание",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      }
     ],
-    "finish": { "text": "finish.md" }
+    "finish": {
+      "text": "finish.md"
+    }
   },
-  "backend": { "imageid": "ubuntu" }
+  "backend": {
+    "imageid": "ubuntu"
+  }
 }

@@ -1,19 +1,43 @@
-## Создаём свою bridge-сеть
+# Шаг 3: Создание пользовательских сетей
 
-В пользовательской сети контейнеры находят друг друга по **имени** — автоматически.
-Docker встроенный DNS резолвит имена контейнеров в IP-адреса.
+**Пользовательская bridge-сеть** решает проблему DNS — контейнеры в ней обращаются друг к другу по имени.
 
----
+## Создание сети
 
-1. Создайте пользовательскую сеть:
-`docker network create mynet`
+```bash
+docker network create my-network
+```{{execute}}
 
-2. Посмотрите список сетей — mynet появилась:
-`docker network ls`
+```bash
+docker network ls
+```{{execute}}
 
-3. Инспектируйте новую сеть:
-`docker network inspect mynet`
+## Создание сети с параметрами
 
-4. Запустите два контейнера в вашей сети через флаг `--network`:
-`docker run -d --name app1 --network mynet alpine sleep 300`
-`docker run -d --name app2 --network mynet alpine sleep 300`
+```bash
+docker network create \
+  --driver bridge \
+  --subnet 172.20.0.0/16 \
+  --gateway 172.20.0.1 \
+  --ip-range 172.20.1.0/24 \
+  app-network
+```{{execute}}
+
+```bash
+docker network inspect app-network | grep -A10 '"IPAM"'
+```{{execute}}
+
+## Запуск контейнеров в пользовательской сети
+
+```bash
+docker run -d --name web --network app-network nginx:alpine
+docker run -d --name cache --network app-network redis:alpine
+```{{execute}}
+
+## Проверьте, кто в сети
+
+```bash
+docker network inspect app-network | grep -A5 '"Containers"'
+```{{execute}}
+
+Оба контейнера видны в сети `app-network`.

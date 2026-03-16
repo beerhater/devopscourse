@@ -1,26 +1,47 @@
-## Host и None сети
+# Шаг 5: Сеть host и none
 
-**Host network** — контейнер использует сетевой стек хоста напрямую.
-Нет изоляции по сети. Порты контейнера === порты хоста. Флаг `-p` не нужен.
-Используется для максимальной производительности сети.
+## Драйвер host
 
-**None network** — полная изоляция. Нет сетевых интерфейсов кроме loopback.
-Используется для задач которым сеть не нужна (обработка файлов и т.д.)
+Контейнер с `--network host` использует сетевой стек хоста напрямую — без виртуальных интерфейсов и NAT.
 
----
+```bash
+docker run --rm --network host alpine ip addr
+```{{execute}}
 
-1. Запустите контейнер в host-сети:
-`docker run --rm --network host alpine ip addr`
+Вы видите все интерфейсы хоста — `eth0`, `lo` и другие. Контейнер буквально является частью сети хоста.
 
-Вы увидите те же интерфейсы что и на хосте.
+**Когда использовать host:**
+- Максимальная сетевая производительность
+- Приложения, которые слушают много портов динамически
+- Мониторинг сетевого трафика хоста
 
-2. Запустите контейнер без сети:
-`docker run --rm --network none alpine ip addr`
+**Ограничение:** не работает на Docker Desktop (macOS/Windows) — только на Linux.
 
-Только loopback (127.0.0.1). Никакого eth0.
+## Драйвер none — полная изоляция
 
-3. Удалите созданную сеть:
-`docker network rm mynet`
+```bash
+docker run --rm --network none alpine ip addr
+```{{execute}}
 
-4. Проверьте:
-`docker network ls`
+Только интерфейс `lo` (loopback). Нет возможности ни входящих, ни исходящих сетевых соединений.
+
+**Когда использовать none:**
+- Обработка данных без доступа в сеть (безопасность)
+- Batch-задачи, которым сеть не нужна
+
+## Подключение контейнера к нескольким сетям
+
+Контейнер может быть в нескольких сетях одновременно:
+
+```bash
+docker network create frontend-net
+docker network create backend-net
+
+docker run -d --name api-server --network frontend-net nginx:alpine
+docker network connect backend-net api-server
+
+docker network inspect frontend-net | grep -A3 '"Containers"'
+docker network inspect backend-net | grep -A3 '"Containers"'
+```{{execute}}
+
+`api-server` теперь виден в обеих сетях и может общаться с контейнерами в каждой из них.

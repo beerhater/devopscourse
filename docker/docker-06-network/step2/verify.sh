@@ -1,2 +1,2 @@
 #!/bin/bash
-docker ps -a | grep -qE "c1|c2" && exit 0 || exit 1
+! docker ps -a --format '{{.Names}}' | grep -q "^container-a$"
