@@ -1,2 +1,2 @@
 #!/bin/bash
-[ -f /root/html/index.html ] && exit 0 || exit 1
+docker volume ls | grep -q "pg-data"

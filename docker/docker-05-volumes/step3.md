@@ -1,28 +1,60 @@
-## Bind Mount
+# Шаг 3: Монтирование томов — флаг -v и --mount
 
-Bind Mount монтирует **конкретную папку хоста** в контейнер.
-Идеально для разработки: меняете файл на хосте — изменение сразу в контейнере.
+Есть два синтаксиса для монтирования тома в контейнер.
 
-Синтаксис: `-v /абсолютный/путь/на/хосте:/путь/в/контейнере`
+## Синтаксис -v (краткий)
 
----
+```
+-v [volume-name:]container-path[:options]
+```
 
-1. Создайте папку на хосте:
-`mkdir -p /root/html`
+## Синтаксис --mount (явный, рекомендуется)
 
-2. Создайте в ней файл:
-`echo "<h1>Live reload!</h1>" > /root/html/index.html`
+```
+--mount type=volume,source=vol-name,target=/path
+```
 
-3. Запустите nginx с bind mount:
-`docker run -d --name web -v /root/html:/usr/share/nginx/html -p 8080:80 nginx`
+## Задание 1: Персистентная база данных PostgreSQL
 
-4. Проверьте:
-`curl http://localhost:8080`
+Запустите PostgreSQL с томом для данных:
 
-5. Измените файл на хосте и снова проверьте:
-`echo "<h1>Updated without restart!</h1>" > /root/html/index.html`
-`curl http://localhost:8080`
+```bash
+docker volume create pg-data
+```{{execute}}
 
-Nginx сразу отдаёт новый файл — без перезапуска контейнера!
+```bash
+docker run -d \
+  --name postgres-db \
+  -e POSTGRES_PASSWORD=secret \
+  -e POSTGRES_DB=mydb \
+  -v pg-data:/var/lib/postgresql/data \
+  postgres:15-alpine
+```{{execute}}
 
-6. Остановите контейнер: `docker stop web && docker rm web`
+```bash
+sleep 3 && docker exec postgres-db psql -U postgres -d mydb -c \
+  "CREATE TABLE users (id SERIAL, name TEXT); INSERT INTO users(name) VALUES ('Alice'), ('Bob');"
+```{{execute}}
+
+Удалите контейнер:
+
+```bash
+docker stop postgres-db && docker rm postgres-db
+```{{execute}}
+
+Запустите новый контейнер с тем же томом — данные сохранились:
+
+```bash
+docker run -d \
+  --name postgres-db2 \
+  -e POSTGRES_PASSWORD=secret \
+  -e POSTGRES_DB=mydb \
+  -v pg-data:/var/lib/postgresql/data \
+  postgres:15-alpine
+```{{execute}}
+
+```bash
+sleep 3 && docker exec postgres-db2 psql -U postgres -d mydb -c "SELECT * FROM users;"
+```{{execute}}
+
+Alice и Bob никуда не делись!

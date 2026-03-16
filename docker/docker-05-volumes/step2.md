@@ -1,22 +1,45 @@
-## Named Volumes
+# Шаг 2: Именованные тома — docker volume
 
-Named Volume — том с именем. Docker хранит его в `/var/lib/docker/volumes/`.
+**Именованный том (named volume)** — это директория на хосте, которой управляет Docker. Том существует независимо от контейнеров и переживает их удаление.
 
----
+## Создание тома
 
-1. Создайте том:
-`docker volume create mydata`
+```bash
+docker volume create my-data
+```{{execute}}
 
-2. Запустите контейнер с томом (`-v имя_тома:путь_в_контейнере`):
-`docker run --name app -v mydata:/data alpine sh -c "echo 'persistent data' > /data/saved.txt"`
+## Список томов
 
-3. Контейнер завершился. Удалите его:
-`docker rm app`
+```bash
+docker volume ls
+```{{execute}}
 
-4. Запустите новый контейнер с тем же томом:
-`docker run --name app2 -v mydata:/data alpine cat /data/saved.txt`
+## Подробная информация о томе
 
-Данные сохранились! Том пережил удаление контейнера.
+```bash
+docker volume inspect my-data
+```{{execute}}
 
-5. Удалите контейнер:
-`docker rm app2`
+Обратите внимание на `Mountpoint` — это реальный путь на хосте, где Docker хранит данные тома (обычно `/var/lib/docker/volumes/...`).
+
+## Создайте ещё несколько томов
+
+```bash
+docker volume create db-data
+docker volume create app-logs
+docker volume ls
+```{{execute}}
+
+## Используйте том с контейнером
+
+```bash
+docker run --rm -v my-data:/data alpine sh -c "echo 'Persistent!' > /data/test.txt"
+```{{execute}}
+
+Данные записаны в том. Проверьте, что они сохранились после удаления контейнера:
+
+```bash
+docker run --rm -v my-data:/data alpine cat /data/test.txt
+```{{execute}}
+
+Данные на месте — контейнер удалён, том жив!

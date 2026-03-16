@@ -1,2 +1,2 @@
 #!/bin/bash
-docker volume ls | grep -q "pgdata" && exit 0 || exit 1
+! docker ps -a --format '{{.Names}}' | grep -q "^tmpfs-demo$"

@@ -1,34 +1,56 @@
-## Практика: запуск PostgreSQL с томом
+# Шаг 5: tmpfs — данные в памяти
 
-Классический пример: база данных, которая не теряет данные при перезапуске.
+**tmpfs mount** хранит данные в оперативной памяти хоста. Данные **не попадают на диск** и исчезают при остановке контейнера.
 
----
+## Когда использовать tmpfs
 
-1. Создайте том для базы данных:
-`docker volume create pgdata`
+- Секреты и временные токены, которые нельзя писать на диск
+- Временные файлы для высокопроизводительных операций
+- Кеши, которые не нужно сохранять
 
-2. Запустите PostgreSQL:
-`docker run -d --name postgres -e POSTGRES_PASSWORD=secret -e POSTGRES_DB=mydb -v pgdata:/var/lib/postgresql/data postgres:15`
+## Синтаксис
 
-3. Подождите пока база запустится:
-`sleep 5 && docker logs postgres | tail -5`
+```
+--tmpfs /container/path
+--mount type=tmpfs,target=/container/path,tmpfs-size=100m
+```
 
-4. Создайте тестовую таблицу:
-`docker exec -it postgres psql -U postgres -d mydb -c "CREATE TABLE users (id SERIAL, name TEXT);"`
+## Задание 1: Базовый tmpfs
 
-5. Вставьте данные:
-`docker exec -it postgres psql -U postgres -d mydb -c "INSERT INTO users (name) VALUES ('Alice'), ('Bob');"`
+```bash
+docker run -d \
+  --name tmpfs-demo \
+  --tmpfs /tmp:size=50m \
+  alpine sleep 120
+```{{execute}}
 
-6. Проверьте данные:
-`docker exec -it postgres psql -U postgres -d mydb -c "SELECT * FROM users;"`
+```bash
+docker exec tmpfs-demo sh -c "echo 'secret token' > /tmp/token.txt && cat /tmp/token.txt"
+```{{execute}}
 
-7. Удалите контейнер, но НЕ том:
-`docker rm -f postgres`
+```bash
+docker exec tmpfs-demo df -h /tmp
+```{{execute}}
 
-8. Создайте новый контейнер с тем же томом:
-`docker run -d --name postgres2 -e POSTGRES_PASSWORD=secret -e POSTGRES_DB=mydb -v pgdata:/var/lib/postgresql/data postgres:15`
+Видите тип файловой системы `tmpfs` — данные в памяти.
 
-9. Через 5 секунд проверьте данные:
-`sleep 5 && docker exec -it postgres2 psql -U postgres -d mydb -c "SELECT * FROM users;"`
+## Задание 2: Данные исчезают при рестарте
 
-Alice и Bob на месте!
+```bash
+docker restart tmpfs-demo
+docker exec tmpfs-demo cat /tmp/token.txt
+```{{execute}}
+
+Файл исчез — tmpfs очищается при рестарте контейнера.
+
+## Сравнение типов монтирования
+
+| Тип | Данные | Управление | Применение |
+|-----|--------|-----------|------------|
+| Volume | На диске (Docker) | Docker | Базы данных, постоянные данные |
+| Bind mount | На диске (хост) | Вы | Разработка, конфиги |
+| tmpfs | В памяти | Ядро ОС | Секреты, временные файлы |
+
+```bash
+docker stop tmpfs-demo && docker rm tmpfs-demo
+```{{execute}}
