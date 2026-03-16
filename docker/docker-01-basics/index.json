@@ -1,18 +1,52 @@
 {
-  "title": "Урок 1: Первые шаги с Docker",
-  "description": "docker run, docker ps, docker stop, docker rm — база которую вы будете использовать каждый день",
-  "difficulty": "Beginner",
-  "time": "25",
+  "title": "Docker: Первые шаги",
+  "description": "Знакомство с Docker: запуск контейнеров, управление ими через docker run, docker ps, docker stop и docker rm",
   "details": {
-    "intro": { "text": "intro.md" },
+    "intro": {
+      "text": "intro.md"
+    },
     "steps": [
-      { "title": "Шаг 1: Как Docker работает изнутри", "text": "step1.md", "verify": "step1/verify.sh" },
-      { "title": "Шаг 2: Первый контейнер",            "text": "step2.md", "verify": "step2/verify.sh" },
-      { "title": "Шаг 3: Фоновый запуск -d",           "text": "step3.md", "verify": "step3/verify.sh" },
-      { "title": "Шаг 4: Заходим внутрь контейнера",   "text": "step4.md", "verify": "step4/verify.sh" },
-      { "title": "Шаг 5: Остановка и удаление",        "text": "step5.md", "verify": "step5/verify.sh" }
+      {
+        "title": "Первый docker run",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "Фоновый режим и проброс портов",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Просмотр контейнеров: docker ps",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Остановка контейнера: docker stop",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Удаление контейнера: docker rm",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "Флаги --name и --rm",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "Итоговое задание",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      }
     ],
-    "finish": { "text": "finish.md" }
+    "finish": {
+      "text": "finish.md"
+    }
   },
-  "backend": { "imageid": "docker" }
+  "backend": {
+    "imageid": "ubuntu-docker"
+  }
 }

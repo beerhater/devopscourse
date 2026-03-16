@@ -1,2 +1,3 @@
 #!/bin/bash
-docker ps | grep -qi "web" && exit 0 || exit 1
+status=$(docker inspect -f '{{.State.Status}}' my-nginx 2>/dev/null)
+[ "$status" = "exited" ]

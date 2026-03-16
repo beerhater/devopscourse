@@ -1,2 +1,2 @@
 #!/bin/bash
-docker ps -a | grep -qi "hello-world" && exit 0 || exit 1
+docker ps --filter "name=my-nginx" --filter "status=running" | grep -q "my-nginx"

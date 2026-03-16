@@ -1,2 +1,2 @@
 #!/bin/bash
-docker ps | grep -qi "web" && exit 0 || exit 1
+docker ps -a | grep -q "nginx"

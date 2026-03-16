@@ -1,2 +1,2 @@
 #!/bin/bash
-docker ps -a | grep -qi "web" && exit 1 || exit 0
+! docker ps -a --format '{{.Names}}' | grep -q "^my-nginx$"
