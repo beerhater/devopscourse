@@ -1,6 +1,19 @@
 {
   "items": [
-    { "path": "linux",  "title": "Linux для DevOps" },
-    { "path": "docker", "title": "Docker для DevOps" }
+    {
+      "path": "linux",
+      "title": "Linux для DevOps",
+      "description": "Основы Linux: навигация, файлы, права, пользователи, процессы, сеть, пакеты, bash-скрипты, systemd"
+    },
+    {
+      "path": "docker",
+      "title": "Docker для DevOps",
+      "description": "Docker от основ до Docker Compose: образы, Dockerfile, volumes, сети, compose"
+    },
+    {
+      "path": "cicd",
+      "title": "CI/CD для DevOps",
+      "description": "Автоматизация сборки и деплоя: пайплайны, GitHub Actions, GitLab CI, тесты, стратегии деплоя"
+    }
   ]
 }
