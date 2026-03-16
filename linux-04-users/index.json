@@ -1,0 +1,39 @@
+{
+  "title": "Урок 4: Пользователи и группы",
+  "description": "Учимся создавать пользователей, управлять группами и переключаться между пользователями",
+  "difficulty": "Beginner",
+  "time": "15",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "Шаг 1: Создаём пользователя",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "Шаг 2: Создаём группу и добавляем пользователя",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Шаг 3: Переключаемся между пользователями",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Шаг 4: Даём права sudo",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
