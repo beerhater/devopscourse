@@ -1,1 +1,45 @@
-# \u0428\u0430\u0433 2: \u0421\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430 docker-compose.yml\n\n## \u0421\u043e\u0437\u0434\u0430\u0439\u0442\u0435 \u0440\u0430\u0431\u043e\u0447\u0443\u044e \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u044e\n\n{{execute}}\n\n## \u0421\u043e\u0437\u0434\u0430\u0439\u0442\u0435 \u0431\u0430\u0437\u043e\u0432\u044b\u0439 \u0444\u0430\u0439\u043b\n\n{{execute}}\n\n{{execute}}\n\n## \u041a\u043b\u044e\u0447\u0435\u0432\u044b\u0435 \u043f\u043e\u043b\u044f \u0441\u0435\u0440\u0432\u0438\u0441\u0430\n\n| \u041f\u043e\u043b\u0435 | \u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 |\n|------|----------|\n|  | \u041e\u0431\u0440\u0430\u0437 Docker |\n|  | \u041f\u0443\u0442\u044c \u043a Dockerfile (\u0432\u043c\u0435\u0441\u0442\u043e image) |\n|  | \u041f\u0440\u043e\u0431\u0440\u043e\u0441 \u043f\u043e\u0440\u0442\u043e\u0432  |\n|  | \u041f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f |\n|  | \u041c\u043e\u043d\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0442\u043e\u043c\u043e\u0432 |\n|  | \u041f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435 \u043a \u0441\u0435\u0442\u044f\u043c |\n|  | \u0417\u0430\u0432\u0438\u0441\u0438\u043c\u043e\u0441\u0442\u0438 \u043e\u0442 \u0434\u0440\u0443\u0433\u0438\u0445 \u0441\u0435\u0440\u0432\u0438\u0441\u043e\u0432 |\n|  | \u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u0440\u0435\u0441\u0442\u0430\u0440\u0442\u0430: , , ,  |\n|  | \u041f\u0435\u0440\u0435\u043e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u0438\u0435 CMD \u043e\u0431\u0440\u0430\u0437\u0430 |\n
+# Шаг 2: Структура docker-compose.yml
+
+## Создайте рабочую директорию
+
+```bash
+mkdir -p /opt/compose-intro && cd /opt/compose-intro
+```{{execute}}
+
+## Создайте базовый файл
+
+```bash
+cat > docker-compose.yml << 'COMPOSEFILE'
+services:
+  web:
+    image: nginx:alpine
+    container_name: my-web
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  app:
+    image: alpine
+    command: sh -c "while true; do echo 'App running'; sleep 5; done"
+    depends_on:
+      - web
+COMPOSEFILE
+```{{execute}}
+
+```bash
+cat docker-compose.yml
+```{{execute}}
+
+## Ключевые поля сервиса
+
+| Поле | Описание |
+|------|----------|
+| `image` | Образ Docker Hub |
+| `build` | Путь к Dockerfile (вместо image) |
+| `ports` | Проброс портов `host:container` |
+| `environment` | Переменные окружения |
+| `volumes` | Монтирование томов |
+| `networks` | Подключение к сетям |
+| `depends_on` | Зависимости от других сервисов |
+| `restart` | Политика рестарта: `no`, `always`, `unless-stopped`, `on-failure` |
+| `command` | Переопределение CMD образа |

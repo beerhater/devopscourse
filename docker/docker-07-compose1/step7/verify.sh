@@ -1,1 +1,2 @@
-#!/bin/bash\ntest -f /opt/fullstack/docker-compose.yml\n
+#!/bin/bash
+test -f /opt/fullstack/docker-compose.yml

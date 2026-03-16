@@ -1,1 +1,2 @@
-#!/bin/bash\ntest -f /opt/compose-intro/docker-compose.yml\n
+#!/bin/bash
+test -f /opt/compose-intro/docker-compose.yml

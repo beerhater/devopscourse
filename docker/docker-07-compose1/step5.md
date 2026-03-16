@@ -1,1 +1,78 @@
-# \u0428\u0430\u0433 5: \u0421\u0435\u0442\u0438 \u0438 \u0442\u043e\u043c\u0430 \u0432 Compose\n\nCompose \u0441\u043e\u0437\u0434\u0430\u0451\u0442 \u0441\u0435\u0442\u044c \u0430\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0447\u0435\u0441\u043a\u0438, \u043d\u043e \u0432\u044b \u043c\u043e\u0436\u0435\u0442\u0435 \u0437\u0430\u0434\u0430\u0442\u044c \u044f\u0432\u043d\u044b\u0435 \u0441\u0435\u0442\u0438 \u0438 \u0442\u043e\u043c\u0430 \u0434\u043b\u044f \u043f\u043e\u043b\u043d\u043e\u0433\u043e \u043a\u043e\u043d\u0442\u0440\u043e\u043b\u044f.\n\n## \u041e\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 \u0442\u0435\u043a\u0443\u0449\u0438\u0439 \u0441\u0442\u0435\u043a\n\n{{execute}}\n\n## \u0421\u043e\u0437\u0434\u0430\u0439\u0442\u0435 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u043d\u044b\u0439 docker-compose.yml\n\n{{execute}}\n\n{{execute}}\n\n## \u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u044e \u0441\u0435\u0442\u0435\u0439\n\nweb \u043d\u0435 \u0432\u0438\u0434\u0438\u0442 db (\u0440\u0430\u0437\u043d\u044b\u0435 \u0441\u0435\u0442\u0438):\n\u0418\u0437\u043e\u043b\u044f\u0446\u0438\u044f \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442!n{{execute}}\n\nadminer \u0432\u0438\u0434\u0438\u0442 db (\u0441\u043e\u0441\u0442\u043e\u0438\u0442 \u0432 \u043e\u0431\u0435\u0438\u0445 \u0441\u0435\u0442\u044f\u0445):\n{{execute}}\n\n## \u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u0442\u043e\u043c\u0430\n\n{{execute}}\n
+# Шаг 5: Сети и тома в Compose
+
+Compose создаёт сеть автоматически, но вы можете задать явные сети и тома.
+
+## Остановите текущий стек
+
+```bash
+cd /opt/compose-intro && docker-compose down
+```{{execute}}
+
+## Создайте расширенный docker-compose.yml
+
+```bash
+cat > docker-compose.yml << 'COMPOSEFILE'
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    networks:
+      - frontend
+    volumes:
+      - web-logs:/var/log/nginx
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: appdb
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  adminer:
+    image: adminer
+    ports:
+      - "8081:8080"
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - db
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+    internal: true
+
+volumes:
+  db-data:
+  web-logs:
+COMPOSEFILE
+```{{execute}}
+
+```bash
+docker-compose up -d
+```{{execute}}
+
+## Проверьте изоляцию сетей
+
+web не видит db (разные сети):
+```bash
+docker-compose exec web ping -c 1 db || echo "Изоляция работает!"
+```{{execute}}
+
+adminer видит db (состоит в обеих сетях):
+```bash
+docker-compose exec adminer ping -c 1 db
+```{{execute}}
+
+## Проверьте тома
+
+```bash
+docker volume ls | grep compose
+```{{execute}}

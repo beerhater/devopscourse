@@ -1,1 +1,2 @@
-#!/bin/bash\ncd /opt/compose-intro && docker-compose ps | grep -q "db"\n
+#!/bin/bash
+cd /opt/compose-intro && docker-compose ps | grep -q "db"

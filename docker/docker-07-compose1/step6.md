@@ -1,1 +1,65 @@
-# \u0428\u0430\u0433 6: \u041f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f \u0438 .env \u0444\u0430\u0439\u043b\n\n\u0425\u0440\u0430\u043d\u0438\u0442\u044c \u043f\u0430\u0440\u043e\u043b\u0438 \u0432  \u2014 \u043f\u043b\u043e\u0445\u0430\u044f \u043f\u0440\u0430\u043a\u0442\u0438\u043a\u0430. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435  \u0444\u0430\u0439\u043b\u044b \u0438 \u043f\u043e\u0434\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0443 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0445 \u0447\u0435\u0440\u0435\u0437 .\n\n## \u041e\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 \u0441\u0442\u0435\u043a\n\n{{execute}}\n\n## \u0421\u043e\u0437\u0434\u0430\u0439\u0442\u0435 .env \u0444\u0430\u0439\u043b\n\n{{execute}}\n\n## \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u0432 docker-compose.yml\n\n{{execute}}\n\n\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u0438\u0442\u043e\u0433\u043e\u0432\u044b\u0439 \u043a\u043e\u043d\u0444\u0438\u0433 \u0441 \u043f\u043e\u0434\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u043d\u044b\u043c\u0438 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u043c\u0438:\n{{execute}}\n\n{{execute}}\n
+# Шаг 6: Переменные окружения и .env файл
+
+Хранить пароли в `docker-compose.yml` — плохая практика. Используйте `.env` файлы.
+
+## Остановите стек
+
+```bash
+cd /opt/compose-intro && docker-compose down -v
+```{{execute}}
+
+## Создайте .env файл
+
+```bash
+cat > .env << 'ENVFILE'
+POSTGRES_PASSWORD=supersecret
+POSTGRES_DB=myapp
+POSTGRES_USER=appuser
+WEB_PORT=8080
+ADMINER_PORT=8081
+APP_ENV=development
+ENVFILE
+```{{execute}}
+
+## Используйте переменные в docker-compose.yml
+
+```bash
+cat > docker-compose.yml << 'COMPOSEFILE'
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "${WEB_PORT}:80"
+    environment:
+      - APP_ENV=${APP_ENV}
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    ports:
+      - "${ADMINER_PORT}:8080"
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+COMPOSEFILE
+```{{execute}}
+
+Проверьте итоговый конфиг с подставленными переменными:
+```bash
+docker-compose config
+```{{execute}}
+
+```bash
+docker-compose up -d
+docker-compose exec db env | grep POSTGRES
+```{{execute}}

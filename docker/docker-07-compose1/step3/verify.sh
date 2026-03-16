@@ -1,1 +1,2 @@
-#!/bin/bash\ndocker images nginx | grep -q "nginx"\n
+#!/bin/bash
+docker images nginx | grep -q "nginx"

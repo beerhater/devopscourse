@@ -1,1 +1,62 @@
-# \u0428\u0430\u0433 4: \u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u0441\u0442\u0435\u043a\u043e\u043c \u2014 ps, logs, exec\n\n## \u0417\u0430\u043f\u0443\u0441\u0442\u0438\u0442\u0435 \u0441\u0442\u0435\u043a\n\n{{execute}}\n\n## docker-compose ps\n\n{{execute}}\n\n## docker-compose logs\n\n\u0412\u0441\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u044b:\n{{execute}}\n\n\u041a\u043e\u043d\u043a\u0440\u0435\u0442\u043d\u044b\u0439 \u0441\u0435\u0440\u0432\u0438\u0441:\n{{execute}}\n\n\u0421\u043b\u0435\u0434\u0438\u0442\u044c \u0432 \u0440\u0435\u0430\u043b\u044c\u043d\u043e\u043c \u0432\u0440\u0435\u043c\u0435\u043d\u0438 (Ctrl+C \u0434\u043b\u044f \u0432\u044b\u0445\u043e\u0434\u0430):\n{{execute}}\n\n## docker-compose exec\n\n{{execute}}\n\n{{execute}}\n\n## docker-compose top\n\n{{execute}}\n\n## \u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043e\u0442\u0434\u0435\u043b\u044c\u043d\u044b\u043c\u0438 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043c\u0438\n\n{{execute}}\n\n{{execute}}\n\n{{execute}}\n
+# Шаг 4: Управление стеком — ps, logs, exec
+
+## Запустите стек
+
+```bash
+cd /opt/compose-intro && docker-compose up -d
+```{{execute}}
+
+## docker-compose ps
+
+```bash
+docker-compose ps
+```{{execute}}
+
+## docker-compose logs
+
+Все сервисы:
+```bash
+docker-compose logs
+```{{execute}}
+
+Конкретный сервис:
+```bash
+docker-compose logs web
+```{{execute}}
+
+Следить в реальном времени (Ctrl+C для выхода):
+```bash
+docker-compose logs -f app
+```{{execute}}
+
+## docker-compose exec
+
+```bash
+docker-compose exec web nginx -v
+```{{execute}}
+
+```bash
+docker-compose exec web ls /etc/nginx/
+```{{execute}}
+
+## docker-compose top
+
+```bash
+docker-compose top
+```{{execute}}
+
+## Управление отдельными сервисами
+
+```bash
+docker-compose stop web
+docker-compose ps
+```{{execute}}
+
+```bash
+docker-compose start web
+docker-compose ps
+```{{execute}}
+
+```bash
+docker-compose restart app
+```{{execute}}

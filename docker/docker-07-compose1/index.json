@@ -1,1 +1,18 @@
-{\n  "title": "Docker Compose: \u0427\u0430\u0441\u0442\u044c 1",\n  "description": "\u0412\u0432\u0435\u0434\u0435\u043d\u0438\u0435 \u0432 Docker Compose: \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430 docker-compose.yml, \u0437\u0430\u043f\u0443\u0441\u043a \u0438 \u043e\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430 \u0441\u0442\u0435\u043a\u0430, \u0441\u0435\u0440\u0432\u0438\u0441\u044b, \u0441\u0435\u0442\u0438 \u0438 \u0442\u043e\u043c\u0430",\n  "details": {\n    "intro": { "text": "intro.md" },\n    "steps": [\n      { "title": "\u0427\u0442\u043e \u0442\u0430\u043a\u043e\u0435 Docker Compose",          "text": "step1.md", "verify": "step1/verify.sh" },\n      { "title": "\u0421\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430 docker-compose.yml",      "text": "step2.md", "verify": "step2/verify.sh" },\n      { "title": "\u0417\u0430\u043f\u0443\u0441\u043a \u0441\u0442\u0435\u043a\u0430: docker-compose up",   "text": "step3.md", "verify": "step3/verify.sh" },\n      { "title": "\u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u0441\u0442\u0435\u043a\u043e\u043c: ps, logs, exec", "text": "step4.md", "verify": "step4/verify.sh" },\n      { "title": "\u0421\u0435\u0442\u0438 \u0438 \u0442\u043e\u043c\u0430 \u0432 Compose",             "text": "step5.md", "verify": "step5/verify.sh" },\n      { "title": "\u041f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f \u0438 .env \u0444\u0430\u0439\u043b",  "text": "step6.md", "verify": "step6/verify.sh" },\n      { "title": "\u0418\u0442\u043e\u0433\u043e\u0432\u043e\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435",                  "text": "step7.md", "verify": "step7/verify.sh" }\n    ],\n    "finish": { "text": "finish.md" }\n  },\n  "backend": { "imageid": "ubuntu" }\n}\n
+{
+  "title": "Docker Compose: Часть 1",
+  "description": "Введение в Docker Compose: структура docker-compose.yml, запуск и остановка стека, сервисы, сети и тома",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Что такое Docker Compose",          "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Структура docker-compose.yml",      "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Запуск стека: docker-compose up",   "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Управление: ps, logs, exec",        "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Сети и тома в Compose",             "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Переменные окружения и .env файл",  "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Итоговое задание",                  "text": "step7.md", "verify": "step7/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu" }
+}
