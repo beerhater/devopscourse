@@ -4,6 +4,7 @@
   "items": [
     { "path": "cicd-01-intro" },
     { "path": "cicd-02-github-actions-1" },
-    { "path": "cicd-03-github-actions-2" }
+    { "path": "cicd-03-github-actions-2" },
+    { "path": "cicd-04-gitlab-ci-1" }
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "title": "GitLab CI: Часть 1",
+  "description": "Структура .gitlab-ci.yml, stages, jobs, runners, artifacts, cache. Поднимаем GitLab и GitLab Runner локально через Docker.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "GitLab CI vs GitHub Actions: сравнение",           "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Структура .gitlab-ci.yml",                         "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Stages: порядок выполнения",                       "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Jobs: настройка и управление",                     "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Artifacts и Cache",                                "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Запускаем GitLab Runner локально",                 "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Итоговое задание",                                 "text": "step7.md", "verify": "step7/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu" }
+}
