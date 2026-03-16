@@ -1,0 +1,18 @@
+{
+  "title": "Autotests in Pipeline",
+  "description": "pytest and go test in CI: unit, integration, coverage, reports, parallel runs, fail-fast.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Why tests in CI and types of tests",           "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "pytest: basic run in pipeline",                "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Coverage: measuring code coverage",            "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Reports: JUnit XML and HTML as CI artifacts",  "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "go test: testing Go services in pipeline",     "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Parallel runs and fail-fast strategies",       "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Final task",                                   "text": "step7.md", "verify": "step7/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu" }
+}
