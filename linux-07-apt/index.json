@@ -1,0 +1,54 @@
+{
+  "title": "Урок 7: Управление пакетами (apt)",
+  "description": "Как правильно устанавливать, обновлять и удалять программы в Linux",
+  "difficulty": "Beginner",
+  "time": "25",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "Шаг 1: Обновление списка пакетов (update)",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "Шаг 2: Поиск информации (search / show)",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Шаг 3: Установка пакетов (install)",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Шаг 4: Проверка установленного",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Шаг 5: Безопасное обновление (upgrade)",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "Шаг 6: Удаление (remove vs purge)",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "Шаг 7: Генеральная уборка (autoremove / clean)",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
