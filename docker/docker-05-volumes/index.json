@@ -1,0 +1,18 @@
+{
+  "title": "Урок 5: Тома и данные",
+  "description": "Персистентность данных: docker volume, bind mount и tmpfs",
+  "difficulty": "Intermediate",
+  "time": "30",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Шаг 1: Проблема потери данных",      "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Шаг 2: Named Volumes",               "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Шаг 3: Bind Mount",                  "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Шаг 4: Инспекция и управление",      "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Шаг 5: Практика с базой данных",     "text": "step5.md", "verify": "step5/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "docker" }
+}

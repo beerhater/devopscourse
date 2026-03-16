@@ -1,0 +1,18 @@
+{
+  "title": "Урок 1: Первые шаги с Docker",
+  "description": "docker run, docker ps, docker stop, docker rm — база которую вы будете использовать каждый день",
+  "difficulty": "Beginner",
+  "time": "25",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Шаг 1: Как Docker работает изнутри", "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Шаг 2: Первый контейнер",            "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Шаг 3: Фоновый запуск -d",           "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Шаг 4: Заходим внутрь контейнера",   "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Шаг 5: Остановка и удаление",        "text": "step5.md", "verify": "step5/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "docker" }
+}

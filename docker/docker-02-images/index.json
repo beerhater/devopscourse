@@ -1,0 +1,18 @@
+{
+  "title": "Урок 2: Образы Docker",
+  "description": "docker pull, docker images, docker rmi, работа с Docker Hub и инспекция образов",
+  "difficulty": "Beginner",
+  "time": "25",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Шаг 1: Docker Hub и теги образов",  "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Шаг 2: Скачиваем образы (pull)",    "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Шаг 3: Список образов (images)",    "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Шаг 4: Инспекция образа",           "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Шаг 5: Удаление образов (rmi)",     "text": "step5.md", "verify": "step5/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "docker" }
+}

@@ -1,0 +1,18 @@
+{
+  "title": "Урок 7: Docker Compose (Часть 1)",
+  "description": "Описание docker-compose.yml, запуск стека, команды up/down/logs",
+  "difficulty": "Intermediate",
+  "time": "30",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Шаг 1: Зачем нужен Compose",             "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Шаг 2: Структура docker-compose.yml",    "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Шаг 3: Запуск стека (up)",               "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Шаг 4: Логи и статус",                   "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Шаг 5: Остановка и очистка (down)",      "text": "step5.md", "verify": "step5/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "docker" }
+}

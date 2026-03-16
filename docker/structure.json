@@ -1,0 +1,12 @@
+{
+  "items": [
+    { "path": "docker-01-basics",     "title": "Урок 1: Первые шаги с Docker" },
+    { "path": "docker-02-images",     "title": "Урок 2: Образы Docker" },
+    { "path": "docker-03-dockerfile", "title": "Урок 3: Написание Dockerfile" },
+    { "path": "docker-04-build-push", "title": "Урок 4: Сборка и тегирование" },
+    { "path": "docker-05-volumes",    "title": "Урок 5: Тома и данные" },
+    { "path": "docker-06-network",    "title": "Урок 6: Сеть в Docker" },
+    { "path": "docker-07-compose1",   "title": "Урок 7: Docker Compose (Часть 1)" },
+    { "path": "docker-08-compose2",   "title": "Урок 8: Docker Compose (Часть 2)" }
+  ]
+}

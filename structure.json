@@ -1,8 +1,6 @@
 {
   "items": [
-    {
-      "path": "linux",
-      "title": "Linux для DevOps"
-    }
+    { "path": "linux",  "title": "Linux для DevOps" },
+    { "path": "docker", "title": "Docker для DevOps" }
   ]
 }

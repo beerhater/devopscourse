@@ -1,0 +1,18 @@
+{
+  "title": "Урок 3: Написание Dockerfile",
+  "description": "FROM, RUN, COPY, ADD, ENV, EXPOSE, CMD, ENTRYPOINT — разбираем каждую инструкцию",
+  "difficulty": "Intermediate",
+  "time": "30",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Шаг 1: FROM и RUN — база и зависимости", "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Шаг 2: COPY и ADD — файлы в образ",      "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Шаг 3: ENV и EXPOSE",                    "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Шаг 4: CMD vs ENTRYPOINT",               "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Шаг 5: Лучшие практики — меньше слоёв", "text": "step5.md", "verify": "step5/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "docker" }
+}
