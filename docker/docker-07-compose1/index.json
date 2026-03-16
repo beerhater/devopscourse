@@ -14,5 +14,5 @@
     ],
     "finish": { "text": "finish.md" }
   },
-  "backend": { "imageid": "docker" }
+  "backend": { "imageid": "ubuntu" }
 }
