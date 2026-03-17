@@ -7,6 +7,9 @@
     },
     {
       "path": "k8s-02-pods"
+    },
+    {
+      "path": "k8s-03-deployments"
     }
   ]
 }
