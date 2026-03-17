@@ -13,6 +13,9 @@
     },
     {
       "path": "k8s-04-services"
+    },
+    {
+      "path": "k8s-05-namespaces"
     }
   ]
 }
