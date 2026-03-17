@@ -14,6 +14,11 @@
       "path": "cicd",
       "title": "CI/CD для DevOps",
       "description": "Автоматизация сборки и деплоя: пайплайны, GitHub Actions, GitLab CI, тесты, стратегии деплоя"
+    },
+    {
+      "path": "kubernetes",
+      "title": "Kubernetes для DevOps",
+      "description": "Оркестрация контейнеров: архитектура K8s, Pods, Deployments, Services, Ingress, Helm, CI/CD"
     }
   ]
 }
