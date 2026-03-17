@@ -1,6 +1,6 @@
 {
   "title": "Архитектура K8s",
-  "description": "Control Plane, Worker Nodes, API-сервер — разбираем как устроен K8s изнутри на живом кластере.",
+  "description": "Control Plane, Worker Nodes, API-сервер — как устроен K8s изнутри на живом кластере.",
   "details": {
     "intro": {
       "text": "intro.md"
@@ -22,7 +22,7 @@
         "verify": "step3/verify.sh"
       },
       {
-        "title": "API-сервер под капотом",
+        "title": "API Server под капотом",
         "text": "step4.md",
         "verify": "step4/verify.sh"
       },

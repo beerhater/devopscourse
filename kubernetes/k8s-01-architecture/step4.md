@@ -1,19 +1,19 @@
-# Шаг 4: API-сервер под капотом
+# Шаг 4: API Server — центр всего
 
-**Главное правило архитектуры K8s**: никто не общается ни с кем напрямую.
-- Вы не пишете данные в базу etcd вручную.
-- Kubelet не спрашивает у Scheduler'а куда девать поды.
-- Всё идёт **ТОЛЬКО** через `kube-apiserver` по протоколу HTTP (REST API).
+**Правило K8s:** никто не общается ни с кем напрямую. Всё идёт только через API Server по REST/HTTP.
 
-Когда вы пишете `kubectl get nodes`, утилита `kubectl` просто формирует HTTP GET запрос. Давайте в этом убедимся, добавив флаг уровня детализации логов `-v=8` (verbosity):
+Посмотрим на реальные HTTP-запросы под капотом `kubectl get nodes`:
 
 ```bash
-kubectl get nodes -v=8
+kubectl get nodes -v=8 2>&1 | grep -E "GET|Response Status"
 ```{{execute}}
 
-Найдите в выводе строку:
-`GET https://.../api/v1/nodes`
+Видите строку `GET https://.../api/v1/nodes`? kubectl — просто REST-клиент.
 
-В ответ API-сервер возвращает обычный JSON с описанием узлов, а `kubectl` просто красиво рисует из него табличку.
-
-Даже внутренние компоненты общаются так же: `kubelet` делает GET/POST запросы к API-серверу, чтобы отчитаться о состоянии своих контейнеров.
+Вызовем API напрямую через proxy:
+```bash
+kubectl proxy --port=8001 &
+sleep 2
+curl -s http://localhost:8001/api/v1/nodes | python3 -m json.tool | head -15
+kill %1 2>/dev/null; true
+```{{execute}}

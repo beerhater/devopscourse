@@ -1,8 +1,12 @@
 {
-  "title": "Kubernetes",
+  "title": "Kubernetes для DevOps",
+  "description": "От архитектуры до деплоя: Pods, Deployments, Services, Ingress, Helm.",
   "items": [
     {
       "path": "k8s-01-architecture"
+    },
+    {
+      "path": "k8s-02-pods"
     }
   ]
 }

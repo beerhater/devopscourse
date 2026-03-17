@@ -1,11 +1,10 @@
-# Поздравляем! 🎉
+# Модуль завершён! 🎉
 
-Вы успешно разобрались с архитектурой Kubernetes.
+## Главные выводы
 
-## Главные выводы:
-1. **Control Plane** (Master) — управляет кластером. Внутри него: API Server, etcd, Scheduler, Controller Manager.
-2. **Worker Node** — запускает нагрузку. Внутри: Kubelet, Kube-proxy, Container Runtime.
-3. **API Server** — центр общения. Все компоненты говорят только с ним по стандартному REST API.
-4. **Pod** — минимальная единица управления в K8s, оболочка над одним (или несколькими) контейнерами.
+- **Control Plane** = API Server + etcd + Scheduler + Controller Manager
+- **Worker Node** = kubelet + kube-proxy + containerd + Pods
+- **API Server** — центр, всё остальное говорит только с ним через REST
+- **Pod** — минимальная единица управления
 
-В следующем модуле мы перейдём к практике и разберём базовые объекты: **Pods, Deployments и Services**.
+Следующий модуль: **Pod** — разбираем подробно.

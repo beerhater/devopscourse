@@ -1,2 +1,2 @@
 #!/bin/bash
-exit 0
+kubectl get nodes | grep -q 'Ready'
