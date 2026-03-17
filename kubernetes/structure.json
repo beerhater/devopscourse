@@ -1,0 +1,8 @@
+{
+  "title": "Kubernetes",
+  "items": [
+    {
+      "path": "k8s-01-architecture"
+    }
+  ]
+}
