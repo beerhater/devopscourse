@@ -1,0 +1,62 @@
+{
+  "title": "Service — ClusterIP, NodePort, LoadBalancer",
+  "description": "Стабильный сетевой адрес для подов: ClusterIP для внутренней связи, NodePort для внешнего доступа, LoadBalancer для облака, Endpoints, kube-dns.",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "Проблема — IP пода непостоянен",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "ClusterIP — внутренний сервис",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "kube-dns — обращение по имени",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "NodePort — доступ снаружи кластера",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "LoadBalancer — продакшн в облаке",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "Endpoints — что за Service",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "Multi-port и sessionAffinity",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      },
+      {
+        "title": "ExternalName и Headless Service",
+        "text": "step8.md",
+        "verify": "step8/verify.sh"
+      },
+      {
+        "title": "Итоговое задание",
+        "text": "step9.md",
+        "verify": "step9/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-2nodes"
+  }
+}
