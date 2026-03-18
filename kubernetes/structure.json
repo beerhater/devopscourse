@@ -16,6 +16,9 @@
     },
     {
       "path": "k8s-05-namespaces"
+    },
+    {
+      "path": "k8s-06-configmap-secret"
     }
   ]
 }
