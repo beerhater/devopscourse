@@ -25,6 +25,9 @@
     },
     {
       "path": "k8s-08-ingress"
+    },
+    {
+      "path": "k8s-09-probes"
     }
   ]
 }
