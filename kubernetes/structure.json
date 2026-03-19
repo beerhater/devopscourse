@@ -19,6 +19,9 @@
     },
     {
       "path": "k8s-06-configmap-secret"
+    },
+    {
+      "path": "k8s-07-pv-pvc"
     }
   ]
 }
