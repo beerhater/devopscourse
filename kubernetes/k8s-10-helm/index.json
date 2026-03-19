@@ -1,0 +1,107 @@
+{
+  "title": "Helm Part 1+2: Charts from zero to production",
+  "description": "Helm 3 fundamentals + writing own chart: create, install, upgrade, rollback, templates, helpers, conditionals, loops, lint, package, multi-env values.",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "Install Helm 3 and core concepts",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "helm create -- chart scaffold and structure",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Chart.yaml -- metadata and versioning",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "values.yaml -- defaults and data types",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "First helm install -- local chart",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "Template syntax: .Values .Release .Chart",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "--set and --values override flags",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      },
+      {
+        "title": "helm repo add -- install from Bitnami",
+        "text": "step8.md",
+        "verify": "step8/verify.sh"
+      },
+      {
+        "title": "helm list history get -- inspect releases",
+        "text": "step9.md",
+        "verify": "step9/verify.sh"
+      },
+      {
+        "title": "helm upgrade and rollback",
+        "text": "step10.md",
+        "verify": "step10/verify.sh"
+      },
+      {
+        "title": "Template functions and pipelines",
+        "text": "step11.md",
+        "verify": "step11/verify.sh"
+      },
+      {
+        "title": "Conditionals -- if with else",
+        "text": "step12.md",
+        "verify": "step12/verify.sh"
+      },
+      {
+        "title": "Loops -- range over lists and maps",
+        "text": "step13.md",
+        "verify": "step13/verify.sh"
+      },
+      {
+        "title": "_helpers.tpl -- named templates define/include",
+        "text": "step14.md",
+        "verify": "step14/verify.sh"
+      },
+      {
+        "title": "Build devapp chart: Deployment+Service+CM",
+        "text": "step15.md",
+        "verify": "step15/verify.sh"
+      },
+      {
+        "title": "Install and test devapp chart",
+        "text": "step16.md",
+        "verify": "step16/verify.sh"
+      },
+      {
+        "title": "helm lint template package",
+        "text": "step17.md",
+        "verify": "step17/verify.sh"
+      },
+      {
+        "title": "Multi-env values and final deployment",
+        "text": "step18.md",
+        "verify": "step18/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-2nodes"
+  }
+}

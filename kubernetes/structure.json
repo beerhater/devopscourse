@@ -28,6 +28,9 @@
     },
     {
       "path": "k8s-09-probes"
+    },
+    {
+      "path": "k8s-10-helm"
     }
   ]
 }
