@@ -22,6 +22,9 @@
     },
     {
       "path": "k8s-07-pv-pvc"
+    },
+    {
+      "path": "k8s-08-ingress"
     }
   ]
 }
