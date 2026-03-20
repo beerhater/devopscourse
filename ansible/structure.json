@@ -8,6 +8,9 @@
     },
     {
       "path": "ansible-03-playbook1"
+    },
+    {
+      "path": "ansible-04-playbook2"
     }
   ]
 }
