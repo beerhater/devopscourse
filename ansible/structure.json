@@ -2,6 +2,9 @@
   "items": [
     {
       "path": "ansible-01-intro"
+    },
+    {
+      "path": "ansible-02-adhoc"
     }
   ]
 }

@@ -19,6 +19,9 @@
       "path": "kubernetes",
       "title": "Kubernetes для DevOps",
       "description": "Оркестрация контейнеров: архитектура K8s, Pods, Deployments, Services, Ingress, Helm, CI/CD"
+    },
+    {
+      "path": "ansible"
     }
   ]
 }
