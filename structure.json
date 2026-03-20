@@ -24,6 +24,11 @@
       "path": "ansible",
       "title": "Ansible для DevOps",
       "description": "Автоматизация инфраструктуры: inventory, ad-hoc, playbooks, roles, Jinja2 templates"
+    },
+    {
+      "path": "terraform",
+      "title": "Terraform для DevOps",
+      "description": "Инфраструктура как код: провайдеры, ресурсы, переменные, state-файл, remote state, модули"
     }
   ]
 }
