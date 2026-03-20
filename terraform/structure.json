@@ -8,6 +8,9 @@
     },
     {
       "path": "terraform-03-commands"
+    },
+    {
+      "path": "terraform-04-variables"
     }
   ]
 }

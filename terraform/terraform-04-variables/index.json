@@ -1,0 +1,67 @@
+{
+  "title": "Terraform: \u041f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u0438 Outputs",
+  "description": "variable, \u0442\u0438\u043f\u044b, \u0432\u0430\u043b\u0438\u0434\u0430\u0446\u0438\u044f, object, list(object), tfvars, output, sensitive, for \u0432\u044b\u0440\u0430\u0436\u0435\u043d\u0438\u044f, locals vs variable.",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430 \u0438 \u0431\u043b\u043e\u043a variable",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "\u0422\u0438\u043f\u044b: string, number, bool, list, map",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "\u0421\u043b\u043e\u0436\u043d\u044b\u0435 \u0442\u0438\u043f\u044b: object \u0438 list(object)",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "\u0412\u0430\u043b\u0438\u0434\u0430\u0446\u0438\u044f: condition + error_message",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "terraform.tfvars \u0438 *.auto.tfvars",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "output: value, description, sensitive",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "Sensitive \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u0438 \u0441\u0435\u043a\u0440\u0435\u0442\u044b",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      },
+      {
+        "title": "for \u0432\u044b\u0440\u0430\u0436\u0435\u043d\u0438\u044f \u0438 \u043a\u043e\u043b\u043b\u0435\u043a\u0446\u0438\u0438",
+        "text": "step8.md",
+        "verify": "step8/verify.sh"
+      },
+      {
+        "title": "locals vs variable",
+        "text": "step9.md",
+        "verify": "step9/verify.sh"
+      },
+      {
+        "title": "\u0418\u0442\u043e\u0433\u043e\u0432\u043e\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435: \u043a\u043e\u043d\u0444\u0438\u0433-\u0433\u0435\u043d\u0435\u0440\u0430\u0442\u043e\u0440",
+        "text": "step10.md",
+        "verify": "step10/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
