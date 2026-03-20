@@ -11,6 +11,9 @@
     },
     {
       "path": "terraform-04-variables"
+    },
+    {
+      "path": "terraform-05-state"
     }
   ]
 }
