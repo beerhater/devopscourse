@@ -1,38 +1,38 @@
-# Step 8: -m fetch and -m lineinfile
+# Шаг 8: -m fetch и -m lineinfile
 
-## -m fetch: download files FROM remote to control node
+## -m fetch: скачиваем файлы С удалённого хоста
 
-The opposite of copy: pull files from managed nodes to control node.
+Противоположность copy: получаем файлы с управляемых узлов на управляющий.
 
 ```bash
 cd ~/ansible-lab
 
-# Fetch a file from remote
+# Скачать файл с удалённого хоста
 ansible all -b -m fetch -a "src=/etc/hostname dest=/tmp/fetched/"
 ```{{execute}}
 
 ```bash
-# File saved as: dest/<hostname>/src path
+# Файл сохраняется как: dest/<имя_хоста>/путь_к_файлу
 ls -la /tmp/fetched/
 find /tmp/fetched -type f
 cat /tmp/fetched/node01/etc/hostname
 ```{{execute}}
 
 ```bash
-# flat=yes: no subdirectory - just save the file directly
+# flat=yes: без поддиректорий — сохранить файл напрямую
 ansible all -b -m fetch -a "src=/etc/os-release dest=/tmp/node01-os-release flat=yes"
 cat /tmp/node01-os-release | head -5
 ```{{execute}}
 
 ```bash
-# Useful: fetch logs for debugging
-ansible all -b -m fetch -a "src=/var/log/syslog dest=/tmp/logs/ flat=no" 2>/dev/null | head -5 || ansible all -b -m fetch -a "src=/var/log/auth.log dest=/tmp/logs/ flat=no" 2>/dev/null | head -5 || echo "Fetched system log"
+# Полезно: скачать логи для отладки
+ansible all -b -m fetch -a "src=/var/log/auth.log dest=/tmp/logs/ flat=no" 2>/dev/null | head -3 || echo "Лог скачан"
 ```{{execute}}
 
-## -m lineinfile: add/modify lines in files
+## -m lineinfile: добавление/изменение строк в файлах
 
 ```bash
-# Ensure a line EXISTS in a file
+# Убедиться, что строка ПРИСУТСТВУЕТ в файле
 ansible all -b -m lineinfile -a "path=/etc/hosts line='10.0.0.100 myapp.local' state=present"
 ```{{execute}}
 
@@ -41,21 +41,21 @@ ansible all -m shell -a "grep myapp /etc/hosts"
 ```{{execute}}
 
 ```bash
-# Replace line matching a regex
+# Заменить строку по регулярному выражению
 ansible all -b -m lineinfile -a "path=/etc/hosts regexp='myapp.local' line='10.0.0.200 myapp.local' state=present"
 ansible all -m shell -a "grep myapp /etc/hosts"
 ```{{execute}}
 
 ```bash
-# Remove a line
+# Удалить строку
 ansible all -b -m lineinfile -a "path=/etc/hosts regexp='myapp.local' state=absent"
-ansible all -m shell -a "grep myapp /etc/hosts || echo removed"
+ansible all -m shell -a "grep myapp /etc/hosts || echo удалено"
 ```{{execute}}
 
-## -m replace: regex substitution across whole file
+## -m replace: замена по регулярному выражению во всём файле
 
 ```bash
-# Create test file
+# Создаём тестовый файл
 ansible all -b -m copy -a "content='env=development
 debug=true
 port=8080
@@ -63,7 +63,7 @@ port=8080
 ```{{execute}}
 
 ```bash
-# Replace all occurrences of a pattern
+# Заменить все вхождения паттерна
 ansible all -b -m replace -a "path=/tmp/app.cfg regexp='development' replace='production'"
 ansible all -m command -a "cat /tmp/app.cfg"
 ```{{execute}}

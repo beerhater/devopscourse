@@ -1,25 +1,25 @@
-# Ansible Introduction: inventory, SSH keys, first ping
+# Ansible: Введение — inventory, SSH-ключи, первый ping
 
-Ansible is an agentless automation tool.
-No agents to install on managed nodes -- it connects via SSH and runs modules remotely.
+Ansible — это инструмент автоматизации без агентов.
+Не нужно ничего устанавливать на управляемые серверы — Ansible подключается по SSH и запускает модули удалённо.
 
 ```
-Control Node (controlplane)     Managed Node (node01)
-  ansible installed         SSH  no ansible needed
-  inventory file       -------->  Python 3 only
-  playbooks                       port 22 open
+Управляющий узел (controlplane)      Управляемый узел (node01)
+  Ansible установлен           SSH    Ansible НЕ нужен
+  файл инвентаря          -------->   Python 3 (уже есть)
+  плейбуки                            порт 22 открыт
 ```
 
-## What we will learn
+## Что изучим
 
-- Ansible architecture: control node vs managed nodes
-- Install Ansible on the control node
-- SSH keys: generate, deploy, test
-- Inventory file (hosts): INI format, groups, variables
-- ansible.cfg: default configuration
-- First real command: ansible all -m ping
-- Inventory groups and host/group variables
-- YAML inventory format
-- Final task: build complete inventory from scratch
+- Архитектура Ansible: управляющий узел vs управляемые узлы
+- Установка Ansible на управляющий узел
+- SSH-ключи: генерация, развёртывание, проверка
+- Файл инвентаря (hosts): формат INI, группы, переменные
+- ansible.cfg: настройка по умолчанию
+- Первая команда: ansible all -m ping
+- Группы инвентаря и переменные хостов/групп
+- Формат YAML инвентаря
+- Итоговое задание
 
-> Check both nodes: `hostname && echo "---" && ssh node01 hostname 2>/dev/null || echo "node01 reachable via network"`{{execute}}
+> Проверьте оба узла: `hostname && ssh node01 hostname 2>/dev/null || echo "node01 доступен по сети"`{{execute}}

@@ -1,70 +1,68 @@
-# Step 3: -m apt - package management
+# Шаг 3: -m apt — управление пакетами
 
-The `apt` module manages packages on Debian/Ubuntu systems.
-It is IDEMPOTENT: running it twice gives the same result.
+Модуль `apt` управляет пакетами на Debian/Ubuntu системах.
+Он ИДЕМПОТЕНТЕН: запуск дважды даёт тот же результат.
 
-## Install packages
+## Установка пакетов
 
 ```bash
 cd ~/ansible-lab
 
-# Install nginx
+# Установить nginx
 ansible all -b -m apt -a "name=nginx state=present update_cache=yes"
 ```{{execute}}
 
 ```bash
-# Verify nginx is installed
+# Проверяем установку
 ansible all -m shell -a "nginx -v"
 ```{{execute}}
 
 ```bash
-# Install multiple packages
+# Установить несколько пакетов сразу
 ansible all -b -m apt -a "name=curl,wget,tree state=present"
 ```{{execute}}
 
-## Package states
+## Состояния пакета (state)
 
 ```bash
 cat << 'EOF'
-state=present    install if not installed (do nothing if already there)
-state=latest     install OR upgrade to latest version
-state=absent     remove the package
-state=build-dep  install build dependencies
+state=present    установить, если не установлен (ничего не делать, если уже есть)
+state=latest     установить ИЛИ обновить до последней версии
+state=absent     удалить пакет
+state=build-dep  установить зависимости для сборки
 EOF
 ```{{execute}}
 
 ```bash
-# Idempotency: running again does nothing (changed: false)
+# Идемпотентность: повторный запуск ничего не меняет (changed: false)
 ansible all -b -m apt -a "name=nginx state=present"
 ```{{execute}}
 
-## Update package cache
+## Обновление кеша пакетов
 
 ```bash
-# update_cache=yes: like apt-get update
+# update_cache=yes: аналог apt-get update
 ansible all -b -m apt -a "update_cache=yes"
 ```{{execute}}
 
 ```bash
-# update_cache with cache_valid_time: skip update if cache is fresh
+# cache_valid_time: пропустить обновление, если кеш свежий (в секундах)
 ansible all -b -m apt -a "update_cache=yes cache_valid_time=3600"
 ```{{execute}}
 
-## Remove packages
+## Удаление пакетов
 
 ```bash
-# Remove a package
 ansible all -b -m apt -a "name=tree state=absent"
 ```{{execute}}
 
 ```bash
-# purge: remove + delete config files
+# purge=yes: удалить пакет + конфигурационные файлы
 ansible all -b -m apt -a "name=tree state=absent purge=yes"
 ```{{execute}}
 
-## Upgrade all packages
+## Обновление всех пакетов
 
 ```bash
-# upgrade=safe: like apt-get upgrade (no dependency removals)
 ansible all -b -m apt -a "upgrade=safe update_cache=yes" -o
 ```{{execute}}

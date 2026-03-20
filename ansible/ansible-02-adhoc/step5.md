@@ -1,18 +1,18 @@
-# Step 5: -m file - manage files, dirs, permissions, symlinks
+# Шаг 5: -m file — файлы, директории, права, симлинки
 
-The `file` module manages file attributes without copying content.
+Модуль `file` управляет атрибутами файлов без копирования содержимого.
 
-## Create directories
+## Создаём директории
 
 ```bash
 cd ~/ansible-lab
 
-# Create a directory
+# Создать директорию
 ansible all -b -m file -a "path=/opt/myapp state=directory"
 ```{{execute}}
 
 ```bash
-# Create with specific permissions
+# Создать с конкретными правами
 ansible all -b -m file -a "path=/opt/myapp/logs state=directory owner=root group=root mode=0755"
 ```{{execute}}
 
@@ -20,28 +20,28 @@ ansible all -b -m file -a "path=/opt/myapp/logs state=directory owner=root group
 ansible all -m shell -a "ls -la /opt/"
 ```{{execute}}
 
-## File states
+## Состояния файла (state)
 
 ```bash
 cat << 'EOF'
-state=file        ensure file exists (does not create, only manages attrs)
-state=directory   ensure directory exists (creates if missing)
-state=link        create symbolic link
-state=hard        create hard link
-state=touch       create empty file if missing (like touch)
-state=absent      remove file/dir/link
+state=file        убедиться, что файл существует (не создаёт, только управляет атрибутами)
+state=directory   убедиться, что директория существует (создаёт при отсутствии)
+state=link        создать символическую ссылку
+state=hard        создать жёсткую ссылку
+state=touch       создать пустой файл если отсутствует (как команда touch)
+state=absent      удалить файл/директорию/ссылку
 EOF
 ```{{execute}}
 
-## Create files and symlinks
+## Создаём файлы и симлинки
 
 ```bash
-# Create empty file
+# Создать пустой файл
 ansible all -b -m file -a "path=/opt/myapp/app.log state=touch"
 ```{{execute}}
 
 ```bash
-# Create symlink
+# Создать символическую ссылку
 ansible all -b -m file -a "src=/opt/myapp path=/var/myapp state=link"
 ```{{execute}}
 
@@ -49,10 +49,10 @@ ansible all -b -m file -a "src=/opt/myapp path=/var/myapp state=link"
 ansible all -m shell -a "ls -la /var/myapp && ls -la /opt/myapp/"
 ```{{execute}}
 
-## Change permissions recursively
+## Изменяем права рекурсивно
 
 ```bash
-# recurse=yes: apply to all files/dirs inside
+# recurse=yes: применить ко всем файлам/директориям внутри
 ansible all -b -m file -a "path=/opt/myapp owner=root group=root mode=0755 recurse=yes"
 ```{{execute}}
 
@@ -60,14 +60,14 @@ ansible all -b -m file -a "path=/opt/myapp owner=root group=root mode=0755 recur
 ansible all -m shell -a "ls -la /opt/myapp/"
 ```{{execute}}
 
-## Remove files and directories
+## Удаляем файлы и директории
 
 ```bash
-# Remove symlink
+# Удалить симлинк
 ansible all -b -m file -a "path=/var/myapp state=absent"
 ```{{execute}}
 
 ```bash
-# Remove directory and all contents
+# Удалить директорию со всем содержимым
 ansible all -b -m file -a "path=/opt/myapp state=absent"
 ```{{execute}}

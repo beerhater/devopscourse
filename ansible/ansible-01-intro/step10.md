@@ -1,9 +1,9 @@
-# Step 10: Final task - build complete inventory from scratch
+# Шаг 10: Итоговое задание — production-style проект
 
-Build a production-style Ansible project structure from scratch.
-Use everything learned: ansible.cfg, YAML inventory, host_vars, group_vars, ping.
+Создайте структуру Ansible-проекта с нуля.
+Используйте всё изученное: ansible.cfg, YAML-инвентарь, host_vars, group_vars, ping.
 
-## 1. Create project structure
+## 1. Создаём структуру проекта
 
 ```bash
 mkdir -p ~/ansible-final/{host_vars,group_vars}
@@ -15,12 +15,12 @@ cd ~/ansible-final
 ```bash
 cat > ~/ansible-final/ansible.cfg << 'EOF'
 [defaults]
-inventory          = ./inventory.yml
-remote_user        = root
-private_key_file   = ~/.ssh/ansible_id
-host_key_checking  = False
-interpreter_python = /usr/bin/python3
-stdout_callback    = yaml
+inventory           = ./inventory.yml
+remote_user         = root
+private_key_file    = ~/.ssh/ansible_id
+host_key_checking   = False
+interpreter_python  = /usr/bin/python3
+stdout_callback     = yaml
 retry_files_enabled = False
 
 [ssh_connection]
@@ -29,7 +29,7 @@ pipelining  = True
 EOF
 ```{{execute}}
 
-## 3. YAML inventory
+## 3. YAML-инвентарь
 
 ```bash
 cat > ~/ansible-final/inventory.yml << 'EOF'
@@ -78,7 +78,7 @@ disk_alert_threshold: 80
 EOF
 ```{{execute}}
 
-## 6. Verify structure
+## 6. Проверяем структуру
 
 ```bash
 find ~/ansible-final -type f | sort
@@ -90,11 +90,11 @@ ansible-inventory --graph
 ```{{execute}}
 
 ```bash
-# All variables for node01 (merged from all sources)
+# Все переменные node01 (объединённые из всех источников)
 ansible-inventory --host node01
 ```{{execute}}
 
-## 7. Run ping - the final verification
+## 7. Запускаем ping — финальная проверка
 
 ```bash
 cd ~/ansible-final
@@ -102,17 +102,16 @@ ansible all -m ping
 ```{{execute}}
 
 ```bash
-# Facts check
 ansible all -m setup -a "filter=ansible_distribution"
 ansible all -m setup -a "filter=ansible_default_ipv4"
 ```{{execute}}
 
-## 8. Project summary
+## 8. Итог проекта
 
 ```bash
-echo "=== Project structure ===" && find ~/ansible-final -type f | sort
+echo "=== Структура проекта ===" && find ~/ansible-final -type f | sort
 echo ""
-echo "=== Inventory graph ===" && ansible-inventory --graph
+echo "=== Граф инвентаря ===" && ansible-inventory --graph
 echo ""
-echo "=== Connectivity ===" && ansible all -m ping
+echo "=== Связность ===" && ansible all -m ping
 ```{{execute}}

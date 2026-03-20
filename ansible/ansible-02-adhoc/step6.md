@@ -1,69 +1,69 @@
-# Step 6: -m service - manage system services
+# Шаг 6: -m service — управление сервисами
 
-The `service` module manages systemd (and other init) services.
+Модуль `service` управляет системными сервисами (systemd и другими).
 
-## Start and stop services
+## Запуск и остановка сервисов
 
 ```bash
 cd ~/ansible-lab
 
-# Check nginx status
-ansible all -b -m shell -a "systemctl is-active nginx || echo stopped"
+# Проверяем статус nginx
+ansible all -b -m shell -a "systemctl is-active nginx || echo остановлен"
 ```{{execute}}
 
 ```bash
-# Start nginx
+# Запустить nginx
 ansible all -b -m service -a "name=nginx state=started"
 ```{{execute}}
 
 ```bash
-# Check it is running
+# Проверяем, что запущен
 ansible all -b -m shell -a "systemctl is-active nginx"
 ```{{execute}}
 
-## Service states
+## Состояния сервиса (state)
 
 ```bash
 cat << 'EOF'
-state=started    start if not running (do nothing if already started)
-state=stopped    stop if running
-state=restarted  always restart (even if already running)
-state=reloaded   reload config (graceful, sends SIGHUP)
+state=started    запустить, если не запущен (ничего не делать, если уже запущен)
+state=stopped    остановить, если запущен
+state=restarted  всегда перезапустить (даже если уже запущен)
+state=reloaded   перечитать конфигурацию (мягко, отправляет SIGHUP)
 EOF
 ```{{execute}}
 
 ```bash
-# Reload nginx (graceful config reload)
+# Перезагрузка конфигурации nginx (мягкий перезапуск)
 ansible all -b -m service -a "name=nginx state=reloaded"
 ```{{execute}}
 
-## Enable/disable on boot
+## Включение/отключение автозапуска
 
 ```bash
-# Enable: start automatically on system boot
+# enabled=yes: запускать автоматически при старте системы
 ansible all -b -m service -a "name=nginx enabled=yes"
 ```{{execute}}
 
 ```bash
-# Verify enabled
+# Проверяем
 ansible all -b -m shell -a "systemctl is-enabled nginx"
 ```{{execute}}
 
 ```bash
-# Start AND enable in one command
+# Запустить И включить автозапуск одной командой
 ansible all -b -m service -a "name=nginx state=started enabled=yes"
 ```{{execute}}
 
-## Stop and disable
+## Остановить и отключить
 
 ```bash
 ansible all -b -m service -a "name=nginx state=stopped enabled=no"
-ansible all -b -m shell -a "systemctl is-active nginx || echo not-active"
+ansible all -b -m shell -a "systemctl is-active nginx || echo не активен"
 ```{{execute}}
 
-## systemd module: more control
+## Модуль systemd: расширенный контроль
 
 ```bash
-# systemd module supports daemon-reload and masked
+# Модуль systemd поддерживает daemon_reload и masked
 ansible all -b -m systemd -a "name=nginx state=started enabled=yes daemon_reload=yes"
 ```{{execute}}

@@ -1,58 +1,58 @@
-# Step 1: Ad-hoc syntax and patterns
+# Шаг 1: Синтаксис ad-hoc и паттерны
 
-## Full syntax
+## Полный синтаксис
 
 ```bash
-ansible <pattern> -m <module> -a "<args>" [options]
+ansible <паттерн> -m <модуль> -a "<аргументы>" [опции]
 
-Options:
-  -i inventory     use specific inventory file
-  -u user          SSH user (overrides ansible.cfg)
+Опции:
+  -i inventory     использовать конкретный файл инвентаря
+  -u user          SSH-пользователь (переопределяет ansible.cfg)
   -b               become (sudo)
-  --become-user    user to become (default root)
-  -k               ask for SSH password
-  -v/-vv/-vvv      verbosity
-  -f N             fork N parallel processes (default 5)
-  -o               one-line condensed output
-  -C               check mode (dry-run, no changes)
-  --diff           show file diffs
+  --become-user    пользователь для sudo (по умолчанию root)
+  -k               запросить SSH-пароль
+  -v/-vv/-vvv      уровень детализации вывода
+  -f N             запускать параллельно на N хостах (по умолчанию 5)
+  -o               компактный однострочный вывод
+  -C               режим проверки (dry-run, без изменений)
+  --diff           показать разницу в файлах
 ```{{execute}}
 
-## Patterns - who to target
+## Паттерны — кого затронуть
 
 ```bash
 cd ~/ansible-lab
 
-# All hosts
+# Все хосты
 ansible all -m ping
 
-# Specific group
+# Конкретная группа
 ansible webservers -m ping
 
-# Specific host by name
+# Конкретный хост по имени
 ansible node01 -m ping
 ```{{execute}}
 
 ```bash
-# Wildcard
+# Маска
 ansible 'node*' -m ping
 ```{{execute}}
 
 ```bash
-# Negation: all except
-ansible 'all,!node01' -m ping 2>/dev/null || echo "No other hosts (expected)"
+# Отрицание: все кроме node01
+ansible 'all,!node01' -m ping 2>/dev/null || echo "Других хостов нет (ожидаемо)"
 ```{{execute}}
 
-## -o flag: compact one-line output
+## Флаг -o: компактный однострочный вывод
 
 ```bash
 cd ~/ansible-lab
 ansible all -m ping -o
 ```{{execute}}
 
-## Check mode: dry-run before applying
+## Режим проверки: dry-run перед применением
 
 ```bash
-# -C: simulate without making changes (not all modules support it)
+# -C: симуляция без реальных изменений (поддерживается не всеми модулями)
 ansible all -m command -a "uptime" -C
 ```{{execute}}

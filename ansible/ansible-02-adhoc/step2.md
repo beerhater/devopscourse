@@ -1,18 +1,18 @@
-# Step 2: -m command and -m shell
+# Шаг 2: -m command и -m shell
 
-These are the most common modules for running arbitrary commands.
+Самые часто используемые модули для выполнения произвольных команд.
 
-## -m command (default module)
+## -m command (модуль по умолчанию)
 
 ```bash
 cd ~/ansible-lab
 
-# command is the DEFAULT module - -m command can be omitted
+# command — МОДУЛЬ ПО УМОЛЧАНИЮ, -m command можно не писать
 ansible all -m command -a "uptime"
 ```{{execute}}
 
 ```bash
-# Same as above (default module)
+# То же самое без -m command
 ansible all -a "uptime"
 ```{{execute}}
 
@@ -23,22 +23,22 @@ ansible all -a "cat /etc/os-release"
 ```{{execute}}
 
 ```bash
-# Get free memory
+# Свободная память
 ansible all -a "free -h"
 ```{{execute}}
 
-## -m command limitations
+## Ограничения -m command
 
 ```bash
-# command does NOT use shell - no pipes, no redirects, no env vars
+# command НЕ использует оболочку — нет конвейеров, нет перенаправлений, нет переменных
 ansible all -m command -a "echo hello | tr a-z A-Z" 2>&1 || true
-echo "command module cannot use pipes - use shell module instead"
+echo "Модуль command не умеет конвейеры — используйте shell"
 ```{{execute}}
 
-## -m shell: full shell features
+## -m shell: полные возможности оболочки
 
 ```bash
-# shell runs through /bin/sh - supports pipes, redirects, variables
+# shell выполняется через /bin/sh — поддержка |, >, переменных
 ansible all -m shell -a "echo hello | tr a-z A-Z"
 ```{{execute}}
 
@@ -51,21 +51,21 @@ ansible all -m shell -a "ls /etc/*.conf | wc -l"
 ```{{execute}}
 
 ```bash
-# chdir: change directory before running
+# chdir: перейти в директорию перед выполнением
 ansible all -m shell -a "ls -la chdir=/etc/ssh"
 ```{{execute}}
 
 ```bash
-# creates: skip if file already exists (idempotency)
-ansible all -m shell -a "echo 'created' > /tmp/testfile creates=/tmp/testfile"
-ansible all -m shell -a "echo 'created' > /tmp/testfile creates=/tmp/testfile"
-echo "Second run skipped (file already exists)"
+# creates: пропустить, если файл уже существует (идемпотентность)
+ansible all -m shell -a "echo 'создан' > /tmp/testfile creates=/tmp/testfile"
+ansible all -m shell -a "echo 'создан' > /tmp/testfile creates=/tmp/testfile"
+echo "Второй запуск пропущен (файл уже существует)"
 ```{{execute}}
 
-## -m raw: when Python is not available
+## -m raw: когда Python недоступен
 
 ```bash
-# raw bypasses the module system - pure SSH command
-# Use for: bootstrapping, minimal containers, network devices
+# raw обходит систему модулей — чистая SSH-команда
+# Используется для: начальной настройки, минимальных систем
 ansible all -m raw -a "uname -r"
 ```{{execute}}

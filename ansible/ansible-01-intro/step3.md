@@ -1,78 +1,70 @@
-# Step 3: SSH keys - how Ansible authenticates
+# Шаг 3: SSH-ключи — как Ansible аутентифицируется
 
-Ansible connects via SSH. By default it uses SSH key authentication.
-Understanding SSH keys is critical before using Ansible.
+Ansible подключается по SSH. По умолчанию использует аутентификацию по ключам.
 
-## How SSH key auth works
+## Как работает аутентификация по ключу
 
 ```
-1. You generate a key PAIR: private key + public key
-   id_rsa (private) -- NEVER share this
-   id_rsa.pub (public) -- copy this to servers
+1. Генерируем ПАРУ ключей: приватный + публичный
+   id_rsa (приватный) -- НИКОМУ не передаём
+   id_rsa.pub (публичный) -- копируем на серверы
 
-2. Copy public key to managed node:
-   ~/.ssh/authorized_keys on node01
+2. Копируем публичный ключ на управляемый узел:
+   ~/.ssh/authorized_keys на node01
 
-3. Connect: SSH proves you own the private key
-   No password needed
+3. Подключение: SSH доказывает, что вы владеете приватным ключом
+   Пароль не нужен
 ```
 
-## Check existing SSH setup in this lab
+## Проверяем текущий SSH-статус в лаборатории
 
 ```bash
-# Does a key pair already exist on controlplane?
 ls -la ~/.ssh/
 ```{{execute}}
 
 ```bash
-cat ~/.ssh/id_rsa.pub 2>/dev/null || echo "No key yet"
+cat ~/.ssh/id_rsa.pub 2>/dev/null || echo "Ключ ещё не создан"
 ```{{execute}}
 
-```bash
-# Check authorized_keys on node01
-ssh root@node01 "cat ~/.ssh/authorized_keys 2>/dev/null | head -2 || echo 'Empty'"
-```{{execute}}
-
-## Generate a dedicated Ansible SSH key
+## Генерируем SSH-ключ для Ansible
 
 ```bash
-# Best practice: separate key for Ansible automation
+# Лучшая практика: отдельный ключ для автоматизации Ansible
 ssh-keygen -t ed25519 -C "ansible-control" -f ~/.ssh/ansible_id -N ""
 ```{{execute}}
 
 ```bash
 ls -la ~/.ssh/
 echo ""
-echo "Private key: ~/.ssh/ansible_id"
-echo "Public key:  ~/.ssh/ansible_id.pub"
+echo "Приватный ключ: ~/.ssh/ansible_id"
+echo "Публичный ключ: ~/.ssh/ansible_id.pub"
 cat ~/.ssh/ansible_id.pub
 ```{{execute}}
 
-## Deploy public key to node01
+## Копируем публичный ключ на node01
 
 ```bash
-# ssh-copy-id copies the public key to remote authorized_keys
 ssh-copy-id -i ~/.ssh/ansible_id.pub root@node01
 ```{{execute}}
 
 ```bash
-# Verify key was added
+# Проверяем, что ключ добавлен
 ssh root@node01 "tail -1 ~/.ssh/authorized_keys"
 ```{{execute}}
 
 ```bash
-# Test key-based auth explicitly
-ssh -i ~/.ssh/ansible_id root@node01 "echo 'Key auth works! No password needed.'"
+# Тестируем аутентификацию по ключу
+ssh -i ~/.ssh/ansible_id root@node01 "echo 'Аутентификация по ключу работает! Пароль не нужен.'"
 ```{{execute}}
 
-## SSH key types comparison
+## Типы SSH-ключей
 
 ```bash
 cat << 'EOF'
-RSA (id_rsa)        -- classic, 2048+ bits, widely supported
-ECDSA (id_ecdsa)    -- smaller, faster, elliptic curve
-Ed25519 (id_ed25519)-- newest, best security/performance, use this
+RSA (id_rsa)         -- классический, 2048+ бит, широкая поддержка
+ECDSA (id_ecdsa)     -- меньше размер, быстрее, эллиптическая кривая
+Ed25519 (id_ed25519) -- новейший, лучшая безопасность и скорость
 
-For Ansible: Ed25519 recommended for new setups
+Для Ansible: рекомендуем Ed25519 для новых установок
 EOF
 ```{{execute}}

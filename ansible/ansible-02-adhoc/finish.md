@@ -1,21 +1,21 @@
-# Module complete!
+# Модуль завершён!
 
-## What we learned
+## Что изучили
 
-- **Ad-hoc syntax** -- `ansible <pattern> -m <module> -a <args>`
-- **-m command** -- default module, no shell features, safe
-- **-m shell** -- full shell: pipes, redirects, env vars
-- **-m raw** -- bypass Python, pure SSH (bootstrap use case)
-- **-m apt** -- install/remove/upgrade packages, idempotent
-- **-m copy** -- push files with permissions, backup, content=
-- **-m file** -- manage dirs, symlinks, permissions, state=absent
-- **-m service / systemd** -- start, stop, enable, reload
-- **-m user / group** -- create OS users with keys
-- **-m fetch** -- pull files FROM remote to control node
-- **-m lineinfile** -- add/remove/replace lines in files
-- **-m replace** -- regex substitution across files
+- **Синтаксис ad-hoc** -- `ansible <паттерн> -m <модуль> -a <аргументы>`
+- **-m command** -- модуль по умолчанию, без возможностей оболочки
+- **-m shell** -- полная оболочка: конвейеры, перенаправления, переменные
+- **-m raw** -- без Python, чистый SSH (для начальной настройки)
+- **-m apt** -- установка/удаление/обновление пакетов, идемпотентно
+- **-m copy** -- доставка файлов с правами, backup=yes, content=
+- **-m file** -- директории, симлинки, права, state=absent
+- **-m service / systemd** -- started, stopped, restarted, enabled
+- **-m user / group** -- создание пользователей ОС с SSH-ключами
+- **-m fetch** -- скачивание файлов С удалённого хоста
+- **-m lineinfile** -- добавление/удаление/замена строк в файлах
+- **-m replace** -- замена по регулярному выражению во всём файле
 
-## Quick Reference
+## Шпаргалка
 
 ```bash
 ansible all -m ping
@@ -31,6 +31,6 @@ ansible all -b -m fetch -a 'src=/etc/hostname dest=/tmp/ flat=yes'
 ansible all -b -m lineinfile -a 'path=/etc/hosts line=10.0.0.1 myapp'
 ```
 
-## Next module
+## Следующий модуль
 
-**Playbook Part 1** -- YAML playbooks, tasks, handlers, `notify`, install nginx properly.
+**Playbook. Часть 1** -- YAML-плейбуки, tasks, handlers, `notify`, установка nginx правильно.

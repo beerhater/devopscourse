@@ -1,58 +1,58 @@
 {
-  "title": "Ansible: Ad-hoc commands",
-  "description": "ansible all -m shell, -m apt, -m copy, -m file, -m service, -m user, -m fetch, -m lineinfile. Full server provision via ad-hoc.",
+  "title": "Ansible: Ad-hoc \u043a\u043e\u043c\u0430\u043d\u0434\u044b",
+  "description": "ansible all -m shell, -m apt, -m copy, -m file, -m service, -m user, -m fetch, -m lineinfile. \u041f\u043e\u043b\u043d\u044b\u0439 \u043f\u0440\u043e\u0432\u0438\u0436\u043d\u0438\u043d\u0433 \u0432\u0435\u0431-\u0441\u0435\u0440\u0432\u0435\u0440\u0430 \u0447\u0435\u0440\u0435\u0437 ad-hoc.",
   "details": {
     "intro": {
       "text": "intro.md"
     },
     "steps": [
       {
-        "title": "Ad-hoc syntax and patterns",
+        "title": "\u0421\u0438\u043d\u0442\u0430\u043a\u0441\u0438\u0441 ad-hoc \u0438 \u043f\u0430\u0442\u0442\u0435\u0440\u043d\u044b",
         "text": "step1.md",
         "verify": "step1/verify.sh"
       },
       {
-        "title": "-m command and -m shell",
+        "title": "-m command \u0438 -m shell",
         "text": "step2.md",
         "verify": "step2/verify.sh"
       },
       {
-        "title": "-m apt: package management",
+        "title": "-m apt: \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043f\u0430\u043a\u0435\u0442\u0430\u043c\u0438",
         "text": "step3.md",
         "verify": "step3/verify.sh"
       },
       {
-        "title": "-m copy: push files to remote",
+        "title": "-m copy: \u0434\u043e\u0441\u0442\u0430\u0432\u043a\u0430 \u0444\u0430\u0439\u043b\u043e\u0432",
         "text": "step4.md",
         "verify": "step4/verify.sh"
       },
       {
-        "title": "-m file: dirs, permissions, symlinks",
+        "title": "-m file: \u0444\u0430\u0439\u043b\u044b, \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u0438, \u043f\u0440\u0430\u0432\u0430, \u0441\u0438\u043c\u043b\u0438\u043d\u043a\u0438",
         "text": "step5.md",
         "verify": "step5/verify.sh"
       },
       {
-        "title": "-m service: start stop enable",
+        "title": "-m service: \u0437\u0430\u043f\u0443\u0441\u043a, \u043e\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430, \u0430\u0432\u0442\u043e\u0437\u0430\u043f\u0443\u0441\u043a",
         "text": "step6.md",
         "verify": "step6/verify.sh"
       },
       {
-        "title": "-m user and -m group: OS users",
+        "title": "-m user \u0438 -m group",
         "text": "step7.md",
         "verify": "step7/verify.sh"
       },
       {
-        "title": "-m fetch and -m lineinfile",
+        "title": "-m fetch \u0438 -m lineinfile",
         "text": "step8.md",
         "verify": "step8/verify.sh"
       },
       {
-        "title": "Output control and useful patterns",
+        "title": "\u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u0432\u044b\u0432\u043e\u0434\u043e\u043c \u0438 \u043f\u043e\u043b\u0435\u0437\u043d\u044b\u0435 \u043f\u0430\u0442\u0442\u0435\u0440\u043d\u044b",
         "text": "step9.md",
         "verify": "step9/verify.sh"
       },
       {
-        "title": "Final task: provision nginx via ad-hoc",
+        "title": "\u0418\u0442\u043e\u0433\u043e\u0432\u043e\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435: \u043f\u0440\u043e\u0432\u0438\u0436\u043d\u0438\u043d\u0433 nginx",
         "text": "step10.md",
         "verify": "step10/verify.sh"
       }

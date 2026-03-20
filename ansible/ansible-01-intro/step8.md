@@ -1,8 +1,8 @@
-# Step 8: YAML inventory format
+# Шаг 8: YAML-формат инвентаря
 
-INI is simple but YAML is more powerful for complex inventories.
+INI прост, но YAML мощнее для сложных инвентарей.
 
-## Convert our inventory to YAML
+## Конвертируем инвентарь в YAML
 
 ```bash
 cat > ~/ansible-lab/hosts.yml << 'EOF'
@@ -21,7 +21,7 @@ all:
         deploy_path: /var/www/html
 
     databases:
-      hosts: {}   # empty group
+      hosts: {}   # пустая группа
 
     production:
       children:
@@ -35,7 +35,7 @@ cat ~/ansible-lab/hosts.yml
 
 ```bash
 cd ~/ansible-lab
-# Use YAML inventory explicitly
+# Используем YAML-инвентарь явно
 ansible-inventory -i hosts.yml --graph
 ```{{execute}}
 
@@ -44,35 +44,35 @@ ansible-inventory -i hosts.yml --host node01
 ```{{execute}}
 
 ```bash
-# Ping using YAML inventory
+# Ping через YAML-инвентарь
 ansible all -i hosts.yml -m ping
 ```{{execute}}
 
-## INI vs YAML comparison
+## Сравнение INI и YAML
 
 ```bash
 cat << 'EOF'
-INI format:
-  + Simple, quick to write
-  + Good for small inventories
-  - Limited nesting
-  - Vars only as strings
+Формат INI:
+  + Простой, быстро написать
+  + Хорош для маленьких инвентарей
+  - Ограниченная вложенность
+  - Переменные только как строки
 
-YAML format:
-  + Proper data types (int, bool, list)
-  + Deep nesting (group of groups of groups)
-  + Version-control friendly (clean diffs)
-  + Same syntax as playbooks
-  - More verbose
+Формат YAML:
+  + Правильные типы данных (int, bool, список)
+  + Глубокая вложенность (группа групп групп)
+  + Удобен для git (чистые диффы)
+  + Тот же синтаксис что и плейбуки
+  - Более многословный
 
-Recommendation:
-  Small lab      -> INI is fine
-  Production     -> YAML + host_vars/ + group_vars/
+Рекомендация:
+  Маленькая лаборатория -> INI подходит
+  Продакшен             -> YAML + host_vars/ + group_vars/
 EOF
 ```{{execute}}
 
 ```bash
-# Update ansible.cfg to use YAML inventory
+# Обновляем ansible.cfg на YAML-инвентарь
 sed -i 's/inventory = .\/hosts/inventory = .\/hosts.yml/' ~/ansible-lab/ansible.cfg
 cat ~/ansible-lab/ansible.cfg | grep inventory
 ```{{execute}}

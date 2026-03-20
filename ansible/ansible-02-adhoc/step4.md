@@ -1,27 +1,27 @@
-# Step 4: -m copy - push files to remote hosts
+# Шаг 4: -m copy — доставка файлов на хосты
 
-The `copy` module copies files FROM control node TO managed nodes.
+Модуль `copy` копирует файлы С управляющего узла НА управляемые.
 
-## Copy a file
+## Копируем файл
 
 ```bash
 cd ~/ansible-lab
 
-# Create a local file to copy
-echo "Hello from Ansible ad-hoc!" > /tmp/hello.txt
+# Создаём локальный файл для копирования
+echo "Привет от Ansible ad-hoc!" > /tmp/hello.txt
 ```{{execute}}
 
 ```bash
-# Copy to remote host
+# Копируем на удалённый хост
 ansible all -b -m copy -a "src=/tmp/hello.txt dest=/tmp/hello.txt"
 ```{{execute}}
 
 ```bash
-# Verify
+# Проверяем
 ansible all -m command -a "cat /tmp/hello.txt"
 ```{{execute}}
 
-## Copy with permissions
+## Копирование с правами доступа
 
 ```bash
 ansible all -b -m copy -a "src=/tmp/hello.txt dest=/var/www/html/hello.txt owner=www-data group=www-data mode=0644"
@@ -31,10 +31,10 @@ ansible all -b -m copy -a "src=/tmp/hello.txt dest=/var/www/html/hello.txt owner
 ansible all -m shell -a "ls -la /var/www/html/hello.txt"
 ```{{execute}}
 
-## content: write string directly (no local file needed)
+## content: записать строку напрямую (без локального файла)
 
 ```bash
-# Write content directly to a file on remote
+# Записываем содержимое прямо в файл на удалённом хосте
 ansible all -b -m copy -a "content='server_name=node01
 env=lab
 ' dest=/etc/myapp.conf"
@@ -44,31 +44,30 @@ env=lab
 ansible all -m command -a "cat /etc/myapp.conf"
 ```{{execute}}
 
-## backup: keep original before overwriting
+## backup: сохранить оригинал перед перезаписью
 
 ```bash
-ansible all -b -m copy -a "content='updated content
+ansible all -b -m copy -a "content='обновлённое содержимое
 ' dest=/etc/myapp.conf backup=yes"
 ```{{execute}}
 
 ```bash
-# Backup file created with timestamp
+# Файл резервной копии создаётся с временной меткой
 ansible all -m shell -a "ls /etc/myapp.conf*"
 ```{{execute}}
 
-## Copy with validation (e.g. nginx config)
+## Копирование конфига nginx
 
 ```bash
-# Write nginx config
 cat > /tmp/nginx-test.conf << 'EOF'
 server {
     listen 8088;
-    location / { return 200 "ad-hoc nginx
+    location / { return 200 "nginx через ad-hoc
 "; }
 }
 EOF
 ```{{execute}}
 
 ```bash
-ansible all -b -m copy -a "src=/tmp/nginx-test.conf dest=/etc/nginx/sites-available/test.conf validate='nginx -t -c %s' backup=yes" 2>/dev/null || ansible all -b -m copy -a "src=/tmp/nginx-test.conf dest=/etc/nginx/conf.d/test.conf backup=yes"
+ansible all -b -m copy -a "src=/tmp/nginx-test.conf dest=/etc/nginx/conf.d/test.conf backup=yes"
 ```{{execute}}

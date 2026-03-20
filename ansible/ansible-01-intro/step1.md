@@ -1,22 +1,22 @@
-# Step 1: Ansible architecture and installation
+# Шаг 1: Архитектура Ansible и установка
 
-## How Ansible works
+## Как работает Ansible
 
 ```
-You run:  ansible all -m ping
-              |
-              v
-  Ansible reads inventory  ->  finds target hosts
-  Ansible connects via SSH ->  to each host
-  Ansible copies module    ->  /tmp/ansible_xxx.py
-  Python runs the module   ->  on remote host
-  Result returned via SSH  ->  JSON to control node
-  Temp file removed        ->  clean, no agent left behind
+Вы запускаете:  ansible all -m ping
+                    |
+                    v
+  Ansible читает инвентарь  ->  находит целевые хосты
+  Ansible подключается SSH  ->  к каждому хосту
+  Ansible копирует модуль   ->  /tmp/ansible_xxx.py
+  Python запускает модуль   ->  на удалённом хосте
+  Результат возвращается    ->  JSON на управляющий узел
+  Временный файл удаляется  ->  никаких агентов не остаётся
 ```
 
-No daemon. No agent. No open port on managed nodes (only SSH 22).
+Нет демона. Нет агента. Нет открытых портов на управляемых хостах (только SSH 22).
 
-## Install Ansible
+## Установка Ansible
 
 ```bash
 apt-get update -qq && apt-get install -y python3-pip 2>/dev/null | tail -1
@@ -28,35 +28,34 @@ ansible --version
 ```{{execute}}
 
 ```bash
-# Ansible uses Python on both sides
-# Control node: Python runs Ansible itself
-# Managed node: Python runs the module (most distros have Python3)
+# Управляющий узел: Python запускает Ansible
+# Управляемый узел: Python запускает модуль (в большинстве дистрибутивов Python3 уже есть)
 python3 --version
-echo "Remote Python check:"
-ssh node01 python3 --version 2>/dev/null || echo "Will check in next step"
+echo "Python на удалённом узле:"
+ssh node01 python3 --version 2>/dev/null || echo "Проверим на следующем шаге"
 ```{{execute}}
 
-## Core components
+## Основные компоненты
 
 ```bash
 cat << 'EOF'
-CONTROL NODE:
-  ansible         <- main CLI tool (ad-hoc commands)
-  ansible-playbook <- runs playbooks
-  ansible-galaxy   <- manage roles and collections
-  ansible-vault    <- encrypt secrets
-  ansible-doc      <- offline documentation
+УПРАВЛЯЮЩИЙ УЗЕЛ (где запускаем Ansible):
+  ansible          <- CLI для ad-hoc команд
+  ansible-playbook <- запуск плейбуков
+  ansible-galaxy   <- управление ролями и коллекциями
+  ansible-vault    <- шифрование секретов
+  ansible-doc      <- офлайн документация
 
-MANAGED NODE requirements:
-  - Python 3.x installed
-  - SSH server running (port 22)
-  - User with sudo OR root access
-  - NO Ansible installation needed
+УПРАВЛЯЕМЫЙ УЗЕЛ (требования):
+  - Python 3.x установлен
+  - SSH-сервер запущен (порт 22)
+  - Пользователь с sudo ИЛИ root
+  - Ansible НЕ нужен
 EOF
 ```{{execute}}
 
 ```bash
-# List all built-in modules (offline docs)
+# Сколько встроенных модулей доступно (офлайн)
 ansible-doc -l | wc -l
-echo "built-in modules available offline"
+echo "встроенных модулей"
 ```{{execute}}

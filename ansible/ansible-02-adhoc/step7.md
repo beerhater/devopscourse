@@ -1,16 +1,16 @@
-# Step 7: -m user and -m group - manage OS users
+# Шаг 7: -m user и -m group — управление пользователями
 
-## Create groups
+## Создаём группы
 
 ```bash
 cd ~/ansible-lab
 
-# Create a group
+# Создать группу
 ansible all -b -m group -a "name=webteam state=present"
 ```{{execute}}
 
 ```bash
-# Create with specific GID
+# Создать с конкретным GID
 ansible all -b -m group -a "name=appgroup gid=1500 state=present"
 ```{{execute}}
 
@@ -18,15 +18,15 @@ ansible all -b -m group -a "name=appgroup gid=1500 state=present"
 ansible all -m shell -a "getent group webteam appgroup"
 ```{{execute}}
 
-## Create users
+## Создаём пользователей
 
 ```bash
-# Create a user with home directory
-ansible all -b -m user -a "name=deploy comment='Deploy user' state=present create_home=yes"
+# Создать пользователя с домашней директорией
+ansible all -b -m user -a "name=deploy comment='Пользователь деплоя' state=present create_home=yes"
 ```{{execute}}
 
 ```bash
-# Create user with specific UID, group, shell
+# Создать с конкретным UID, группой, оболочкой
 ansible all -b -m user -a "name=appuser uid=2000 group=webteam groups=sudo shell=/bin/bash state=present"
 ```{{execute}}
 
@@ -34,28 +34,28 @@ ansible all -b -m user -a "name=appuser uid=2000 group=webteam groups=sudo shell
 ansible all -m shell -a "id deploy && id appuser"
 ```{{execute}}
 
-## User parameters
+## Параметры пользователя
 
 ```bash
 cat << 'EOF'
-name         username
-uid          user ID
-group        primary group
-groups       additional groups (comma separated)
-shell        login shell
-home         home directory path
-create_home  create home dir (yes/no)
-comment      GECOS field (full name)
-password     hashed password (use password_hash filter)
+name         имя пользователя
+uid          идентификатор пользователя
+group        основная группа
+groups       дополнительные группы (через запятую)
+shell        оболочка входа
+home         путь к домашней директории
+create_home  создать домашнюю директорию (yes/no)
+comment      поле GECOS (полное имя)
+password     хэш пароля (используйте password_hash фильтр)
 state        present / absent
-system       yes = system account (no home, no login)
+system       yes = системная учётная запись (без домашней директории, без входа)
 EOF
 ```{{execute}}
 
-## Set SSH key for user
+## Добавляем SSH-ключ пользователю
 
 ```bash
-# authorized_key module: add SSH public key to user
+# Модуль authorized_key: добавить публичный SSH-ключ пользователю
 ansible all -b -m authorized_key -a "user=deploy key='$(cat ~/.ssh/ansible_id.pub)' state=present"
 ```{{execute}}
 
@@ -63,9 +63,9 @@ ansible all -b -m authorized_key -a "user=deploy key='$(cat ~/.ssh/ansible_id.pu
 ansible all -m shell -a "cat /home/deploy/.ssh/authorized_keys"
 ```{{execute}}
 
-## Remove users
+## Удаляем пользователей
 
 ```bash
-# remove=yes: also delete home directory and mail spool
+# remove=yes: также удаляет домашнюю директорию и почтовый ящик
 ansible all -b -m user -a "name=appuser state=absent remove=yes"
 ```{{execute}}

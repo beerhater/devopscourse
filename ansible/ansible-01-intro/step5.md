@@ -1,37 +1,37 @@
-# Step 5: ansible.cfg - configuration file
+# Шаг 5: ansible.cfg — файл конфигурации
 
-`ansible.cfg` sets defaults so you don't repeat flags on every command.
-Ansible searches for it in this order:
-`ANSIBLE_CONFIG` env var > `./ansible.cfg` > `~/.ansible.cfg` > `/etc/ansible/ansible.cfg`
+`ansible.cfg` задаёт параметры по умолчанию, чтобы не повторять флаги при каждой команде.
+Ansible ищет его в таком порядке:
+`ANSIBLE_CONFIG` (переменная окружения) > `./ansible.cfg` > `~/.ansible.cfg` > `/etc/ansible/ansible.cfg`
 
-## Create ansible.cfg in project directory
+## Создаём ansible.cfg в директории проекта
 
 ```bash
 cat > ~/ansible-lab/ansible.cfg << 'EOF'
 [defaults]
-# Default inventory file (no need for -i flag)
+# Файл инвентаря по умолчанию (флаг -i не нужен)
 inventory = ./hosts
 
-# Remote user for SSH connections
+# Удалённый пользователь для SSH
 remote_user = root
 
-# Path to SSH private key
+# Путь к приватному SSH-ключу
 private_key_file = ~/.ssh/ansible_id
 
-# Don't check host fingerprints (useful in lab, NOT in production)
+# Не проверять отпечатки хостов (удобно в лаборатории, НЕ для продакшена)
 host_key_checking = False
 
-# Python interpreter on managed nodes
+# Интерпретатор Python на управляемых узлах
 interpreter_python = /usr/bin/python3
 
-# Output format
+# Формат вывода
 stdout_callback = yaml
 
-# Don't create .retry files
+# Не создавать .retry файлы
 retry_files_enabled = False
 
 [ssh_connection]
-# Reuse SSH connections for performance (ControlMaster)
+# Переиспользовать SSH-соединения для ускорения (ControlMaster)
 ssh_args = -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no
 pipelining = True
 EOF
@@ -40,11 +40,11 @@ cat ~/ansible-lab/ansible.cfg
 
 ```bash
 cd ~/ansible-lab
-# Verify ansible picks up the config
+# Проверяем, что Ansible подхватил конфиг
 ansible --version | grep 'config file'
 ```{{execute}}
 
-## Simplify inventory now (vars moved to ansible.cfg)
+## Упрощаем инвентарь (переменные переехали в ansible.cfg)
 
 ```bash
 cat > ~/ansible-lab/hosts << 'EOF'
@@ -61,14 +61,13 @@ cat ~/ansible-lab/hosts
 cd ~/ansible-lab && ansible-inventory --graph
 ```{{execute}}
 
-## host_key_checking warning
+## Важность host_key_checking
 
 ```bash
 cat << 'EOF'
 host_key_checking = False
-  -- Lab only! Disables SSH fingerprint verification
-  -- In production: set to True and use known_hosts
-  -- Prevents "Are you sure you want to continue connecting?" prompt
-  -- Without this: first Ansible run hangs waiting for user input
+  -- Только для лаборатории! Отключает проверку отпечатков SSH
+  -- В продакшене: установить True и использовать known_hosts
+  -- Без этого: первый запуск Ansible зависнет, ожидая ответа пользователя
 EOF
 ```{{execute}}

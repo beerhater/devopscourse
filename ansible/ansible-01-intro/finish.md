@@ -1,40 +1,40 @@
-# Module complete!
+# Модуль завершён!
 
-## What we learned
+## Что изучили
 
-- **Ansible architecture** -- agentless, SSH-based, Python modules on remote
-- **Control node requirements** -- Ansible installed, SSH key, inventory file
-- **Managed node requirements** -- Python 3 + SSH server only
-- **SSH key generation** -- `ssh-keygen -t ed25519`, `ssh-copy-id`
+- **Архитектура Ansible** -- без агентов, через SSH, Python-модули на удалённом хосте
+- **Требования к управляющему узлу** -- Ansible, SSH-ключ, файл инвентаря
+- **Требования к управляемому узлу** -- только Python 3 + SSH-сервер
+- **Генерация SSH-ключа** -- `ssh-keygen -t ed25519`, `ssh-copy-id`
 - **ansible.cfg** -- inventory, remote_user, private_key_file, host_key_checking
-- **INI inventory** -- hosts, groups, [group:vars], [group:children]
-- **YAML inventory** -- all/children/hosts/vars hierarchy
-- **host_vars/ and group_vars/** -- clean variable organization
-- **ansible all -m ping** -- connectivity test (SSH + Python, not ICMP)
-- **ansible -m setup** -- gather facts, filter with `filter=`
-- **raw vs command vs shell** -- when to use each module type
+- **INI-инвентарь** -- хосты, группы, [group:vars], [group:children]
+- **YAML-инвентарь** -- иерархия all/children/hosts/vars
+- **host_vars/ и group_vars/** -- чистая организация переменных
+- **ansible all -m ping** -- тест связности (SSH + Python, не ICMP)
+- **ansible -m setup** -- сбор фактов, фильтр `filter=`
+- **raw vs command vs shell** -- когда использовать каждый тип
 
-## Quick Reference
+## Шпаргалка
 
 ```bash
-# Generate SSH key
+# Генерация SSH-ключа
 ssh-keygen -t ed25519 -f ~/.ssh/ansible_id -N ''
 ssh-copy-id -i ~/.ssh/ansible_id.pub root@node01
 
-# Test connectivity
+# Проверка связности
 ansible all -m ping
 ansible all -m ping -v
 
-# Gather facts
+# Сбор фактов
 ansible all -m setup
 ansible all -m setup -a 'filter=ansible_distribution*'
 
-# Inspect inventory
+# Просмотр инвентаря
 ansible-inventory --graph
 ansible-inventory --host node01
 ansible-inventory --list
 ```
 
-## Next module
+## Следующий модуль
 
-**Ad-hoc commands** -- `ansible all -m shell`, `-m apt`, `-m copy`, `-m service`.
+**Ad-hoc команды** -- `ansible all -m shell`, `-m apt`, `-m copy`, `-m service`.

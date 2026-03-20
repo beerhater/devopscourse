@@ -1,75 +1,74 @@
-# Step 4: First inventory file - INI format
+# Шаг 4: Первый файл инвентаря — формат INI
 
-The inventory tells Ansible WHERE to connect.
-Default location: `/etc/ansible/hosts` or custom file with `-i` flag.
+Инвентарь сообщает Ansible, К КАКИМ хостам подключаться.
+Расположение по умолчанию: `/etc/ansible/hosts` или произвольный файл с флагом `-i`.
 
-## Create project directory
+## Создаём рабочую директорию проекта
 
 ```bash
 mkdir -p ~/ansible-lab && cd ~/ansible-lab
 ```{{execute}}
 
-## Basic INI inventory
+## Базовый INI-инвентарь
 
 ```bash
 cat > ~/ansible-lab/hosts << 'EOF'
-# This is a comment
+# Это комментарий
 
-# Ungrouped hosts (implicit 'all' group)
+# Хост без группы (попадает в неявную группу 'all')
 node01
 
-# Named group: [groupname]
+# Именованная группа: [имя_группы]
 [webservers]
 node01
 
 [databases]
-# node02  (we only have one managed node in this lab)
+# node02  (в нашей лаборатории только один управляемый узел)
 EOF
 cat ~/ansible-lab/hosts
 ```{{execute}}
 
-## INI format with connection variables
+## INI-формат с переменными подключения
 
 ```bash
 cat > ~/ansible-lab/hosts << 'EOF'
-# Host with connection variables inline
+# Хост с переменными подключения (inline)
 [webservers]
 node01 ansible_user=root ansible_ssh_private_key_file=~/.ssh/ansible_id
 
 [webservers:vars]
-# Group variables: applied to all hosts in webservers
+# Групповые переменные: применяются ко всем хостам группы webservers
 http_port=80
 app_name=myapp
 
 [all:vars]
-# Variables for ALL hosts
+# Переменные для ВСЕХ хостов
 ansible_python_interpreter=/usr/bin/python3
 EOF
 cat ~/ansible-lab/hosts
 ```{{execute}}
 
 ```bash
-# Show parsed inventory
+# Показать разобранный инвентарь
 ansible-inventory -i ~/ansible-lab/hosts --list
 ```{{execute}}
 
 ```bash
-# Visual tree view
+# Дерево инвентаря
 ansible-inventory -i ~/ansible-lab/hosts --graph
 ```{{execute}}
 
-## Common inventory variables
+## Часто используемые переменные инвентаря
 
 ```bash
 cat << 'EOF'
-Connection variables:
-  ansible_host               <- IP or DNS (if hostname != connection address)
-  ansible_port               <- SSH port (default: 22)
-  ansible_user               <- SSH login user
-  ansible_password           <- SSH password (not recommended, use keys)
-  ansible_ssh_private_key_file <- path to private key
-  ansible_python_interpreter <- Python path on managed node
-  ansible_become             <- enable privilege escalation (sudo)
-  ansible_become_user        <- user to become (default: root)
+Переменные подключения:
+  ansible_host                    <- IP или DNS (если имя хоста != адрес подключения)
+  ansible_port                    <- порт SSH (по умолчанию: 22)
+  ansible_user                    <- логин для SSH
+  ansible_ssh_private_key_file    <- путь к приватному ключу
+  ansible_python_interpreter      <- путь к Python на управляемом узле
+  ansible_become                  <- повышение привилегий (sudo)
+  ansible_become_user             <- пользователь после sudo (по умолчанию: root)
 EOF
 ```{{execute}}

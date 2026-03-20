@@ -1,10 +1,10 @@
-# Step 7: Inventory groups and host variables
+# Шаг 7: Группы инвентаря и переменные хостов
 
-## Multiple groups and group nesting
+## Несколько групп и вложенность групп
 
 ```bash
 cat > ~/ansible-lab/hosts << 'EOF'
-# Single managed node in multiple groups
+# Один управляемый узел в нескольких группах
 [webservers]
 node01
 
@@ -12,24 +12,24 @@ node01
 node01
 
 [databases]
-# empty in this lab
+# пусто в нашей лаборатории
 
-# Parent group: contains child groups
+# Родительская группа: содержит дочерние группы
 [production:children]
 webservers
 appservers
 
-# Variables for production group (inherited by children)
+# Переменные для группы production (наследуются дочерними)
 [production:vars]
 env=production
 deploy_user=deploy
 
-# Variables for webservers group
+# Переменные для группы webservers
 [webservers:vars]
 http_port=80
 https_port=443
 
-# All hosts get these
+# Для всех хостов
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
 ansible_user=root
@@ -43,31 +43,14 @@ ansible-inventory --graph
 ```{{execute}}
 
 ```bash
-# See all variables for node01 (from all groups combined)
+# Все переменные node01 (из всех групп объединённые)
 ansible-inventory --host node01
 ```{{execute}}
 
-## Host-level variables
+## Директории host_vars и group_vars (лучший подход)
 
 ```bash
-cat > ~/ansible-lab/hosts << 'EOF'
-[webservers]
-node01 http_port=80 server_name=web01.lab
-
-[all:vars]
-ansible_python_interpreter=/usr/bin/python3
-EOF
-```{{execute}}
-
-```bash
-cd ~/ansible-lab
-ansible-inventory --host node01
-```{{execute}}
-
-## host_vars and group_vars directories (best practice)
-
-```bash
-# Variables in files instead of inline - cleaner for many vars
+# Переменные в файлах вместо inline — удобнее при большом количестве переменных
 mkdir -p ~/ansible-lab/host_vars
 mkdir -p ~/ansible-lab/group_vars
 
@@ -91,12 +74,12 @@ EOF
 
 ```bash
 cd ~/ansible-lab
-# Now ansible-inventory picks up variables from files automatically
+# Ansible-inventory автоматически подхватывает переменные из файлов
 ansible-inventory --host node01
 ```{{execute}}
 
 ```bash
-# Clean up inline vars from hosts file
+# Упрощаем hosts — переменные теперь в файлах
 cat > ~/ansible-lab/hosts << 'EOF'
 [webservers]
 node01

@@ -1,14 +1,14 @@
-# Step 6: First ansible ping
+# Шаг 6: Первый ansible ping
 
-`ansible all -m ping` is the Ansible "hello world".
-It tests: inventory parsing + SSH connection + Python on remote.
+`ansible all -m ping` — это "Hello World" в мире Ansible.
+Проверяет: разбор инвентаря + SSH-соединение + Python на удалённом хосте.
 
 ```
-ping module does NOT send ICMP ping
-It connects via SSH, imports Python, returns {"ping": "pong"}
+Модуль ping НЕ отправляет ICMP-пакеты!
+Он подключается по SSH, импортирует Python, возвращает {"ping": "pong"}
 ```
 
-## Run the first ping
+## Запускаем первый ping
 
 ```bash
 cd ~/ansible-lab
@@ -16,52 +16,52 @@ ansible all -m ping
 ```{{execute}}
 
 ```bash
-# Ping specific group
+# Ping конкретной группы
 ansible webservers -m ping
 ```{{execute}}
 
 ```bash
-# Verbose output - see exactly what SSH connection is made
+# Подробный вывод — видно точные параметры SSH-соединения
 ansible all -m ping -v
 ```{{execute}}
 
 ```bash
-# Very verbose - see all SSH parameters
+# Очень подробный вывод — все параметры SSH
 ansible all -m ping -vvv 2>&1 | head -40
 ```{{execute}}
 
-## Understanding the output
+## Разбираем вывод
 
 ```bash
 cat << 'EOF'
 node01 | SUCCESS => {
-    "changed": false,     <- no change was made on host
-    "ping": "pong"        <- module ran successfully
+    "changed": false,   <- изменений на хосте не было
+    "ping": "pong"      <- модуль выполнился успешно
 }
 
-node01 | FAILED!          <- connection failed
-  ...permission denied    <- SSH auth issue
-  ...no hosts matched     <- inventory issue
-  ...python not found     <- Python missing on remote
+node01 | FAILED!            <- соединение не удалось
+  ...permission denied      <- проблема с SSH-аутентификацией
+  ...no hosts matched       <- проблема с инвентарём
+  ...python not found       <- Python не установлен на удалённом хосте
 EOF
 ```{{execute}}
 
 ```bash
-# ping a specific host by name
+# Ping конкретного хоста по имени
 ansible node01 -m ping
 ```{{execute}}
 
 ```bash
-# Run against all except one host (useful with many nodes)
-ansible 'all,!node01' -m ping 2>/dev/null || echo "No other hosts (expected in 2-node lab)"
+# Все хосты кроме node01 (полезно при большом количестве узлов)
+ansible 'all,!node01' -m ping 2>/dev/null || echo "Других хостов нет (ожидаемо в 2-узловой лаборатории)"
 ```{{execute}}
 
-## -m ping vs actual connectivity test
+## ping vs реальная проверка сети
 
 ```bash
-# ansible ping = SSH + Python test
+# ansible ping = SSH + Python
 ansible all -m ping
 
-# To test actual network: use raw module (no Python needed)
-ansible all -m raw -a "echo hello from raw"
+# Для проверки сети: модуль raw (Python не нужен)
+ansible all -m raw -a "echo привет от raw"
 ```{{execute}}
