@@ -5,6 +5,9 @@
     },
     {
       "path": "ansible-02-adhoc"
+    },
+    {
+      "path": "ansible-03-playbook1"
     }
   ]
 }
