@@ -1,0 +1,67 @@
+{
+  "title": "Ansible: Roles",
+  "description": "\u0421\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430 \u0440\u043e\u043b\u0438, ansible-galaxy init, tasks/handlers/templates/defaults/vars/meta, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 \u0432 \u043f\u043b\u0435\u0439\u0431\u0443\u043a\u0435, \u0437\u0430\u0432\u0438\u0441\u0438\u043c\u043e\u0441\u0442\u0438, \u0440\u0430\u0437\u0431\u0438\u0435\u043d\u0438\u0435 \u043c\u043e\u043d\u043e\u043b\u0438\u0442\u0430 \u043d\u0430 \u0440\u043e\u043b\u0438.",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "\u0421\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430 \u0440\u043e\u043b\u0438: \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u0438 \u0438 \u043d\u0430\u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "ansible-galaxy init: \u0441\u043a\u0435\u043b\u0435\u0442 \u0440\u043e\u043b\u0438",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "tasks/main.yml \u0438 handlers/main.yml",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "defaults/main.yml vs vars/main.yml",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "templates/ \u0438 files/ \u0432\u043d\u0443\u0442\u0440\u0438 \u0440\u043e\u043b\u0438",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 \u0440\u043e\u043b\u0435\u0439 \u0432 \u043f\u043b\u0435\u0439\u0431\u0443\u043a\u0435",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "meta/main.yml \u0438 \u0437\u0430\u0432\u0438\u0441\u0438\u043c\u043e\u0441\u0442\u0438 \u0440\u043e\u043b\u0435\u0439",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      },
+      {
+        "title": "ansible-galaxy \u0438 requirements.yml",
+        "text": "step8.md",
+        "verify": "step8/verify.sh"
+      },
+      {
+        "title": "\u0420\u0430\u0437\u0431\u0438\u0435\u043d\u0438\u0435 \u043c\u043e\u043d\u043e\u043b\u0438\u0442\u0430 \u043d\u0430 \u0440\u043e\u043b\u0438",
+        "text": "step9.md",
+        "verify": "step9/verify.sh"
+      },
+      {
+        "title": "\u0418\u0442\u043e\u0433\u043e\u0432\u043e\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435: \u043f\u043e\u043b\u043d\u044b\u0439 \u0441\u0442\u0435\u043a \u0440\u043e\u043b\u0435\u0439",
+        "text": "step10.md",
+        "verify": "step10/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-2nodes"
+  }
+}

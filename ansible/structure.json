@@ -11,6 +11,9 @@
     },
     {
       "path": "ansible-04-playbook2"
+    },
+    {
+      "path": "ansible-05-roles"
     }
   ]
 }
