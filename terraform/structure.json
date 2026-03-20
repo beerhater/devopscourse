@@ -17,6 +17,9 @@
     },
     {
       "path": "terraform-06-remote-state"
+    },
+    {
+      "path": "terraform-07-modules"
     }
   ]
 }

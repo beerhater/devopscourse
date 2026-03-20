@@ -1,0 +1,67 @@
+{
+  "title": "Terraform: \u041c\u043e\u0434\u0443\u043b\u0438",
+  "description": "\u041b\u043e\u043a\u0430\u043b\u044c\u043d\u044b\u0435 \u043c\u043e\u0434\u0443\u043b\u0438, \u0440\u0435\u0435\u0441\u0442\u0440, git, for_each, \u0432\u043b\u043e\u0436\u0435\u043d\u043d\u044b\u0435, providers, best practices.",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430 \u0438 \u043a\u043e\u043d\u0446\u0435\u043f\u0446\u0438\u044f \u043c\u043e\u0434\u0443\u043b\u0435\u0439",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "\u041f\u0435\u0440\u0432\u044b\u0439 \u043b\u043e\u043a\u0430\u043b\u044c\u043d\u044b\u0439 \u043c\u043e\u0434\u0443\u043b\u044c",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "module \u0431\u043b\u043e\u043a: source, inputs, outputs",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "\u0412\u043b\u043e\u0436\u0435\u043d\u043d\u044b\u0435 \u043c\u043e\u0434\u0443\u043b\u0438 \u0438 \u043f\u0435\u0440\u0435\u0434\u0430\u0447\u0430 \u0434\u0430\u043d\u043d\u044b\u0445",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "for_each \u0441 \u043c\u043e\u0434\u0443\u043b\u044f\u043c\u0438",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "\u041f\u0443\u0431\u043b\u0438\u0447\u043d\u044b\u0439 \u0440\u0435\u0435\u0441\u0442\u0440 registry.terraform.io",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "Git source \u0438 \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      },
+      {
+        "title": "providers \u0432 \u043c\u043e\u0434\u0443\u043b\u044f\u0445: \u043c\u0443\u043b\u044c\u0442\u0438\u0440\u0435\u0433\u0438\u043e\u043d",
+        "text": "step8.md",
+        "verify": "step8/verify.sh"
+      },
+      {
+        "title": "\u0422\u0435\u0441\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0438 best practices",
+        "text": "step9.md",
+        "verify": "step9/verify.sh"
+      },
+      {
+        "title": "\u0418\u0442\u043e\u0433\u043e\u0432\u043e\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435: \u0431\u0438\u0431\u043b\u0438\u043e\u0442\u0435\u043a\u0430 \u043c\u043e\u0434\u0443\u043b\u0435\u0439",
+        "text": "step10.md",
+        "verify": "step10/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
