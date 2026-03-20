@@ -2,6 +2,9 @@
   "items": [
     {
       "path": "terraform-01-iac-concept"
+    },
+    {
+      "path": "terraform-02-first-resources"
     }
   ]
 }

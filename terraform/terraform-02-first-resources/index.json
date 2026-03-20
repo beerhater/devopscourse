@@ -1,0 +1,67 @@
+{
+  "title": "Terraform: \u041f\u0435\u0440\u0432\u044b\u0435 \u0440\u0435\u0441\u0443\u0440\u0441\u044b",
+  "description": "\u041f\u0440\u043e\u0432\u0430\u0439\u0434\u0435\u0440 local, local_file, local_sensitive_file, data sources, random_*, depends_on, lifecycle, locals.",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430 \u0438 \u043f\u0440\u043e\u0432\u0430\u0439\u0434\u0435\u0440 local",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "resource local_file: \u0432\u0441\u0435 \u0430\u0440\u0433\u0443\u043c\u0435\u043d\u0442\u044b",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "local_sensitive_file: \u0444\u0430\u0439\u043b\u044b \u0441 \u0441\u0435\u043a\u0440\u0435\u0442\u0430\u043c\u0438",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "\u0421\u0441\u044b\u043b\u043a\u0438 \u043d\u0430 \u0430\u0442\u0440\u0438\u0431\u0443\u0442\u044b: \u0433\u0440\u0430\u0444 \u0437\u0430\u0432\u0438\u0441\u0438\u043c\u043e\u0441\u0442\u0435\u0439",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Data Sources: \u0447\u0438\u0442\u0430\u0435\u043c \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0435 \u0444\u0430\u0439\u043b\u044b",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "random_id, string, password, pet",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "depends_on: \u044f\u0432\u043d\u044b\u0435 \u0437\u0430\u0432\u0438\u0441\u0438\u043c\u043e\u0441\u0442\u0438",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      },
+      {
+        "title": "lifecycle: \u0436\u0438\u0437\u043d\u0435\u043d\u043d\u044b\u0439 \u0446\u0438\u043a\u043b \u0440\u0435\u0441\u0443\u0440\u0441\u0430",
+        "text": "step8.md",
+        "verify": "step8/verify.sh"
+      },
+      {
+        "title": "locals: \u043b\u043e\u043a\u0430\u043b\u044c\u043d\u044b\u0435 \u0432\u044b\u0447\u0438\u0441\u043b\u0435\u043d\u0438\u044f",
+        "text": "step9.md",
+        "verify": "step9/verify.sh"
+      },
+      {
+        "title": "\u0418\u0442\u043e\u0433\u043e\u0432\u043e\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435: \u0433\u0435\u043d\u0435\u0440\u0430\u0442\u043e\u0440 \u043a\u043e\u043d\u0444\u0438\u0433\u0430",
+        "text": "step10.md",
+        "verify": "step10/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
