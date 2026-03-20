@@ -1,0 +1,67 @@
+{
+  "title": "Terraform: \u041a\u043e\u043d\u0446\u0435\u043f\u0446\u0438\u044f IaC",
+  "description": "\u0417\u0430\u0447\u0435\u043c Terraform, \u043f\u0440\u043e\u0432\u0430\u0439\u0434\u0435\u0440\u044b, \u0434\u0435\u043a\u043b\u0430\u0440\u0430\u0442\u0438\u0432\u043d\u044b\u0439 \u043f\u043e\u0434\u0445\u043e\u0434, HCL \u0441\u0438\u043d\u0442\u0430\u043a\u0441\u0438\u0441, init/plan/apply/destroy, \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430 \u043f\u0440\u043e\u0435\u043a\u0442\u0430.",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430 Terraform",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "ClickOps vs IaC, \u0434\u0435\u043a\u043b\u0430\u0440\u0430\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u044c",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "HCL: \u0441\u0438\u043d\u0442\u0430\u043a\u0441\u0438\u0441 \u044f\u0437\u044b\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0433\u0443\u0440\u0430\u0446\u0438\u0438",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "\u041f\u0440\u043e\u0432\u0430\u0439\u0434\u0435\u0440\u044b \u0438 required_providers",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "terraform init",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "terraform plan",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "terraform apply \u0438 destroy",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      },
+      {
+        "title": "\u0421\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430 Terraform-\u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+        "text": "step8.md",
+        "verify": "step8/verify.sh"
+      },
+      {
+        "title": "Terraform Registry \u0438 \u044d\u043a\u043e\u0441\u0438\u0441\u0442\u0435\u043c\u0430",
+        "text": "step9.md",
+        "verify": "step9/verify.sh"
+      },
+      {
+        "title": "\u0418\u0442\u043e\u0433\u043e\u0432\u043e\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435: \u043f\u0435\u0440\u0432\u044b\u0439 \u043f\u0440\u043e\u0435\u043a\u0442",
+        "text": "step10.md",
+        "verify": "step10/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
