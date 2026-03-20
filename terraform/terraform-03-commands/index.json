@@ -1,0 +1,67 @@
+{
+  "title": "Terraform: \u041e\u0441\u043d\u043e\u0432\u043d\u044b\u0435 \u043a\u043e\u043c\u0430\u043d\u0434\u044b",
+  "description": "terraform init, fmt, validate, plan, apply, destroy, show, state, output, console. \u0424\u043b\u0430\u0433\u0438, tfvars, \u043f\u0440\u0438\u043e\u0440\u0438\u0442\u0435\u0442\u044b \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0445.",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430 \u0438 \u0443\u0447\u0435\u0431\u043d\u044b\u0439 \u043f\u0440\u043e\u0435\u043a\u0442",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "terraform init: \u0432\u0441\u0435 \u0444\u043b\u0430\u0433\u0438",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "terraform fmt \u0438 validate",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "terraform plan: \u0447\u0442\u0435\u043d\u0438\u0435 \u0432\u044b\u0432\u043e\u0434\u0430, -out, -target",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "terraform apply: \u0444\u043b\u0430\u0433\u0438 \u0438 -var-file",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "terraform destroy \u0438 drift detection",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "terraform show \u0438 state \u043a\u043e\u043c\u0430\u043d\u0434\u044b",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      },
+      {
+        "title": "terraform output \u0438 console",
+        "text": "step8.md",
+        "verify": "step8/verify.sh"
+      },
+      {
+        "title": "tfvars \u0438 \u043f\u0440\u0438\u043e\u0440\u0438\u0442\u0435\u0442\u044b \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0445",
+        "text": "step9.md",
+        "verify": "step9/verify.sh"
+      },
+      {
+        "title": "\u0418\u0442\u043e\u0433\u043e\u0432\u043e\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435: CI/CD workflow",
+        "text": "step10.md",
+        "verify": "step10/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}

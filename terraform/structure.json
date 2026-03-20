@@ -5,6 +5,9 @@
     },
     {
       "path": "terraform-02-first-resources"
+    },
+    {
+      "path": "terraform-03-commands"
     }
   ]
 }
