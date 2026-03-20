@@ -21,7 +21,9 @@
       "description": "Оркестрация контейнеров: архитектура K8s, Pods, Deployments, Services, Ingress, Helm, CI/CD"
     },
     {
-      "path": "ansible"
+      "path": "ansible",
+      "title": "Ansible для DevOps",
+      "description": "Автоматизация инфраструктуры: inventory, ad-hoc, playbooks, roles, Jinja2 templates"
     }
   ]
 }
