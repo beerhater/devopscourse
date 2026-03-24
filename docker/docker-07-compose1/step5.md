@@ -5,7 +5,7 @@ Compose создаёт сеть автоматически, но вы может
 ## Остановите текущий стек
 
 ```bash
-cd /opt/compose-intro && docker-compose down
+cd /opt/compose-intro && docker compose down
 ```{{execute}}
 
 ## Создайте расширенный docker-compose.yml
@@ -56,19 +56,21 @@ COMPOSEFILE
 ```{{execute}}
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```{{execute}}
 
 ## Проверьте изоляцию сетей
 
-web не видит db (разные сети):
+web подключён только к `frontend`, поэтому до `db` по внутренней сети он не дотянется:
 ```bash
-docker-compose exec web ping -c 1 db || echo "Изоляция работает!"
+docker inspect "$(docker compose ps -q web)" \
+  --format '{{range $k, $_ := .NetworkSettings.Networks}}{{$k}} {{end}}'
 ```{{execute}}
 
-adminer видит db (состоит в обеих сетях):
+adminer состоит в обеих сетях и может ходить к db:
 ```bash
-docker-compose exec adminer ping -c 1 db
+docker inspect "$(docker compose ps -q adminer)" \
+  --format '{{range $k, $_ := .NetworkSettings.Networks}}{{$k}} {{end}}'
 ```{{execute}}
 
 ## Проверьте тома

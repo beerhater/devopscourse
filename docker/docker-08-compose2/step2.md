@@ -66,20 +66,23 @@ COMPOSEFILE
 ```{{execute}}
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```{{execute}}
 
 Следим за статусом — `starting` -> `healthy`:
 ```bash
-watch -n 2 docker-compose ps
+for i in $(seq 1 10); do
+  docker compose ps
+  sleep 2
+done
 ```{{execute}}
 
-Нажмите Ctrl+C через 30 секунд.
+Такой цикл безопаснее для Killercoda, чем бесконечный `watch`.
 
 ```bash
-docker-compose ps
+docker compose ps
 ```{{execute}}
 
 ```bash
-docker-compose down
+docker compose down
 ```{{execute}}

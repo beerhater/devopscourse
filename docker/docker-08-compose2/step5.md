@@ -53,16 +53,16 @@ COMPOSEFILE
 
 Только основные сервисы:
 ```bash
-docker-compose up -d --build
-docker-compose ps
+docker compose up -d --build
+docker compose ps
 ```{{execute}}
 
 С dev-инструментами:
 ```bash
-docker-compose --profile dev up -d
-docker-compose ps
+docker compose --profile dev up -d
+docker compose ps
 ```{{execute}}
 
 ```bash
-docker-compose --profile dev down
+docker compose --profile dev down
 ```{{execute}}

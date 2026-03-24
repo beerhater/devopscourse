@@ -72,12 +72,12 @@ COMPOSEFILE
 ```{{execute}}
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 curl http://localhost:5000
 ```{{execute}}
 
 `--build` принудительно пересобирает образы при каждом `up`.
 
 ```bash
-docker-compose down
+docker compose down
 ```{{execute}}

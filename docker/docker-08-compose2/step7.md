@@ -113,6 +113,8 @@ services:
     image: nginx:alpine
     ports:
       - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     restart: unless-stopped
     depends_on:
       app:
@@ -131,42 +133,70 @@ volumes:
 COMPOSEFILE
 ```{{execute}}
 
+**4.1. Конфиг nginx для проксирования в app:**
+
+```bash
+cat > nginx.conf << 'NGINXCONF'
+events {}
+
+http {
+  upstream app_backend {
+    server app:5000;
+  }
+
+  server {
+    listen 80;
+
+    location / {
+      proxy_pass http://app_backend;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+  }
+}
+NGINXCONF
+```{{execute}}
+
 **5. Запустите:**
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```{{execute}}
 
 **6. Следите за healthcheck:**
 
 ```bash
-watch -n 3 docker-compose ps
+for i in $(seq 1 10); do
+  docker compose ps
+  sleep 3
+done
 ```{{execute}}
 
-Дождитесь `healthy` у всех сервисов, затем Ctrl+C.
+Дождитесь `healthy` у всех сервисов.
 
 **7. Запустите 3 реплики app:**
 
 ```bash
-docker-compose up -d --scale app=3
-docker-compose ps
+docker compose up -d --scale app=3
+docker compose ps
 ```{{execute}}
 
 **8. Проверьте nginx:**
 
 ```bash
-curl http://localhost:8080
+curl http://localhost:8080 | python3 -m json.tool
 ```{{execute}}
 
 **9. Dev-профиль:**
 
 ```bash
-docker-compose --profile dev up -d
-docker-compose ps
+docker compose --profile dev up -d
+docker compose ps
 ```{{execute}}
 
 **10. Очистите:**
 
 ```bash
-docker-compose --profile dev down -v
+docker compose --profile dev down -v
 ```{{execute}}

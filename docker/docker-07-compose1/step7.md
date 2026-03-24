@@ -101,29 +101,29 @@ COMPOSEFILE
 **5. Запустите:**
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```{{execute}}
 
 **6. Проверьте сервисы:**
 
 ```bash
-docker-compose ps
+docker compose ps
 ```{{execute}}
 
 **7. Проверьте бекенд:**
 
 ```bash
-docker-compose exec nginx wget -qO- http://backend:5000
+docker compose exec nginx wget -qO- http://backend:5000
 ```{{execute}}
 
 **8. Логи:**
 
 ```bash
-docker-compose logs --tail=5
+docker compose logs --tail=5
 ```{{execute}}
 
 **9. Очистите:**
 
 ```bash
-docker-compose down -v
+docker compose down -v
 ```{{execute}}

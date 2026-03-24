@@ -37,7 +37,7 @@ cat > /opt/docker-flow.txt << 'EOF'
 5. Образ доступен в Docker Hub
    │
 6. (опционально) job: deploy
-   └── ssh server "docker pull username/app:latest && docker-compose up -d"
+   └── ssh server "docker pull username/app:latest && docker compose up -d"
 
 РЕЗУЛЬТАТ:
   - username/app:latest    — всегда последняя версия

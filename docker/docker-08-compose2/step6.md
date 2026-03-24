@@ -6,7 +6,7 @@
 
 1. `docker-compose.yml` — базовая конфигурация
 2. `docker-compose.override.yml` — применяется **автоматически** (обычно dev)
-3. Prod: `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up`
+3. Prod: `docker compose -f docker-compose.yml -f docker-compose.prod.yml up`
 
 ```bash
 cd /opt/compose2
@@ -74,14 +74,14 @@ COMPOSEFILE
 
 Dev — override применяется автоматически:
 ```bash
-docker-compose config | grep APP_ENV
+docker compose config | grep APP_ENV
 ```{{execute}}
 
 Prod — явно указываем файлы:
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml config | grep APP_ENV
+docker compose -f docker-compose.yml -f docker-compose.prod.yml config | grep APP_ENV
 ```{{execute}}
 
 ```bash
-docker-compose down -v
+docker compose down -v
 ```{{execute}}

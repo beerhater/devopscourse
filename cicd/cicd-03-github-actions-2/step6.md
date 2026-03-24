@@ -144,7 +144,7 @@ jobs:
           echo "В реальном проекте здесь был бы:"
           echo "ssh deploy@staging-server"
           echo "  docker pull username/app:latest"
-          echo "  docker-compose up -d"
+          echo "  docker compose up -d"
 WORKFLOW
 ```{{execute}}
 

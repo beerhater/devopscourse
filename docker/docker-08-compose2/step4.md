@@ -31,26 +31,26 @@ COMPOSEFILE
 ```{{execute}}
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```{{execute}}
 
 Запустите 3 реплики:
 ```bash
-docker-compose up -d --scale app=3
+docker compose up -d --scale app=3
 ```{{execute}}
 
 ```bash
-docker-compose ps
+docker compose ps
 ```{{execute}}
 
 Три контейнера: `compose2_app_1`, `compose2_app_2`, `compose2_app_3`.
 
 Уменьшите до 1:
 ```bash
-docker-compose up -d --scale app=1
-docker-compose ps
+docker compose up -d --scale app=1
+docker compose ps
 ```{{execute}}
 
 ```bash
-docker-compose down
+docker compose down
 ```{{execute}}

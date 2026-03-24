@@ -11,4 +11,4 @@
 - **`profiles`** — опциональные сервисы для dev/tools
 - **Override-файлы** — разные конфиги для dev/prod без дублирования
 
-> Проверьте: `docker-compose version`{{execute}}
+> Проверьте: `docker compose version`{{execute}}

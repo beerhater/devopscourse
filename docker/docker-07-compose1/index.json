@@ -6,7 +6,7 @@
     "steps": [
       { "title": "Что такое Docker Compose",          "text": "step1.md", "verify": "step1/verify.sh" },
       { "title": "Структура docker-compose.yml",      "text": "step2.md", "verify": "step2/verify.sh" },
-      { "title": "Запуск стека: docker-compose up",   "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Запуск стека: docker compose up",   "text": "step3.md", "verify": "step3/verify.sh" },
       { "title": "Управление: ps, logs, exec",        "text": "step4.md", "verify": "step4/verify.sh" },
       { "title": "Сети и тома в Compose",             "text": "step5.md", "verify": "step5/verify.sh" },
       { "title": "Переменные окружения и .env файл",  "text": "step6.md", "verify": "step6/verify.sh" },

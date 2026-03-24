@@ -15,13 +15,13 @@
 
 | Команда | Описание |
 |---------|----------|
-| `docker-compose up -d --build` | Собрать и запустить |
-| `docker-compose up --scale svc=3` | 3 реплики |
-| `docker-compose --profile dev up` | Запуск с профилем |
-| `docker-compose -f base.yml -f prod.yml up` | Объединить файлы |
-| `docker-compose config` | Итоговый конфиг |
-| `docker-compose ps` | Статус + healthcheck |
-| `docker-compose down -v` | Удалить + тома |
+| `docker compose up -d --build` | Собрать и запустить |
+| `docker compose up --scale svc=3` | 3 реплики |
+| `docker compose --profile dev up` | Запуск с профилем |
+| `docker compose -f base.yml -f prod.yml up` | Объединить файлы |
+| `docker compose config` | Итоговый конфиг |
+| `docker compose ps` | Статус + healthcheck |
+| `docker compose down -v` | Удалить + тома |
 
 ## Весь курс Docker пройден!
 

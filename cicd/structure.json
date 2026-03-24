@@ -18,6 +18,9 @@
     },
     {
       "path": "cicd-06-autotests"
+    },
+    {
+      "path": "cicd-07-deploy-strategies"
     }
   ]
 }

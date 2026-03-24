@@ -1,18 +1,18 @@
-# Шаг 3: Запуск стека — docker-compose up
+# Шаг 3: Запуск стека — docker compose up
 
 ## Основные команды
 
 | Команда | Описание |
 |---------|----------|
-| `docker-compose up` | Запуск в foreground (видны логи) |
-| `docker-compose up -d` | Запуск в фоне (detached) |
-| `docker-compose down` | Остановка и удаление контейнеров/сетей |
-| `docker-compose down -v` | Также удалить тома |
+| `docker compose up` | Запуск в foreground (видны логи) |
+| `docker compose up -d` | Запуск в фоне (detached) |
+| `docker compose down` | Остановка и удаление контейнеров/сетей |
+| `docker compose down -v` | Также удалить тома |
 
 ## Задание 1: Запустите стек
 
 ```bash
-cd /opt/compose-intro && docker-compose up -d
+cd /opt/compose-intro && docker compose up -d
 ```{{execute}}
 
 Compose автоматически:
@@ -21,7 +21,7 @@ Compose автоматически:
 3. Именует контейнеры как `<project>_<service>_<номер>`
 
 ```bash
-docker-compose ps
+docker compose ps
 ```{{execute}}
 
 ## Задание 2: Проверьте созданную сеть
@@ -39,7 +39,7 @@ curl http://localhost:8080
 ## Задание 4: Остановите стек
 
 ```bash
-docker-compose down
+docker compose down
 ```{{execute}}
 
 `down` удаляет контейнеры и сети. Данные в томах **сохраняются** — нужен `down -v` для их удаления.

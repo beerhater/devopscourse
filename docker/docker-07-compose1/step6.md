@@ -5,7 +5,7 @@
 ## Остановите стек
 
 ```bash
-cd /opt/compose-intro && docker-compose down -v
+cd /opt/compose-intro && docker compose down -v
 ```{{execute}}
 
 ## Создайте .env файл
@@ -56,10 +56,10 @@ COMPOSEFILE
 
 Проверьте итоговый конфиг с подставленными переменными:
 ```bash
-docker-compose config
+docker compose config
 ```{{execute}}
 
 ```bash
-docker-compose up -d
-docker-compose exec db env | grep POSTGRES
+docker compose up -d
+docker compose exec db env | grep POSTGRES
 ```{{execute}}

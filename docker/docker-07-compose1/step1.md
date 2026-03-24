@@ -38,12 +38,12 @@ volumes:
   db-data:
 ```
 
-Запуск: `docker-compose up -d` — одна команда вместо пяти!
+Запуск: `docker compose up -d` — одна команда вместо пяти!
 
 ## Проверьте версию
 
 ```bash
-docker-compose version
+docker compose version
 ```{{execute}}
 
-> На новых версиях Docker также работает `docker compose` (через пробел). В этом курсе используем `docker-compose`.
+> В современных окружениях Killercoda обычно доступна команда `docker compose` (через пробел). Её и используем в курсе.

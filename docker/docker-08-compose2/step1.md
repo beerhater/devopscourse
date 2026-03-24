@@ -32,7 +32,7 @@ COMPOSEFILE
 ```{{execute}}
 
 ```bash
-docker-compose up
+docker compose up
 ```{{execute}}
 
 `app` стартует почти одновременно с `db` — `depends_on` лишь задаёт порядок, не ждёт готовности.
@@ -40,7 +40,7 @@ docker-compose up
 ## Решение: condition: service_healthy
 
 ```bash
-docker-compose down
+docker compose down
 ```{{execute}}
 
 ```bash
@@ -66,11 +66,11 @@ COMPOSEFILE
 ```{{execute}}
 
 ```bash
-docker-compose up
+docker compose up
 ```{{execute}}
 
 Теперь `app` стартует только когда PostgreSQL реально готов!
 
 ```bash
-docker-compose down
+docker compose down
 ```{{execute}}

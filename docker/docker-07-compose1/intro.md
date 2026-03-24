@@ -7,9 +7,9 @@
 В этом модуле вы освоите:
 
 - Структуру файла `docker-compose.yml`
-- **`docker-compose up/down`** — запуск и остановка стека
-- **`docker-compose ps/logs/exec`** — управление и отладка
+- **`docker compose up/down`** — запуск и остановка стека
+- **`docker compose ps/logs/exec`** — управление и отладка
 - Сети и тома в Compose
 - Переменные окружения и `.env` файлы
 
-> Проверьте версию Compose: `docker-compose version`{{execute}}
+> Проверьте версию Compose: `docker compose version`{{execute}}
