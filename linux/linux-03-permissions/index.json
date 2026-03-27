@@ -1,8 +1,8 @@
 {
   "title": "Урок 3: Права доступа",
-  "description": "Разбираемся с правами на файлы: chmod, chown и как читать ls -la",
+  "description": "Разбираемся с правами на файлы: chmod, chown, chgrp, umask, sticky bit и как читать ls -la",
   "difficulty": "Beginner",
-  "time": "15",
+  "time": "25",
   "details": {
     "intro": {
       "text": "intro.md"
@@ -27,6 +27,21 @@
         "title": "Шаг 4: Меняем владельца через chown",
         "text": "step4.md",
         "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Шаг 5: Меняем группу через chgrp",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "Шаг 6: Настраиваем umask",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "Шаг 7: Sticky bit для общей директории",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
       }
     ],
     "finish": {
