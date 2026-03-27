@@ -9,6 +9,8 @@
     { "path": "linux-07-apt", "title": "Урок 7: Управление пакетами (apt)" },
     { "path": "linux-08-bash1", "title": "Урок 8: Bash-скриптинг (Часть 1)" },
     { "path": "linux-09-bash2", "title": "Урок 9: Bash-скриптинг (Часть 2)" },
-    { "path": "linux-10-systemd", "title": "Урок 10: systemd и управление сервисами" }
+    { "path": "linux-10-systemd", "title": "Урок 10: systemd и управление сервисами" },
+    { "path": "linux-11-search-filter", "title": "Урок 11: Поиск и фильтрация" },
+    { "path": "linux-12-pipes-redirection", "title": "Урок 12: Pipes и перенаправление вывода" }
   ]
 }

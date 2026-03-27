@@ -1,0 +1,54 @@
+{
+  "title": "Урок 12: Pipes и перенаправление вывода",
+  "description": "Учимся собирать команды в цепочки и управлять stdout/stderr через |, >, >>, <, 2> и 2>&1",
+  "difficulty": "Intermediate",
+  "time": "35",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "Шаг 1: stdout и stderr простым языком",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "Шаг 2: Перезапись и дозапись через > и >>",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Шаг 3: Входной поток через <",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Шаг 4: Перенаправляем ошибки через 2>",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Шаг 5: Объединяем потоки через 2>&1",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "Шаг 6: Pipes — передаём вывод между командами",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "Шаг 7: Практика — собираем цепочку команд",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
