@@ -16,7 +16,12 @@ spec:
   containers:
   - name: writer
     image: busybox
-    command: ["sh", "-c", "echo 'Persistent data: pod started at '$(date) >> /mnt/data/log.txt && sleep 3600"]
+    command:
+    - sh
+    - -c
+    - |
+      echo "Persistent data: pod started at $(date)" >> /mnt/data/log.txt
+      sleep 3600
     volumeMounts:
     - name: persistent-storage
       mountPath: /mnt/data
@@ -51,7 +56,14 @@ spec:
   containers:
   - name: reader
     image: busybox
-    command: ["sh", "-c", "echo 'New pod reads old data:' && cat /mnt/data/log.txt && echo 'New pod appended at '$(date) >> /mnt/data/log.txt && sleep 3600"]
+    command:
+    - sh
+    - -c
+    - |
+      echo 'New pod reads old data:'
+      cat /mnt/data/log.txt
+      echo "New pod appended at $(date)" >> /mnt/data/log.txt
+      sleep 3600
     volumeMounts:
     - name: persistent-storage
       mountPath: /mnt/data
@@ -62,7 +74,7 @@ kubectl wait --for=condition=Ready pod/pvc-reader --timeout=60s
 
 ```bash
 # Новый под видит данные от старого!
-kubectl exec pvc-reader -- cat /mnt/data/log.txt
+kubectl exec pvc-reader -- cat /mnt/data/log.txt | tee /root/pvc_persistence.log
 ```{{execute}}
 
 ```bash

@@ -13,7 +13,13 @@ spec:
   initContainers:
   - name: init-check
     image: busybox
-    command: ["sh", "-c", "echo 'Pre-flight check...' && sleep 2 && echo 'OK'"]
+    command:
+    - sh
+    - -c
+    - |
+      echo 'Pre-flight check...'
+      sleep 2
+      echo 'OK'
   containers:
   - name: web
     image: nginx:alpine
@@ -28,7 +34,14 @@ spec:
         cpu: "50m"
   - name: sidecar
     image: busybox
-    command: ["sh", "-c", "while true; do echo "$(date): monitoring"; sleep 10; done"]
+    command:
+    - sh
+    - -c
+    - |
+      while true; do
+        echo "$(date): monitoring"
+        sleep 10
+      done
     resources:
       requests:
         memory: "8Mi"
@@ -61,8 +74,4 @@ kubectl get pods -l env=practice
 
 ```bash
 kubectl exec final-app -c web -- nginx -v
-```{{execute}}
-
-```bash
-kubectl delete pod final-app sidecar-demo init-demo my-nginx web-pod 2>/dev/null; true
 ```{{execute}}

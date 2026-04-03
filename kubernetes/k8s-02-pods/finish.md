@@ -23,4 +23,10 @@ kubectl get pods -l key=value           # фильтр по labels
 | `Pending` | Нет ресурсов или узлов |
 | `OOMKilled` | Превышен memory limit |
 
+## Опциональная очистка
+
+```bash
+kubectl delete pod final-app sidecar-demo init-demo my-nginx web-pod 2>/dev/null; true
+```
+
 Следующий модуль: **Deployment** — самовосстановление и rolling updates.

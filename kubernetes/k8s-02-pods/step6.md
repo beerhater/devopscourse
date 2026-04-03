@@ -17,13 +17,25 @@ spec:
   containers:
   - name: app
     image: busybox
-    command: ["sh", "-c", "while true; do echo "$(date): running" >> /logs/app.log; sleep 3; done"]
+    command:
+    - sh
+    - -c
+    - |
+      while true; do
+        echo "$(date): running" | tee -a /logs/app.log
+        sleep 3
+      done
     volumeMounts:
     - name: shared-logs
       mountPath: /logs
   - name: log-reader
     image: busybox
-    command: ["sh", "-c", "tail -f /logs/app.log"]
+    command:
+    - sh
+    - -c
+    - |
+      touch /logs/app.log
+      tail -f /logs/app.log
     volumeMounts:
     - name: shared-logs
       mountPath: /logs
@@ -51,11 +63,22 @@ spec:
   initContainers:
   - name: wait-for-setup
     image: busybox
-    command: ["sh", "-c", "echo 'Init: preparing...' && sleep 5 && echo 'Init: done!'"]
+    command:
+    - sh
+    - -c
+    - |
+      echo 'Init: preparing...'
+      sleep 5
+      echo 'Init: done!'
   containers:
   - name: main-app
     image: busybox
-    command: ["sh", "-c", "echo 'Main app started after init!' && sleep infinity"]
+    command:
+    - sh
+    - -c
+    - |
+      echo 'Main app started after init!'
+      sleep 3600
 EOF
 kubectl apply -f init-pod.yaml
 ```{{execute}}
