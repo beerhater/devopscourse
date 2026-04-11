@@ -1,0 +1,12 @@
+{
+  "title": "Ansible: Templates",
+  "description": "Учимся рендерить конфиги через Jinja2 templates и переменные.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Создаём template и рендерим конфиг", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "kubernetes-kubeadm-2nodes" }
+}

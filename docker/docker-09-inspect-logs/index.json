@@ -1,0 +1,12 @@
+{
+  "title": "Docker: inspect, logs и exec",
+  "description": "Учимся быстро разбирать контейнер через docker inspect, logs и exec, как это делают при первом triage.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "inspect, logs и exec на практике", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu" }
+}

@@ -1,0 +1,12 @@
+{
+  "title": "Ansible: Loops и Conditionals",
+  "description": "Учимся делать массовые задачи через loop и включать шаги только при нужных условиях.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "loop и when на практике", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "kubernetes-kubeadm-2nodes" }
+}

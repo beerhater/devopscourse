@@ -7,6 +7,11 @@
     { "path": "docker-05-volumes",   "title": "Урок 5: Volumes" },
     { "path": "docker-06-network",   "title": "Урок 6: Сеть" },
     { "path": "docker-07-compose1",  "title": "Урок 7: Docker Compose (Часть 1)" },
-    { "path": "docker-08-compose2",  "title": "Урок 8: Docker Compose (Часть 2)" }
+    { "path": "docker-08-compose2",  "title": "Урок 8: Docker Compose (Часть 2)" },
+    { "path": "docker-09-inspect-logs", "title": "Урок 9: inspect, logs и exec" },
+    { "path": "docker-10-restart-policies", "title": "Урок 10: Restart Policies" },
+    { "path": "docker-11-multi-stage", "title": "Урок 11: Multi-stage build" },
+    { "path": "docker-12-resources", "title": "Урок 12: Лимиты ресурсов" },
+    { "path": "docker-13-debug-cleanup", "title": "Урок 13: Debug и cleanup" }
   ]
 }

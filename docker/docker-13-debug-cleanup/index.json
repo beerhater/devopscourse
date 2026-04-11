@@ -1,0 +1,12 @@
+{
+  "title": "Docker: Debug и cleanup",
+  "description": "Разбираем базовый cleanup потока: stopped containers, dangling images и безопасная уборка.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Ищем мусор и убираем его", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu" }
+}

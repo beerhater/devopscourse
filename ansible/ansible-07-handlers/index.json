@@ -1,0 +1,12 @@
+{
+  "title": "Ansible: Handlers",
+  "description": "Разбираем notify и handlers, чтобы перезапускать сервисы только при реальных изменениях.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "notify и handler на localhost", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "kubernetes-kubeadm-2nodes" }
+}

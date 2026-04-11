@@ -1,0 +1,12 @@
+{
+  "title": "CI/CD: Variables и Secrets",
+  "description": "Разбираем безопасную работу с переменными окружения и секретами в pipeline.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Переменные и secrets в workflow", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu" }
+}

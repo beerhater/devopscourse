@@ -1,0 +1,12 @@
+{
+  "title": "Docker: Restart Policies",
+  "description": "Разбираем restart policy и смотрим, как Docker ведёт себя при падении контейнера.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Политики рестарта на практике", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu" }
+}

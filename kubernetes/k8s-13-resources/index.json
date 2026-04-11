@@ -1,0 +1,12 @@
+{
+  "title": "Requests, Limits и QoS",
+  "description": "Учимся задавать requests/limits для pod и читать их через describe.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Создаём pod с requests и limits", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "kubernetes-kubeadm-2nodes" }
+}

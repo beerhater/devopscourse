@@ -14,6 +14,21 @@
     },
     {
       "path": "ansible-05-roles"
+    },
+    {
+      "path": "ansible-06-templates"
+    },
+    {
+      "path": "ansible-07-handlers"
+    },
+    {
+      "path": "ansible-08-loops-conditionals"
+    },
+    {
+      "path": "ansible-09-tags"
+    },
+    {
+      "path": "ansible-10-error-handling"
     }
   ]
 }

@@ -1,0 +1,12 @@
+{
+  "title": "Ansible: Tags",
+  "description": "Учимся запускать только нужную часть playbook через tags.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Запускаем только tagged-задачи", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "kubernetes-kubeadm-2nodes" }
+}

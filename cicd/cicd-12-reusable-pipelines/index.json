@@ -1,0 +1,12 @@
+{
+  "title": "CI/CD: Reusable workflows и шаблоны",
+  "description": "Выносим общую pipeline-логику в reusable workflow, чтобы не копировать её по репозиториям.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Создаём reusable workflow и вызов", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu" }
+}

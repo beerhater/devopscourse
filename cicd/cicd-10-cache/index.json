@@ -1,0 +1,12 @@
+{
+  "title": "CI/CD: Cache зависимостей",
+  "description": "Добавляем cache в pipeline, чтобы не качать зависимости с нуля на каждый run.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Настраиваем cache в workflow", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu" }
+}

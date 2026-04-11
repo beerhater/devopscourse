@@ -1,0 +1,12 @@
+{
+  "title": "ServiceAccount и RBAC",
+  "description": "Создаём service account, role и rolebinding, затем проверяем права через kubectl auth can-i.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Настраиваем RBAC для чтения pod", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "kubernetes-kubeadm-2nodes" }
+}

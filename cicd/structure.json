@@ -21,6 +21,21 @@
     },
     {
       "path": "cicd-07-deploy-strategies"
+    },
+    {
+      "path": "cicd-08-artifacts"
+    },
+    {
+      "path": "cicd-09-variables-secrets"
+    },
+    {
+      "path": "cicd-10-cache"
+    },
+    {
+      "path": "cicd-11-matrix"
+    },
+    {
+      "path": "cicd-12-reusable-pipelines"
     }
   ]
 }

@@ -1,0 +1,12 @@
+{
+  "title": "Kubernetes Troubleshooting",
+  "description": "Учимся разбирать проблемный pod через describe, events и признаки image pull ошибок.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Разбираем сломанный pod", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "kubernetes-kubeadm-2nodes" }
+}

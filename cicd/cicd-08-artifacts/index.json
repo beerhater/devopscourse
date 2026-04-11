@@ -1,0 +1,12 @@
+{
+  "title": "CI/CD: Артефакты и отчёты",
+  "description": "Учимся сохранять build-артефакты и test reports в pipeline.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Добавляем artifact в workflow", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu" }
+}

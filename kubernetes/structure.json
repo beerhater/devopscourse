@@ -31,6 +31,21 @@
     },
     {
       "path": "k8s-10-helm"
+    },
+    {
+      "path": "k8s-11-jobs-cronjobs"
+    },
+    {
+      "path": "k8s-12-statefulsets"
+    },
+    {
+      "path": "k8s-13-resources"
+    },
+    {
+      "path": "k8s-14-rbac"
+    },
+    {
+      "path": "k8s-15-troubleshooting"
     }
   ]
 }

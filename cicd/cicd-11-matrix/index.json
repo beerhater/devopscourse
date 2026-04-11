@@ -1,0 +1,12 @@
+{
+  "title": "CI/CD: Matrix и параллельные джобы",
+  "description": "Учимся запускать один и тот же pipeline по нескольким версиям или окружениям.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Добавляем matrix strategy", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu" }
+}

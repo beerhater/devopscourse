@@ -1,0 +1,12 @@
+{
+  "title": "Docker: Multi-stage build",
+  "description": "Собираем образ в несколько стадий, чтобы отделить build-слой от runtime-слоя.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Пишем multi-stage Dockerfile", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "ubuntu" }
+}

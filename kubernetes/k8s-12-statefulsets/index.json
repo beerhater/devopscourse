@@ -1,0 +1,12 @@
+{
+  "title": "StatefulSets и Headless Service",
+  "description": "Учимся запускать stateful workloads с предсказуемыми именами pod и headless service.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Поднимаем headless service и StatefulSet", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "kubernetes-kubeadm-2nodes" }
+}

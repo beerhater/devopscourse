@@ -1,0 +1,12 @@
+{
+  "title": "Ansible: Block, Rescue, Always",
+  "description": "Разбираем обработку ошибок в playbook через block/rescue/always.",
+  "details": {
+    "intro": { "text": "intro.md" },
+    "steps": [
+      { "title": "Обрабатываем сбой через rescue", "text": "step1.md", "verify": "step1/verify.sh" }
+    ],
+    "finish": { "text": "finish.md" }
+  },
+  "backend": { "imageid": "kubernetes-kubeadm-2nodes" }
+}
