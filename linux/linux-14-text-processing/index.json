@@ -1,0 +1,49 @@
+{
+  "title": "Урок 14: Текстовая обработка",
+  "description": "Разбираем cut, tr, sed, awk и xargs на практических данных, похожих на конфиги, CSV и простые отчёты",
+  "difficulty": "Intermediate",
+  "time": "40",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "Шаг 1: Берём нужные колонки через cut",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "Шаг 2: Нормализуем текст через tr",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Шаг 3: Меняем строки через sed",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Шаг 4: Достаём поля и считаем через awk",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Шаг 5: Передаём список файлов в xargs",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "Шаг 6: Практика — собираем отчёт по prod-сервисам",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}

@@ -11,6 +11,10 @@
     { "path": "linux-09-bash2", "title": "Урок 9: Bash-скриптинг (Часть 2)" },
     { "path": "linux-10-systemd", "title": "Урок 10: systemd и управление сервисами" },
     { "path": "linux-11-search-filter", "title": "Урок 11: Поиск и фильтрация" },
-    { "path": "linux-12-pipes-redirection", "title": "Урок 12: Pipes и перенаправление вывода" }
+    { "path": "linux-12-pipes-redirection", "title": "Урок 12: Pipes и перенаправление вывода" },
+    { "path": "linux-13-archives", "title": "Урок 13: Архивы и сжатие" },
+    { "path": "linux-14-text-processing", "title": "Урок 14: Текстовая обработка" },
+    { "path": "linux-15-environment", "title": "Урок 15: Переменные окружения и PATH" },
+    { "path": "linux-16-diagnostics", "title": "Урок 16: Диагностика системы и диска" }
   ]
 }

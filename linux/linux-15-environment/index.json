@@ -1,0 +1,49 @@
+{
+  "title": "Урок 15: Переменные окружения и PATH",
+  "description": "Учимся работать с env-переменными, временными значениями, PATH, which/type и .bashrc на реальных mini-lab сценариях",
+  "difficulty": "Intermediate",
+  "time": "35",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "Шаг 1: Экспортируем переменную окружения",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "Шаг 2: Передаём переменную только одной команде",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Шаг 3: Скрипт читает переменные окружения",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Шаг 4: Работаем с PATH, which и type",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Шаг 5: Сохраняем переменную в .bashrc",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "Шаг 6: Загружаем переменные из env-файла",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
