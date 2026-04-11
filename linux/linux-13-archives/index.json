@@ -1,0 +1,54 @@
+{
+  "title": "Урок 13: Архивы и сжатие",
+  "description": "Учимся собирать backup-архивы, смотреть их содержимое и восстанавливать нужные файлы через tar, gzip и xz",
+  "difficulty": "Beginner",
+  "time": "35",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "Шаг 1: Создаём первый tar-архив",
+        "text": "step1.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "Шаг 2: Смотрим содержимое архива",
+        "text": "step2.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Шаг 3: Распаковываем архив",
+        "text": "step3.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Шаг 4: Сжимаем один файл через gzip",
+        "text": "step4.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Шаг 5: Делаем backup в tar.gz",
+        "text": "step5.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "Шаг 6: Делаем snapshot в tar.xz",
+        "text": "step6.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "Шаг 7: Восстанавливаем один файл из архива",
+        "text": "step7.md",
+        "verify": "step7/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
