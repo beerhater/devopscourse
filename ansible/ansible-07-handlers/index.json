@@ -4,7 +4,13 @@
   "details": {
     "intro": { "text": "intro.md" },
     "steps": [
-      { "title": "notify и handler на localhost", "text": "step1.md", "verify": "step1/verify.sh" }
+      { "title": "notify и handler на localhost", "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Проверяем idempotency на втором запуске", "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Несколько задач notify один handler", "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Используем listen", "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Принудительный flush_handlers", "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "template + handler", "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Формируем handlers-checklist", "text": "step7.md", "verify": "step7/verify.sh" }
     ],
     "finish": { "text": "finish.md" }
   },

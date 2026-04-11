@@ -4,7 +4,13 @@
   "details": {
     "intro": { "text": "intro.md" },
     "steps": [
-      { "title": "loop и when на практике", "text": "step1.md", "verify": "step1/verify.sh" }
+      { "title": "loop и when на практике", "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Loop по списку словарей", "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Условное пропускание задач", "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Рендерим сервисный список из loop", "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Добавляем loop_control.label", "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Собираем combined playbook", "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Формируем loops-checklist", "text": "step7.md", "verify": "step7/verify.sh" }
     ],
     "finish": { "text": "finish.md" }
   },

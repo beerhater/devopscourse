@@ -4,7 +4,13 @@
   "details": {
     "intro": { "text": "intro.md" },
     "steps": [
-      { "title": "Настраиваем cache в workflow", "text": "step1.md", "verify": "step1/verify.sh" }
+      { "title": "Настраиваем cache в workflow", "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Добавляем restore-keys", "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Пример cache для Python", "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Используем built-in cache setup-node", "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Сравниваем два подхода", "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Собираем финальный cache-workflow", "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Формируем cache-checklist", "text": "step7.md", "verify": "step7/verify.sh" }
     ],
     "finish": { "text": "finish.md" }
   },

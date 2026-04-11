@@ -4,7 +4,13 @@
   "details": {
     "intro": { "text": "intro.md" },
     "steps": [
-      { "title": "Политики рестарта на практике", "text": "step1.md", "verify": "step1/verify.sh" }
+      { "title": "on-failure на падающем контейнере", "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Контейнер без restart policy", "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Политика unless-stopped", "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Политика always", "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Сравниваем политики в одном отчёте", "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Читаем логи после сбоя", "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Выбираем policy под разные сценарии", "text": "step7.md", "verify": "step7/verify.sh" }
     ],
     "finish": { "text": "finish.md" }
   },

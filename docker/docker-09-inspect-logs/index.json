@@ -4,7 +4,13 @@
   "details": {
     "intro": { "text": "intro.md" },
     "steps": [
-      { "title": "inspect, logs и exec на практике", "text": "step1.md", "verify": "step1/verify.sh" }
+      { "title": "Поднимаем контейнер и делаем первый triage", "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Читаем образ и команду через inspect", "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Сохраняем startup-логи", "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Заходим внутрь контейнера через exec", "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Проверяем проброс порта", "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Проверяем HTTP-ответ сервиса", "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Собираем финальный debugging-report", "text": "step7.md", "verify": "step7/verify.sh" }
     ],
     "finish": { "text": "finish.md" }
   },

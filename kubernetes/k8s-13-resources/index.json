@@ -4,7 +4,13 @@
   "details": {
     "intro": { "text": "intro.md" },
     "steps": [
-      { "title": "Создаём pod с requests и limits", "text": "step1.md", "verify": "step1/verify.sh" }
+      { "title": "Создаём pod с requests и limits", "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Читаем describe и секции ресурсов", "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Проверяем QoS класс Burstable", "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Создаём Guaranteed pod", "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Сравниваем QoS классы", "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Собираем ресурсный отчёт по двум pod", "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Формулируем практические рекомендации", "text": "step7.md", "verify": "step7/verify.sh" }
     ],
     "finish": { "text": "finish.md" }
   },

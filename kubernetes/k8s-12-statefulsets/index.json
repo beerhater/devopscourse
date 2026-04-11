@@ -4,7 +4,13 @@
   "details": {
     "intro": { "text": "intro.md" },
     "steps": [
-      { "title": "Поднимаем headless service и StatefulSet", "text": "step1.md", "verify": "step1/verify.sh" }
+      { "title": "Поднимаем headless service и StatefulSet", "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Масштабируем StatefulSet до 3 реплик", "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Проверяем ordinals и имена pod", "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Разбираем headless service", "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Скейлим обратно до 2 реплик", "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Делаем rollout restart", "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Собираем отчёт по stateful workload", "text": "step7.md", "verify": "step7/verify.sh" }
     ],
     "finish": { "text": "finish.md" }
   },

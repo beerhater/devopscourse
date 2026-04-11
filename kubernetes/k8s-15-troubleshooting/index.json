@@ -4,7 +4,13 @@
   "details": {
     "intro": { "text": "intro.md" },
     "steps": [
-      { "title": "Разбираем сломанный pod", "text": "step1.md", "verify": "step1/verify.sh" }
+      { "title": "Разбираем сломанный pod", "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Читаем причину через jsonpath", "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Сохраняем ключевые events", "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Создаём pod с CrashLoopBackOff", "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Читаем логи краша", "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Сравниваем два типа сбоев", "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Собираем troubleshooting-checklist", "text": "step7.md", "verify": "step7/verify.sh" }
     ],
     "finish": { "text": "finish.md" }
   },

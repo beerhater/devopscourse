@@ -4,7 +4,13 @@
   "details": {
     "intro": { "text": "intro.md" },
     "steps": [
-      { "title": "Добавляем artifact в workflow", "text": "step1.md", "verify": "step1/verify.sh" }
+      { "title": "Добавляем artifact в workflow", "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Сохраняем test report как artifact", "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Настраиваем retention-days", "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Добавляем download-artifact", "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Упаковываем несколько файлов", "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Собираем финальный workflow", "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Делаем artifact-checklist", "text": "step7.md", "verify": "step7/verify.sh" }
     ],
     "finish": { "text": "finish.md" }
   },

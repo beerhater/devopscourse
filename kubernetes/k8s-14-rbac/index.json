@@ -4,7 +4,13 @@
   "details": {
     "intro": { "text": "intro.md" },
     "steps": [
-      { "title": "Настраиваем RBAC для чтения pod", "text": "step1.md", "verify": "step1/verify.sh" }
+      { "title": "Настраиваем RBAC для чтения pod", "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Смотрим YAML роли", "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Проверяем запрет на configmaps", "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "Расширяем роль на чтение configmaps", "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Проверяем subject и roleRef в RoleBinding", "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Смотрим ServiceAccount как объект", "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Собираем least-privilege report", "text": "step7.md", "verify": "step7/verify.sh" }
     ],
     "finish": { "text": "finish.md" }
   },

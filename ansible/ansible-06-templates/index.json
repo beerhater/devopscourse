@@ -4,7 +4,13 @@
   "details": {
     "intro": { "text": "intro.md" },
     "steps": [
-      { "title": "Создаём template и рендерим конфиг", "text": "step1.md", "verify": "step1/verify.sh" }
+      { "title": "Создаём template и рендерим конфиг", "text": "step1.md", "verify": "step1/verify.sh" },
+      { "title": "Условие внутри шаблона", "text": "step2.md", "verify": "step2/verify.sh" },
+      { "title": "Цикл внутри шаблона", "text": "step3.md", "verify": "step3/verify.sh" },
+      { "title": "default filter для значений по умолчанию", "text": "step4.md", "verify": "step4/verify.sh" },
+      { "title": "Рендер nested variables", "text": "step5.md", "verify": "step5/verify.sh" },
+      { "title": "Собираем production env-файл", "text": "step6.md", "verify": "step6/verify.sh" },
+      { "title": "Формируем template-checklist", "text": "step7.md", "verify": "step7/verify.sh" }
     ],
     "finish": { "text": "finish.md" }
   },
