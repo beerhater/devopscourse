@@ -93,10 +93,11 @@ EOF
 ```bash
 cat > main.tf << 'EOF'
 resource "local_file" "validated_config" {
-  content  = "project=${var.project_name}
-env=${var.environment}
-port=${var.app_port}
-"
+  content = <<-CFG
+    project=${var.project_name}
+    env=${var.environment}
+    port=${var.app_port}
+  CFG
   filename = "/tmp/tf-vars/validated.conf"
 }
 EOF

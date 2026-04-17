@@ -77,8 +77,7 @@ resource "local_file" "db_config" {
 
 # Итерация по list(object)
 resource "local_file" "services_config" {
-  content = join("
-", [
+  content = join("\n", [
     for svc in var.services :
     "${svc.name}:${svc.port} (enabled=${svc.enabled})"
   ])

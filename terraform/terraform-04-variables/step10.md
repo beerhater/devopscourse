@@ -89,8 +89,7 @@ resource "local_file" "main_config" {
     log_level = ${local.is_prod ? "warn" : "debug"}
 
     [services]
-    ${join("
-    ", [for s in local.enabled_services : "${s.name} = ${s.port}"])}
+    ${join("\n    ", [for s in local.enabled_services : "${s.name} = ${s.port}"])}
   CFG
   filename        = "${var.base_dir}/${var.environment}/app.conf"
   file_permission = "0644"
@@ -107,8 +106,7 @@ resource "local_sensitive_file" "secrets" {
 }
 
 resource "local_file" "service_registry" {
-  content  = join("
-", [for name, port in local.service_ports : "${name}:${port}"])
+  content  = join("\n", [for name, port in local.service_ports : "${name}:${port}"])
   filename = "${var.base_dir}/${var.environment}/services.txt"
 }
 EOF

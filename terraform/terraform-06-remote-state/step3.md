@@ -26,9 +26,10 @@ cat > main.tf << 'EOF'
 resource "random_id" "app" { byte_length = 8 }
 
 resource "local_file" "app" {
-  content  = "id=${random_id.app.hex}
-created=locally
-"
+  content = <<-CFG
+    id=${random_id.app.hex}
+    created=locally
+  CFG
   filename = "/tmp/migrate-demo/app.conf"
 }
 

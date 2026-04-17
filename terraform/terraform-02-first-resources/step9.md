@@ -76,17 +76,17 @@ resource "local_file" "config" {
 }
 
 resource "local_file" "tags" {
-  content  = join("
-", [for k, v in local.common_tags : "${k} = ${v}"])
+  content  = join("\n", [for k, v in local.common_tags : "${k} = ${v}"])
   filename = "${local.base_path}/tags.txt"
 }
 
 resource "local_file" "readme" {
-  content  = "# ${local.name_prefix}
+  content  = <<-README
+    # ${local.name_prefix}
 
-Окружение: ${var.environment}
-Регион: ${var.region}
-"
+    Окружение: ${var.environment}
+    Регион: ${var.region}
+  README
   filename = "${local.base_path}/README.md"
 }
 EOF

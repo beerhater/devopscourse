@@ -34,10 +34,11 @@ variable "name" { type = string; default = "cr-it" }
 resource "random_id" "id" { byte_length = 4 }
 
 resource "local_file" "config" {
-  content  = "env=${var.env}
-name=${var.name}
-id=${random_id.id.hex}
-"
+  content = <<-CFG
+    env=${var.env}
+    name=${var.name}
+    id=${random_id.id.hex}
+  CFG
   filename = "/tmp/tf-cmds/${var.name}-${var.env}.conf"
   file_permission = "0644"
 }

@@ -60,9 +60,10 @@ resource "random_id" "subnet_a"  { byte_length = 4 }
 resource "random_id" "subnet_b"  { byte_length = 4 }
 
 resource "local_file" "network_config" {
-  content  = "vpc_id=${random_id.vpc_id.hex}
-region=ru-central1
-"
+  content = <<-CFG
+    vpc_id=${random_id.vpc_id.hex}
+    region=ru-central1
+  CFG
   filename = "/tmp/remote-data/networking.conf"
 }
 

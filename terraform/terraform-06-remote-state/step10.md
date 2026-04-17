@@ -50,10 +50,11 @@ variable "region"  { type = string; default = "ru-central1" }
 resource "random_id" "network_id" { byte_length = 6 }
 
 resource "local_file" "shared_config" {
-  content  = "project=${var.project}
-network=${random_id.network_id.hex}
-region=${var.region}
-"
+  content = <<-CFG
+    project=${var.project}
+    network=${random_id.network_id.hex}
+    region=${var.region}
+  CFG
   filename = "/tmp/final-remote/shared.conf"
 }
 
@@ -122,8 +123,7 @@ resource "local_file" "app_config" {
 }
 
 resource "local_sensitive_file" "secrets" {
-  content         = "DB_PASSWORD=${random_password.db_pass.result}
-"
+  content         = "DB_PASSWORD=${random_password.db_pass.result}"
   filename        = "/tmp/final-remote/${var.env}/.env"
   file_permission = "0600"
 }

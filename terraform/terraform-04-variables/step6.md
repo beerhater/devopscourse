@@ -52,8 +52,7 @@ resource "local_file" "app_config" {
 }
 
 resource "local_sensitive_file" "db_config" {
-  content         = "DB_PASSWORD=${random_password.db_password.result}
-"
+  content         = "DB_PASSWORD=${random_password.db_password.result}"
   filename        = "/tmp/tf-outputs/.db.env"
   file_permission = "0600"
 }

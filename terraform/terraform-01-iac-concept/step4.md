@@ -72,8 +72,10 @@ terraform {
 # }
 
 resource "local_file" "welcome" {
-  content  = "Привет от Terraform!
-Провайдер: hashicorp/local"
+  content  = <<-TEXT
+    Привет от Terraform!
+    Провайдер: hashicorp/local
+  TEXT
   filename = "/tmp/terraform-welcome.txt"
 }
 

@@ -105,8 +105,7 @@ resource "local_file" "app_config" {
 }
 
 resource "local_file" "env_file" {
-  content         = join("
-", [for k, v in local.all_env : "${k}=${v}"])
+  content         = join("\n", [for k, v in local.all_env : "${k}=${v}"])
   filename        = "${local.base_dir}/.env"
   file_permission = "0644"
 }

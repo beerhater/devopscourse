@@ -40,9 +40,10 @@ EOF
 ```bash
 cat > main.tf << 'EOF'
 resource "local_file" "app_config" {
-  content  = "project=${var.project_name}
-env=${var.environment}
-"
+  content = <<-CFG
+    project=${var.project_name}
+    env=${var.environment}
+  CFG
   filename = "/tmp/tf-sensitive/app.conf"
 }
 

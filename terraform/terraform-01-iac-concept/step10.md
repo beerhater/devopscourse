@@ -103,12 +103,13 @@ resource "local_file" "env_file" {
 }
 
 resource "local_file" "readme" {
-  content  = "# ${var.app_name}
+  content = <<-README
+    # ${var.app_name}
 
-Окружение: **${var.environment}**
-Порт: ${var.app_port}
-Deploy ID: ${random_id.deploy_id.hex}
-"
+    Окружение: **${var.environment}**
+    Порт: ${var.app_port}
+    Deploy ID: ${random_id.deploy_id.hex}
+  README
   filename = "${var.base_dir}/README.md"
 }
 EOF

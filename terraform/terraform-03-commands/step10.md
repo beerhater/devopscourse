@@ -67,8 +67,7 @@ resource "local_sensitive_file" "api_key" {
 }
 
 resource "local_file" "deploy_log" {
-  content  = "Deployed: ${local.app_name} v${var.version_tag} (${random_id.deploy.hex})
-"
+  content  = "Deployed: ${local.app_name} v${var.version_tag} (${random_id.deploy.hex})"
   filename = "${var.output_dir}/${var.environment}/deploy.log"
   depends_on = [local_file.app_config, local_sensitive_file.api_key]
 }

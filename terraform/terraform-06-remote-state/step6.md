@@ -42,10 +42,11 @@ variable "project" { type = string; default = "cr-it" }
 resource "random_id" "id" { byte_length = 6 }
 
 resource "local_file" "config" {
-  content  = "project=${var.project}
-env=${var.env}
-id=${random_id.id.hex}
-"
+  content = <<-CFG
+    project=${var.project}
+    env=${var.env}
+    id=${random_id.id.hex}
+  CFG
   filename = "/tmp/multienv/${var.env}/app.conf"
 }
 

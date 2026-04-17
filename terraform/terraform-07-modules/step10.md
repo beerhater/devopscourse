@@ -37,11 +37,12 @@ locals {
 resource "random_id" "id" { byte_length = 6 }
 
 resource "local_file" "config" {
-  content  = "name=${local.full_name}
-port=${var.port}
-replicas=${var.replicas}
-id=${random_id.id.hex}
-"
+  content = <<-CFG
+    name=${local.full_name}
+    port=${var.port}
+    replicas=${var.replicas}
+    id=${random_id.id.hex}
+  CFG
   filename = "${var.output_dir}/${var.environment}/services/${var.name}.conf"
   file_permission = "0644"
 }
@@ -76,9 +77,10 @@ resource "random_password" "db"  { length = 24; special = false }
 resource "random_string"   "key" { length = 32; special = false }
 
 resource "local_sensitive_file" "secrets" {
-  content         = "DB_PASSWORD=${random_password.db.result}
-APP_KEY=${random_string.key.result}
-"
+  content = <<-ENV
+    DB_PASSWORD=${random_password.db.result}
+    APP_KEY=${random_string.key.result}
+  ENV
   filename        = "${var.output_dir}/${var.environment}/secrets/${var.service_name}.env"
   file_permission = "0600"
 }
@@ -112,11 +114,11 @@ resource "local_file" "prometheus" {
       scrape_interval: ${var.environment == "production" ? "15s" : "60s"}
 
     scrape_configs:
-    ${join("
-    ", [for svc in var.services :
-      "- job_name: ${svc.name}
-      static_configs:
-        - targets: ['localhost:${svc.port}']"
+    ${join("\n", [for svc in var.services : <<-JOB
+      - job_name: ${svc.name}
+        static_configs:
+          - targets: ['localhost:${svc.port}']
+    JOB
     ])}
   YAML
   filename = "${var.output_dir}/${var.environment}/prometheus.yml"

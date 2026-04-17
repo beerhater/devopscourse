@@ -38,8 +38,7 @@ resource "random_id" "version" {
 }
 
 resource "local_file" "versioned" {
-  content  = "Версия: ${random_id.version.hex}
-"
+  content  = "Версия: ${random_id.version.hex}"
   filename = "/tmp/tf-lifecycle/current.txt"
 
   lifecycle {
@@ -56,9 +55,10 @@ cat /tmp/tf-lifecycle/current.txt
 ```bash
 cat > main.tf << 'EOF'
 resource "local_file" "critical_config" {
-  content  = "КРИТИЧЕСКИ ВАЖНЫЙ КОНФИГ
-НЕ УДАЛЯТЬ!
-"
+  content  = <<-CONF
+    КРИТИЧЕСКИ ВАЖНЫЙ КОНФИГ
+    НЕ УДАЛЯТЬ!
+  CONF
   filename = "/tmp/tf-lifecycle/critical.conf"
 
   lifecycle {

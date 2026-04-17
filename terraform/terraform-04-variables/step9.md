@@ -68,8 +68,7 @@ resource "local_file" "config" {
     path      = ${local.config_path}
 
     [tags]
-    ${join("
-    ", [for k, v in local.common_tags : "${k} = ${v}"])}
+    ${join("\n    ", [for k, v in local.common_tags : "${k} = ${v}"])}
   CFG
   filename = local.config_path
 }

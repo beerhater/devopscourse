@@ -36,8 +36,7 @@ cd ~/tf-resources
 cat > main.tf << 'EOF'
 # 1. Простая строка
 resource "local_file" "simple" {
-  content  = "Привет, это простой файл!
-"
+  content  = "Привет, это простой файл!"
   filename = "/tmp/tf-demo/simple.txt"
   file_permission = "0644"
 }

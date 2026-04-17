@@ -62,8 +62,10 @@ terraform {
 
 # Простой ресурс: создать локальный файл
 resource "local_file" "welcome" {
-  content  = "Привет от Terraform!
-Этот файл создан декларативно."
+  content  = <<-TEXT
+    Привет от Terraform!
+    Этот файл создан декларативно.
+  TEXT
   filename = "/tmp/terraform-welcome.txt"
 }
 EOF

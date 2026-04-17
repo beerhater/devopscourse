@@ -102,10 +102,12 @@ resource "local_file" "config" {
 }
 
 resource "local_file" "readme" {
-  content  = "# ${var.project_name}
+  content = <<-README
+    # ${var.project_name}
 
-Окружение: ${var.environment}
-ID: ${random_id.project_id.hex}"
+    Окружение: ${var.environment}
+    ID: ${random_id.project_id.hex}
+  README
   filename = "${var.output_dir}/README.md"
 }
 EOF

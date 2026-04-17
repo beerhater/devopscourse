@@ -39,8 +39,7 @@ resource "local_file" "app_config" {
 }
 
 resource "local_sensitive_file" "db_secret" {
-  content         = "DB_PASS=${random_password.db_pass.result}
-"
+  content         = "DB_PASS=${random_password.db_pass.result}"
   filename        = "/tmp/state-final/${var.env}/.env"
   file_permission = "0600"
 }

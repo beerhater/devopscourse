@@ -63,8 +63,7 @@ data "local_file" "hostname" {
 
 # Маркер базовой директории
 resource "local_file" "base_dir_marker" {
-  content  = "created by terraform
-"
+  content  = "created by terraform"
   filename = "${var.output_dir}/.keep"
 }
 

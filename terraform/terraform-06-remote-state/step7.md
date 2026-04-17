@@ -73,10 +73,11 @@ locals {
 resource "random_id" "id" { byte_length = 6 }
 
 resource "local_file" "config" {
-  content  = "workspace=${local.env}
-replicas=${local.replicas}
-id=${random_id.id.hex}
-"
+  content = <<-CFG
+    workspace=${local.env}
+    replicas=${local.replicas}
+    id=${random_id.id.hex}
+  CFG
   filename = "/tmp/workspace-demo/${local.env}/app.conf"
 }
 

@@ -65,20 +65,17 @@ locals {
 }
 
 resource "local_file" "enabled_services" {
-  content  = join("
-", [for svc in local.enabled_services : "${svc.name}:${svc.port}"])
+  content  = join("\n", [for svc in local.enabled_services : "${svc.name}:${svc.port}"])
   filename = "/tmp/tf-for/enabled.txt"
 }
 
 resource "local_file" "port_map" {
-  content  = join("
-", [for name, port in local.service_ports : "${name} -> ${port}"])
+  content  = join("\n", [for name, port in local.service_ports : "${name} -> ${port}"])
   filename = "/tmp/tf-for/ports.txt"
 }
 
 resource "local_file" "env_file" {
-  content  = join("
-", local.env_lines)
+  content  = join("\n", local.env_lines)
   filename = "/tmp/tf-for/.env"
 }
 
@@ -86,9 +83,10 @@ resource "local_file" "env_file" {
 resource "local_file" "service_configs" {
   for_each = {for svc in local.enabled_services : svc.name => svc}
 
-  content  = "name=${each.value.name}
-port=${each.value.port}
-"
+  content = <<-CFG
+    name=${each.value.name}
+    port=${each.value.port}
+  CFG
   filename = "/tmp/tf-for/${each.key}.conf"
 }
 EOF

@@ -79,8 +79,7 @@ EOF
 cat > main.tf << 'EOF'
 resource "random_id" "id" { byte_length = 6 }
 resource "local_file" "f" {
-  content  = "id=${random_id.id.hex}
-"
+  content  = "id=${random_id.id.hex}"
   filename = "/tmp/partial-demo/app.conf"
 }
 output "id" { value = random_id.id.hex }

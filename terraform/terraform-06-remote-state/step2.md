@@ -81,10 +81,11 @@ variable "project" { type = string; default = "cr-it" }
 resource "random_id" "deploy_id" { byte_length = 6 }
 
 resource "local_file" "config" {
-  content  = "env=${var.env}
-project=${var.project}
-deploy=${random_id.deploy_id.hex}
-"
+  content = <<-CFG
+    env=${var.env}
+    project=${var.project}
+    deploy=${random_id.deploy_id.hex}
+  CFG
   filename = "/tmp/remote-state/${var.env}/app.conf"
   file_permission = "0644"
 }

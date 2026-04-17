@@ -34,21 +34,18 @@ cd ~/tf-resources
 cat > main.tf << 'EOF'
 # Маркер директории (Terraform не создаёт директории напрямую)
 resource "local_file" "dir_marker" {
-  content  = "directory marker
-"
+  content  = "directory marker"
   filename = "/tmp/myapp/.keep"
 }
 
 resource "local_file" "logs_marker" {
-  content  = "logs directory marker
-"
+  content  = "logs directory marker"
   filename = "/tmp/myapp/logs/.keep"
   depends_on = [local_file.dir_marker]
 }
 
 resource "local_file" "config_marker" {
-  content  = "config directory marker
-"
+  content  = "config directory marker"
   filename = "/tmp/myapp/config/.keep"
   depends_on = [local_file.dir_marker]
 }
@@ -67,8 +64,7 @@ resource "local_file" "app_config" {
 
 # Лог — только после директории logs
 resource "local_file" "app_log" {
-  content    = "Приложение запущено
-"
+  content    = "Приложение запущено"
   filename   = "/tmp/myapp/logs/app.log"
   depends_on = [local_file.logs_marker]
 }

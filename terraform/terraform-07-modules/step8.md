@@ -49,17 +49,19 @@ EOF
 cat > ~/tf-modules/modules/multi-region/main.tf << 'EOF'
 resource "local_file" "primary_config" {
   provider = local.primary
-  content  = "region=${var.primary}
-name=${var.name}
-"
+  content  = <<-CFG
+    region=${var.primary}
+    name=${var.name}
+  CFG
   filename = "${var.output_dir}/${var.primary}-${var.name}.conf"
 }
 
 resource "local_file" "secondary_config" {
   provider = local.secondary
-  content  = "region=${var.secondary}
-name=${var.name}
-"
+  content  = <<-CFG
+    region=${var.secondary}
+    name=${var.name}
+  CFG
   filename = "${var.output_dir}/${var.secondary}-${var.name}.conf"
 }
 EOF
